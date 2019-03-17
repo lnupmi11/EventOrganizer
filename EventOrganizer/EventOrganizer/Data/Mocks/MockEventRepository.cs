@@ -24,7 +24,9 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.ElementAt(1),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Conference.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Conference.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Conference.jpg",
+                        EventDateTime = new DateTime(2019, 5, 18, 18, 00, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 35, 00)
                     },
                     new Event {
                         Name = "Artificial intelligence seminar",
@@ -33,8 +35,10 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.ElementAt(1),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Seminar.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Seminar.jpg"
-                    },
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Seminar.jpg",
+                        EventDateTime = new DateTime(2019, 5, 20, 18, 30, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 31, 00)
+            },
                     new Event {
                         Name = "Hardware expo",
                         ShortDescription = "Hardware expo",
@@ -42,7 +46,9 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.ElementAt(2),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Expo.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Expo.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Expo.jpg",
+                        EventDateTime = new DateTime(2019, 5, 10, 18, 00, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 29, 00)
                     },
                     new Event {
                         Name = "Volvo product launch",
@@ -51,7 +57,9 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.ElementAt(2),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Product-Launch.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Product-Launch.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Product-Launch.jpg",
+                        EventDateTime = new DateTime(2019, 5, 25, 12, 30, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 27, 00)
                     },
                     new Event {
                         Name = "Dell shareholder/board meeting",
@@ -60,7 +68,9 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.First(),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Board-Meetings.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Board-Meetings.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Board-Meetings.jpg",
+                        EventDateTime = new DateTime(2019, 5, 15, 18, 00, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 30, 00)
                     },
                     new Event {
                         Name = "Holiday party",
@@ -69,16 +79,20 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.ElementAt(3),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Year-End-Functions.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Year-End-Functions.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Year-End-Functions.jpg",
+                        EventDateTime = new DateTime(2019, 5, 22, 22, 00, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 34, 00)
                     },
                     new Event {
-                        Name = "36po opening ceremony",
-                        ShortDescription = "36po opening ceremony",
-                        LongDescription = "36po opening ceremony",
+                        Name = "36 po opening ceremony",
+                        ShortDescription = "36 po opening ceremony",
+                        LongDescription = "36 po opening ceremony",
                         Category = _categoryRepository.Categories.Last(),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Executive-Retreat.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Executive-Retreat.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Executive-Retreat.jpg",
+                        EventDateTime = new DateTime(2019, 5, 20, 15, 00, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 35, 00)
                     },
                     new Event {
                         Name = "Oscar 2019",
@@ -87,7 +101,9 @@ namespace EventOrganizer.Data.Mocks
                         Category = _categoryRepository.Categories.Last(),
                         ImageUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Corporate-Dinner.jpg",
                         IsPreferredEvent = true,
-                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Corporate-Dinner.jpg"
+                        ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Corporate-Dinner.jpg",
+                        EventDateTime = new DateTime(2019, 5, 27, 21, 00, 00),
+                        CreationalDateTime = new DateTime(2019, 3, 17, 17, 37, 00)
                     }
                 };
             }
