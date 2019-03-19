@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventOrganizer.Data.Interfaces;
+using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventOrganizer.Controllers
@@ -20,8 +21,10 @@ namespace EventOrganizer.Controllers
 
         public ViewResult List()
         {
-            var events = _eventRepository.Events;
-            return View(events);
+            EventListViewModel vm = new EventListViewModel();
+            vm.Events = _eventRepository.Events;
+
+            return View(vm);
         }
     }
 }
