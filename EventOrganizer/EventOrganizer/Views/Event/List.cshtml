@@ -1,0 +1,17 @@
+﻿@using EventOrganizer.Data.Models
+@model IEnumerable<Event>
+
+<div>
+    <h2>List of events</h2>
+</div>
+
+@{
+    foreach (var e in Model)
+    {
+        <div>
+            <h3>@e.Name</h3>
+            <p>Date: @e.EventDateTime.ToLongDateString()</p>
+            <p>Time: @e.EventDateTime.ToShortTimeString()</p>
+        </div>
+    }
+}
