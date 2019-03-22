@@ -6,21 +6,8 @@
 <h2>@Model.CurrentCategory</h2>
 
 @{
-    foreach (var e in Model.Events)
+    foreach (Event e in Model.Events)
     {
-        <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-                <img src="@e.ImageThumbnailUrl" alt="" />
-                <div class="caption">
-                    <p class="pull-right">@e.EventDateTime.ToShortDateString()</p>
-                    @*<h3 class="pull-right">@e.EventDateTime.ToShortTimeString()</h3>*@
-                    <h5>
-                        <a>@e.Name</a>
-                    </h5>
-                    <p>@e.Category.Name</p>
-                    @*To do: add short descriptions*@
-                </div>
-            </div>
-        </div>
+        @Html.Partial("EventsSummary", e);
     }
 }
