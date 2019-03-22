@@ -8,5 +8,7 @@ namespace EventOrganizer.ViewModels
     public class EventListViewModel
     {
         public IEnumerable<Event> Events { get; set; }
+
+        public string CurrentCategory { get; set; }
     }
 }

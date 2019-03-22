@@ -15,15 +15,15 @@ namespace EventOrganizer.Data.Mocks
             {
                 return new List<Category>
                 {
-                    new Category { CategoryName = "Bussiness", Description = "Bussiness conferences, meetings and..." },
+                    new Category { Name = "Bussiness", Description = "Bussiness conferences, meetings and..." },
 
-                    new Category { CategoryName = "Education", Description = "Educational seminars, lectures and..." },
+                    new Category { Name = "Education", Description = "Educational seminars, lectures and..." },
 
-                    new Category { CategoryName = "Marketing", Description = "Marketing trade shows, product launches and..." },
+                    new Category { Name = "Marketing", Description = "Marketing trade shows, product launches and..." },
 
-                    new Category { CategoryName = "Entertainment", Description = "Theme parties, weddings, birthdays and..." },
+                    new Category { Name = "Entertainment", Description = "Theme parties, weddings, birthdays and..." },
 
-                    new Category { CategoryName = "Culture", Description = "Opening ceremonies, award ceremonies and..." }
+                    new Category { Name = "Culture", Description = "Opening ceremonies, award ceremonies and..." }
                 };
             }
         }

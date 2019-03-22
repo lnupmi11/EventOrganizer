@@ -1,18 +1,26 @@
-﻿@using EventOrganizer.ViewModels
-@model EventListViewModel
-
+﻿
 <div>
     <h2>List of events</h2>
 </div>
 
+<h2>@Model.CurrentCategory</h2>
+
 @{
     foreach (var e in Model.Events)
     {
-        <div>
-            <h3>@e.Name</h3>
-            <p>Date: @e.EventDateTime.ToLongDateString()</p>
-            <p>Time: @e.EventDateTime.ToShortTimeString()</p>
-	    <p>Category name: @e.Category.CategoryName</p>
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="@e.ImageThumbnailUrl" alt="" />
+                <div class="caption">
+                    <p class="pull-right">@e.EventDateTime.ToShortDateString()</p>
+                    @*<h3 class="pull-right">@e.EventDateTime.ToShortTimeString()</h3>*@
+                    <h5>
+                        <a>@e.Name</a>
+                    </h5>
+                    <p>@e.Category.Name</p>
+                    @*To do: add short descriptions*@
+                </div>
+            </div>
         </div>
     }
 }

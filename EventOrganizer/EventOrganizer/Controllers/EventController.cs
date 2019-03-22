@@ -23,6 +23,7 @@ namespace EventOrganizer.Controllers
         {
             EventListViewModel vm = new EventListViewModel();
             vm.Events = _eventRepository.Events;
+            vm.CurrentCategory = "EC";
 
             return View(vm);
         }
