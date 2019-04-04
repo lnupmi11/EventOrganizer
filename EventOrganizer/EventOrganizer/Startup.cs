@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using EventOrganizer.Data.Models;
+using AspNetCore.RouteAnalyzer;
 
 namespace EventOrganizer
 {
@@ -36,6 +37,8 @@ namespace EventOrganizer
             services.AddTransient<IEventRepository, MockEventRepository>();
             services.AddTransient<ICategoryRepository, MockCategoryRepository>();
 
+            services.AddRouteAnalyzer();
+
             services.AddMvc();
         }
 
@@ -47,6 +50,11 @@ namespace EventOrganizer
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
+            // List all possible routes
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRouteAnalyzer("/routes");
+            //});
         }
     }
 }
