@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EventOrganizer.Data;
 using EventOrganizer.Data.Interfaces;
 using EventOrganizer.Data.Mocks;
+using EventOrganizer.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,8 +36,8 @@ namespace EventOrganizer
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<IEventRepository, MockEventRepository>();
-            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+            services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             services.AddMvc();
         }
