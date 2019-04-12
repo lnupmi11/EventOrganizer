@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EventOrganizer.Data;
 using EventOrganizer.Data.Interfaces;
 using EventOrganizer.Data.Mocks;
+using EventOrganizer.Data.Models;
 using EventOrganizer.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,8 @@ namespace EventOrganizer
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            DbInitializer.Seed(app);
         }
     }
 }
