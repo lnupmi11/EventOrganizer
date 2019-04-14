@@ -11,7 +11,7 @@ namespace EventOrganizer.Data.Models
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
-            AppDbContext context = applicationBuilder.ApplicationServices.GetRequiredService<AppDbContext>();
+            EventOrganizerDbContext context = applicationBuilder.ApplicationServices.GetRequiredService<EventOrganizerDbContext>();
 
             if (!context.Categories.Any())
             {

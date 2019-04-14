@@ -10,17 +10,17 @@ namespace EventOrganizer.Data.Repositories
 {
     public class EventRepository : IEventRepository
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly EventOrganizerDbContext _eventOrganizerDbContext;
 
-        public EventRepository(AppDbContext appDbContext)
+        public EventRepository(EventOrganizerDbContext eventOrganizerDbContext)
         {
-            _appDbContext = appDbContext;
+            _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public IEnumerable<Event> Events => _appDbContext.Events.Include(c => c.Category);
+        public IEnumerable<Event> Events => _eventOrganizerDbContext.Events.Include(c => c.Category);
 
-        public IEnumerable<Event> PreferredEvents => _appDbContext.Events.Where(p => p.IsPreferredEvent).Include(c => c.Category);
+        public IEnumerable<Event> PreferredEvents => _eventOrganizerDbContext.Events.Where(p => p.IsPreferredEvent).Include(c => c.Category);
 
-        public Event GetEventById(int eventId) => _appDbContext.Events.FirstOrDefault(p => p.EventId == eventId);
+        public Event GetEventById(int eventId) => _eventOrganizerDbContext.Events.FirstOrDefault(p => p.EventId == eventId);
     }
 }

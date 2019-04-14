@@ -9,11 +9,11 @@ namespace EventOrganizer.Data.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly AppDbContext _appDbContext;
-        public CategoryRepository(AppDbContext appDbContext)
+        private readonly EventOrganizerDbContext _eventOrganizerDbContext;
+        public CategoryRepository(EventOrganizerDbContext eventOrganizerDbContext)
         {
-            _appDbContext = appDbContext;
+            _eventOrganizerDbContext = eventOrganizerDbContext;
         }
-        public IEnumerable<Category> Categories => _appDbContext.Categories;
+        public IEnumerable<Category> Categories => _eventOrganizerDbContext.Categories;
     }
 }
