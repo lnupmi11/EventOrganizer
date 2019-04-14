@@ -92,5 +92,14 @@ namespace EventOrganizer.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("List", "Events");
         }
+
+        [HttpPost]
+        public IActionResult Delete(string id)
+        {
+            if(_userRepository.GetUserById(id) != null)
+                _userRepository.DeleteById(id);
+
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }

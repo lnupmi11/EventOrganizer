@@ -10,5 +10,9 @@ namespace EventOrganizer.Data.Interfaces
         IEnumerable<User> Users { get; }
 
         User GetUserByUserName(string UserName);
+
+        User GetUserById(string id);
+
+        void DeleteById(string id);
     }
 }

@@ -20,5 +20,13 @@ namespace EventOrganizer.Data.Repositories
         public IEnumerable<User> Users => _eventOrganizerDbContext.Users;
 
         public User GetUserByUserName(string username) => _eventOrganizerDbContext.Users.FirstOrDefault(p => p.UserName == username);
+
+        public User GetUserById(string id) => _eventOrganizerDbContext.Users.FirstOrDefault(p => p.Id == id);
+
+        public void DeleteById(string id)
+        {
+            _eventOrganizerDbContext.Remove(GetUserById(id));
+            _eventOrganizerDbContext.SaveChanges();
+        }
     }
 }
