@@ -30,6 +30,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @*@await Component.InvokeAsync("CategoryMenu")
                     <li><a asp-controller="About" asp-action="Index">About</a></li>
                     @await Component.InvokeAsync("ShoppingCartSummary")*@
@@ -46,7 +47,7 @@
     <div class="container body-content" style="padding:50px;">
         @RenderBody()
         <hr />
-        <footer>
+        <footer style=" text-align:center">
             <i class='fab fa-facebook' style='font-size:36px'></i>
             <i class='fab fa-google-plus-square' style='font-size:36px'></i>
             <i class='fab fa-instagram' style='font-size:36px'></i>
@@ -56,7 +57,9 @@
             <i class='fab fa-telegram' style='font-size:36px'></i>
             <i class='fab fa-twitch' style='font-size:36px'></i>
             <i class='fab fa-rocketchat' style='font-size:36px'></i>
-            <p><a target="_blank" href="https://github.com/etrupja">&copy; 2019</a></p>
+            <p></p>
+            <p><a target="_blank" href="https://github.com/lnupmi11/EventOrganizer">Copyrights &copy; 2019 - EventOrganizer Software&trade;</a></p>
+            <p></p>
         </footer>
     </div>
 </body>
