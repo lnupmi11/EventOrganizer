@@ -59,6 +59,11 @@ namespace EventOrganizer
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "categoryfilter",
+                    template: "Events/{action}/{category?}",
+                    defaults: new { Controller = "Events", action = "List" });
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{Id?}");
             });
