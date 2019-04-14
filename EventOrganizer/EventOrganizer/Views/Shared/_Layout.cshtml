@@ -30,10 +30,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @await Component.InvokeAsync("CategoryMenu")
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-                    @*@await Component.InvokeAsync("CategoryMenu")
-                    <li><a asp-controller="About" asp-action="Index">About</a></li>
-                    @await Component.InvokeAsync("ShoppingCartSummary")*@
+                    @*<li><a asp-controller="About" asp-action="Index">About</a></li>
+                      @await Component.InvokeAsync("ShoppingCartSummary")*@
                 </ul>
                 @*@await Html.PartialAsync("LoginPartial")
                 <form class="navbar-form navbar-right" asp-controller="Drink" asp-action="Search" method="get">
