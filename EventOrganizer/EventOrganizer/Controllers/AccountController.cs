@@ -50,5 +50,36 @@ namespace EventOrganizer.Controllers
             ModelState.AddModelError("", "Username/Password not found");
             return View(loginViewModel);
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(LoginViewModel loginViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser() { UserName = loginViewModel.UserName };
+                var result = await _userManager.CreateAsync(user, loginViewModel.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("List", "Events");
+                }
+
+            }
+            
+            return View(loginViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("List", "Events");
+        }
     }
 }
