@@ -1,4 +1,6 @@
-﻿using EventOrganizer.ViewModels;
+﻿using EventOrganizer.Data.Interfaces;
+using EventOrganizer.Data.Models;
+using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,13 +12,15 @@ namespace EventOrganizer.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IUserRepository _userRepository;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IUserRepository userRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         public IActionResult Login(string returnUrl)
@@ -33,9 +37,11 @@ namespace EventOrganizer.Controllers
             if (!ModelState.IsValid)
                 return View(loginViewModel);
 
-            var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
+            var user = _userRepository.GetUserByUserName(loginViewModel.UserName);
             if (user != null)
             {
+                await _signInManager.SignOutAsync();
+
                 var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
 
                 if (result.Succeeded)
@@ -62,7 +68,8 @@ namespace EventOrganizer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser() { UserName = loginViewModel.UserName };
+                var user = new User() { UserName = loginViewModel.UserName };
+
                 var result = await _userManager.CreateAsync(user, loginViewModel.Password);
 
                 if (result.Succeeded)

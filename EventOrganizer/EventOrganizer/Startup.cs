@@ -41,6 +41,7 @@ namespace EventOrganizer
                             .AddDefaultTokenProviders();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddRouteAnalyzer();
 
