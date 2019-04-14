@@ -68,7 +68,11 @@ namespace EventOrganizer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = loginViewModel.UserName };
+                var user = new User()
+                {
+                    UserName = loginViewModel.UserName,
+                    Email = loginViewModel.Email
+                };
 
                 var result = await _userManager.CreateAsync(user, loginViewModel.Password);
 
