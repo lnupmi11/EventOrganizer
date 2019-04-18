@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventOrganizer.Data.Interfaces;
+using EventOrganizer.Data.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,49 @@ namespace EventOrganizer.Controllers
             _eventRepository = eventRepository;
         }
 
-        public ViewResult List()
+        public ViewResult List(string category)
         {
-            EventsListViewModel vm = new EventsListViewModel();
-            vm.Events = _eventRepository.Events;
-            vm.CurrentCategory = "EC";
+            string _category = category;
+            IEnumerable<Event> events = null;
+            string currentCategory = string.Empty;
 
-            return View(vm);
+            if (string.IsNullOrEmpty(category))
+            {
+                events = _eventRepository.Events.OrderBy(p => p.EventId);
+                currentCategory = "All";
+            }
+            else
+            {
+                if (string.Equals("Bussiness", _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Bussiness")).OrderBy(p => p.Name);
+                }
+                else if(string.Equals("Education", _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Education")).OrderBy(p => p.Name);
+                }
+                else if (string.Equals("Marketing", _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Marketing")).OrderBy(p => p.Name);
+                }
+                else if (string.Equals("Entertainment", _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Entertainment")).OrderBy(p => p.Name);
+                }
+                else if (string.Equals("Culture", _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Culture")).OrderBy(p => p.Name);
+                }
+
+                currentCategory = _category;
+            }
+
+            EventsListViewModel elvm = new EventsListViewModel();
+
+            elvm.Events = events;
+            elvm.CurrentCategory = currentCategory;
+
+            return View(elvm);
         }
     }
 }

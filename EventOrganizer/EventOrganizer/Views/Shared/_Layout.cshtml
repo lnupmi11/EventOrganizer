@@ -16,11 +16,39 @@
     <title>EventOrganizer</title>
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-dark" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">EventOrganizer</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @await Component.InvokeAsync("CategoryMenu")
+                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
+                    @*<li><a asp-controller="About" asp-action="Index">About</a></li>
+                      @await Component.InvokeAsync("ShoppingCartSummary")*@
+                </ul>
+                @*@await Html.PartialAsync("LoginPartial")
+                <form class="navbar-form navbar-right" asp-controller="Drink" asp-action="Search" method="get">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search for a drink" name="searchString" value="@ViewData["searchString"]">
+                    </div>
+                </form>*@
+            </div>
+        </div>
+    </nav>
     <div class="container body-content" style="padding:50px;">
         @await Html.PartialAsync("LoginPartial")
         @RenderBody()
         <hr />
-        <footer>
+        <footer style=" text-align:center">
             <i class='fab fa-facebook' style='font-size:36px'></i>
             <i class='fab fa-google-plus-square' style='font-size:36px'></i>
             <i class='fab fa-instagram' style='font-size:36px'></i>
@@ -30,7 +58,9 @@
             <i class='fab fa-telegram' style='font-size:36px'></i>
             <i class='fab fa-twitch' style='font-size:36px'></i>
             <i class='fab fa-rocketchat' style='font-size:36px'></i>
-            <p><a target="_blank" href="https://github.com/etrupja">&copy; 2019</a></p>
+            <p></p>
+            <p><a target="_blank" href="https://github.com/lnupmi11/EventOrganizer">Copyrights &copy; 2019 - EventOrganizer Software&trade;</a></p>
+            <p></p>
         </footer>
     </div>
 </body>

@@ -55,8 +55,19 @@ namespace EventOrganizer
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
-          
+            //app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "categoryfilter",
+                    template: "Events/{action}/{category?}",
+                    defaults: new { Controller = "Events", action = "List" });
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{Id?}");
+            });
             // List all possible routes
             //app.UseMvc(routes =>
             //{
