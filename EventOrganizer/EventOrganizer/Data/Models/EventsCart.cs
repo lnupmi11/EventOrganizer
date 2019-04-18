@@ -31,7 +31,7 @@ namespace EventOrganizer.Data.Models
             return new EventsCart(context) { EventsCartId = cartId };
         }
 
-        public void AddToCart(Event @event, int amount)
+        public void AddToCart(Event @event)
         {
             var eventsCartItem =
                 _eventOrganizerDbContext.EventsCartItems.SingleOrDefault(
