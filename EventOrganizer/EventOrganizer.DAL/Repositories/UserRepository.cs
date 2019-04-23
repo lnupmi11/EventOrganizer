@@ -1,12 +1,13 @@
-﻿using EventOrganizer.Data.Interfaces;
-using EventOrganizer.Data.Models;
+﻿using EventOrganizer.DAL.DbContext;
+using EventOrganizer.DAL.Interfaces;
+using EventOrganizer.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace EventOrganizer.Data.Repositories
+namespace EventOrganizer.DAL.Repositories
 {
     public class UserRepository : IUserRepository
     {

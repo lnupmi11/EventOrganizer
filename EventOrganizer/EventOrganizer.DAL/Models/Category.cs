@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace EventOrganizer.Data.Models
+namespace EventOrganizer.DAL.Models
 {
     public class Category
     {

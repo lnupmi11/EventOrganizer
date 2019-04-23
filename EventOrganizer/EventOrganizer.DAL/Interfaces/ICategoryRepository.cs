@@ -1,10 +1,9 @@
-﻿using EventOrganizer.Data.Models;
+﻿using EventOrganizer.DAL.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace EventOrganizer.Data.Interfaces
+namespace EventOrganizer.DAL.Interfaces
 {
     public interface ICategoryRepository
     {

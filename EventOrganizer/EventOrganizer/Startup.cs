@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EventOrganizer.Data;
-using EventOrganizer.Data.Interfaces;
-using EventOrganizer.Data.Mocks;
-using EventOrganizer.Data.Models;
-using EventOrganizer.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using AspNetCore.RouteAnalyzer;
+using EventOrganizer.DAL.DbContext;
+using EventOrganizer.DAL.Repositories;
+using EventOrganizer.DAL.Models;
+using EventOrganizer.DAL.Interfaces;
 
 namespace EventOrganizer
 {

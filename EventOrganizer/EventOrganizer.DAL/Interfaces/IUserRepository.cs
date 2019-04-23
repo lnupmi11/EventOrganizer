@@ -1,9 +1,9 @@
-﻿using EventOrganizer.Data.Models;
+﻿using EventOrganizer.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EventOrganizer.Data.Interfaces
+namespace EventOrganizer.DAL.Interfaces
 {
     public interface IUserRepository
     {
