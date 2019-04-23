@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventOrganizer.DAL\EventOrganizer.DAL.csproj" />
+    <ProjectReference Include="..\EventOrganizer.BLL\EventOrganizer.BLL.csproj" />
   </ItemGroup>
 
 </Project>
