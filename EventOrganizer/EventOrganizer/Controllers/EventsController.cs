@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EventOrganizer.Data.Interfaces;
-using EventOrganizer.Data.Models;
+using EventOrganizer.DAL.Interfaces;
+using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

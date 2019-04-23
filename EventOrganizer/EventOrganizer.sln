@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOrganizer", "EventOrganizer\EventOrganizer.csproj", "{BB49D8C9-6F82-49A8-A675-23A7523D86A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOrganizer", "EventOrganizer\EventOrganizer.csproj", "{BB49D8C9-6F82-49A8-A675-23A7523D86A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOrganizer.DAL", "EventOrganizer.DAL\EventOrganizer.DAL.csproj", "{6530E5FB-12BE-4D28-B37F-2AF7C96E0EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOrganizer.BLL", "EventOrganizer.BLL\EventOrganizer.BLL.csproj", "{284C9513-7289-4B44-A7EF-ADADC0BF0BE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{BB49D8C9-6F82-49A8-A675-23A7523D86A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB49D8C9-6F82-49A8-A675-23A7523D86A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB49D8C9-6F82-49A8-A675-23A7523D86A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6530E5FB-12BE-4D28-B37F-2AF7C96E0EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6530E5FB-12BE-4D28-B37F-2AF7C96E0EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6530E5FB-12BE-4D28-B37F-2AF7C96E0EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6530E5FB-12BE-4D28-B37F-2AF7C96E0EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{284C9513-7289-4B44-A7EF-ADADC0BF0BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284C9513-7289-4B44-A7EF-ADADC0BF0BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284C9513-7289-4B44-A7EF-ADADC0BF0BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284C9513-7289-4B44-A7EF-ADADC0BF0BE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

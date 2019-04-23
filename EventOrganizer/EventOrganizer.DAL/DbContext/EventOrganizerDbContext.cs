@@ -1,11 +1,11 @@
-﻿using EventOrganizer.Data.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EventOrganizer.DAL.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace EventOrganizer.Data
+namespace EventOrganizer.DAL.DbContext
 {
     public class EventOrganizerDbContext : IdentityDbContext<User>
     {
@@ -17,5 +17,5 @@ namespace EventOrganizer.Data
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<User> Users { get; set; }
-    }   
+    }
 }

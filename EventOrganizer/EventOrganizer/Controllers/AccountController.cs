@@ -1,5 +1,5 @@
-﻿using EventOrganizer.Data.Interfaces;
-using EventOrganizer.Data.Models;
+﻿using EventOrganizer.DAL.Interfaces;
+using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

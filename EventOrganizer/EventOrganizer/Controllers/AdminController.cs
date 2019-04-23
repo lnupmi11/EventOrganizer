@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using EventOrganizer.Data.Models;
 using System.Threading.Tasks;
+using EventOrganizer.DAL.Models;
+using EventOrganizer.ViewModels;
 
 namespace EventOrganizer.Controllers
 {
