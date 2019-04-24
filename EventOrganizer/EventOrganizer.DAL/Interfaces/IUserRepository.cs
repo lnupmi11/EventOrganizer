@@ -7,12 +7,16 @@ namespace EventOrganizer.DAL.Interfaces
 {
     public interface IUserRepository
     {
-        IEnumerable<User> Users { get; }
+        IEnumerable<User> All();
 
-        User GetUserByUserName(string UserName);
+        User Get(string id);
 
-        User GetUserById(string id);
+        User GetByUserName(string username);
 
-        void DeleteById(string id);
+        void Create(User item);
+
+        void Update(User item);
+
+        void Delete(string id);
     }
 }
