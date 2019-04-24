@@ -18,16 +18,44 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public IEnumerable<User> Users => _eventOrganizerDbContext.Users;
-
-        public User GetUserByUserName(string username) => _eventOrganizerDbContext.Users.FirstOrDefault(p => p.UserName == username);
-
-        public User GetUserById(string id) => _eventOrganizerDbContext.Users.FirstOrDefault(p => p.Id == id);
-
-        public void DeleteById(string id)
+        public IEnumerable<User> All()
         {
-            _eventOrganizerDbContext.Remove(GetUserById(id));
+            return _eventOrganizerDbContext.Users;
+        }
+
+        public User Get(string id)
+        {
+            return All().FirstOrDefault(u => u.Id == id);
+        }
+
+        public User GetByUserName(string username)
+        {
+            return All().FirstOrDefault(u => u.UserName == username);
+        }
+
+        public void Create(User item)
+        {
+            _eventOrganizerDbContext.Users.Add(item);
             _eventOrganizerDbContext.SaveChanges();
+        }
+
+        public void Update(User item)
+        {
+            if (item != null)
+            {
+                _eventOrganizerDbContext.Users.Update(item);
+                _eventOrganizerDbContext.SaveChanges();
+            }
+        }
+
+        public void Delete(string id)
+        {
+            var user = _eventOrganizerDbContext.Users.Find(id);
+            if (user != null)
+            {
+                _eventOrganizerDbContext.Users.Remove(user);
+                _eventOrganizerDbContext.SaveChanges();
+            }
         }
     }
 }

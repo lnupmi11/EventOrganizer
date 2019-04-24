@@ -14,6 +14,8 @@ using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Repositories;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.DAL.Interfaces;
+using EventOrganizer.BLL.Services;
+using EventOrganizer.BLL.Interfaces;
 
 namespace EventOrganizer
 {
@@ -41,6 +43,8 @@ namespace EventOrganizer
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+
+            services.AddTransient<IUserService, UserService>();
 
             services.AddRouteAnalyzer();
 

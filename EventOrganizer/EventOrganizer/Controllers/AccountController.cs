@@ -1,4 +1,5 @@
-﻿using EventOrganizer.DAL.Interfaces;
+﻿using EventOrganizer.BLL.Interfaces;
+using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -14,13 +15,15 @@ namespace EventOrganizer.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IUserRepository userRepository)
+        public AccountController(UserManager<User> userManager,
+                                 SignInManager<User> signInManager,
+                                 IUserService userService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public IActionResult Login(string returnUrl)
@@ -37,7 +40,7 @@ namespace EventOrganizer.Controllers
             if (!ModelState.IsValid)
                 return View(loginViewModel);
 
-            var user = _userRepository.GetUserByUserName(loginViewModel.UserName);
+            var user = _userService.GetByUserName(loginViewModel.UserName);
             if (user != null)
             {
                 await _signInManager.SignOutAsync();
@@ -96,8 +99,7 @@ namespace EventOrganizer.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            if(_userRepository.GetUserById(id) != null)
-                _userRepository.DeleteById(id);
+            _userService.DeleteById(id);
 
             return RedirectToAction("Index", "Admin");
         }
