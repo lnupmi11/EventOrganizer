@@ -17,6 +17,7 @@ using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.BLL.Interfaces;
 using EventOrganizer.BLL.Services;
 
+
 namespace EventOrganizer
 {
     public class Startup
@@ -45,6 +46,8 @@ namespace EventOrganizer
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICategoryService, CategoryService>();
+
+            services.AddTransient<IUserService, UserService>();
 
             services.AddRouteAnalyzer();
 
