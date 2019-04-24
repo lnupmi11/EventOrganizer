@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventOrganizer.BLL.Interfaces;
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +13,17 @@ namespace EventOrganizer.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEventRepository _eventRepository;
-
-        public HomeController(IEventRepository eventRepository)
+        private readonly IEventService _eventService;
+        
+        public HomeController(IEventService eventService)
         {
-            _eventRepository = eventRepository;
+            _eventService = eventService;
         }
         public ViewResult Index()
         {
             var homeViewModel = new HomeViewModel
             {
-                PreferredEvents = _eventRepository.PreferredEvents
+                PreferredEvents = _eventService.GetPreferredEvents()
             };
             return View(homeViewModel);
         }

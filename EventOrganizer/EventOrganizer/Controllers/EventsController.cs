@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventOrganizer.BLL.Interfaces;
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
@@ -12,50 +13,27 @@ namespace EventOrganizer.Controllers
 {
     public class EventsController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IEventRepository _eventRepository;
+        private readonly ICategoryService _categoryService;
+        private readonly IEventService _eventService;
 
-        public EventsController(ICategoryRepository categoryRepository, IEventRepository eventRepository)
+        public EventsController(ICategoryService categoryService, IEventService eventService)
         {
-            _categoryRepository = categoryRepository;
-            _eventRepository = eventRepository;
+            _categoryService = categoryService;
+            _eventService = eventService;
         }
 
         public ViewResult List(string category)
         {
-            string _category = category;
             IEnumerable<Event> events = null;
-            string currentCategory = string.Empty;
+            string currentCategory = null;
+            currentCategory = _categoryService.GetCategoryName(category);
 
-            if (string.IsNullOrEmpty(category))
+            if (string.Equals("All", currentCategory))
             {
-                events = _eventRepository.Events.OrderBy(p => p.EventId);
-                currentCategory = "All";
-            }
-            else
+                events = _eventService.GetAll();
+            } else
             {
-                if (string.Equals("Bussiness", _category, StringComparison.OrdinalIgnoreCase))
-                {
-                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Bussiness")).OrderBy(p => p.Name);
-                }
-                else if(string.Equals("Education", _category, StringComparison.OrdinalIgnoreCase))
-                {
-                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Education")).OrderBy(p => p.Name);
-                }
-                else if (string.Equals("Marketing", _category, StringComparison.OrdinalIgnoreCase))
-                {
-                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Marketing")).OrderBy(p => p.Name);
-                }
-                else if (string.Equals("Entertainment", _category, StringComparison.OrdinalIgnoreCase))
-                {
-                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Entertainment")).OrderBy(p => p.Name);
-                }
-                else if (string.Equals("Culture", _category, StringComparison.OrdinalIgnoreCase))
-                {
-                    events = _eventRepository.Events.Where(p => p.Category.Name.Equals("Culture")).OrderBy(p => p.Name);
-                }
-
-                currentCategory = _category;
+                events = _eventService.GetEvents(currentCategory);
             }
 
             EventsListViewModel elvm = new EventsListViewModel();
