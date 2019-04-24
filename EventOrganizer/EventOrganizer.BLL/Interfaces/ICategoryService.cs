@@ -1,10 +1,13 @@
-﻿using System;
+﻿using EventOrganizer.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EventOrganizer.BLL.Interfaces
 {
-    class ICategoryService
+    public interface ICategoryService
     {
+        string GetCategoryName(string categoryName);
+
     }
 }
