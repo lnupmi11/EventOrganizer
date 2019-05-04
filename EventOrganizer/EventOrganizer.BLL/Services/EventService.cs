@@ -42,6 +42,12 @@ namespace EventOrganizer.BLL.Services
             return _eventRepository.GetEventById(eventId);
         }
 
-
+        public void CreateItem(Event item)
+        {
+            if (item != null)
+            {
+                _eventRepository.Create(item);
+            }
+        }
     }
 }

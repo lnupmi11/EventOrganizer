@@ -14,5 +14,7 @@ namespace EventOrganizer.BLL.Interfaces
         IEnumerable<Event> GetPreferredEvents();
 
         Event GetEventById(int id);
+
+        void CreateItem(Event item);
     }
 }

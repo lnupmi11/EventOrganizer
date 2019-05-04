@@ -23,5 +23,11 @@ namespace EventOrganizer.DAL.Repositories
         public IEnumerable<Event> PreferredEvents => _eventOrganizerDbContext.Events.Where(p => p.IsPreferredEvent).Include(c => c.Category);
 
         public Event GetEventById(int eventId) => _eventOrganizerDbContext.Events.FirstOrDefault(p => p.Id == eventId);
+
+        public void Create(Event item)
+        {
+            _eventOrganizerDbContext.Events.Add(item);
+            _eventOrganizerDbContext.SaveChanges();
+        }
     }
 }
