@@ -12,5 +12,7 @@ namespace EventOrganizer.DAL.Interfaces
         IEnumerable<Event> PreferredEvents { get; }
 
         Event GetEventById(int EventId);
+
+        void Create(Event item);
     }
 }

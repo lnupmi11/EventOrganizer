@@ -43,5 +43,29 @@ namespace EventOrganizer.Controllers
 
             return View(elvm);
         }
+
+        public ViewResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateEventModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            Event event_item = new Event
+            {
+                Name = model.Name,
+                ShortDescription = model.ShortDescription,
+                LongDescription = model.LongDescription,
+                ImageUrl = model.ImageUrl,
+                ImageThumbnailUrl = model.ImageThumbnailUrl,
+                IsPreferredEvent = model.IsPreferredEvent,
+                CategoryId = model.CategoryId,
+                ScheduledAt = model.ScheduledAt,
+                CreatedAt = DateTime.Now
+            };
+
+            _eventService.CreateItem(event_item);
+            return RedirectToAction("List");
+        }
     }
 }

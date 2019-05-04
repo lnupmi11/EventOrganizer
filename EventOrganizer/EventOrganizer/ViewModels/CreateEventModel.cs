@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace EventOrganizer.DAL.Models
+namespace EventOrganizer.ViewModels
 {
-    public class Event
+    public class CreateEventModel
     {
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+
         public string ShortDescription { get; set; }
+
         public string LongDescription { get; set; }
+
+        [Required]
         public string ImageUrl { get; set; }
+
         public string ImageThumbnailUrl { get; set; }
+
         public bool IsPreferredEvent { get; set; }
+
+        [Required]
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+
         public DateTime ScheduledAt { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

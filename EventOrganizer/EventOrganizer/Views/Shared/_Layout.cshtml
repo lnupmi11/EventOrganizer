@@ -53,7 +53,7 @@
                 @*@await Html.PartialAsync("LoginPartial")
                 <form class="navbar-form navbar-right" asp-controller="Drink" asp-action="Search" method="get">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search for a drink" name="searchString" value="@ViewData["searchString"]">
+                        <input type="text" class="form-control" placeholder="Search for a drink" name="searchString" value="@ViewData["searchString"]" />
                     </div>
                 </form>*@
             </div>
@@ -61,22 +61,24 @@
     </nav>
     <div class="container body-content" style="padding:50px;">
         @*@await Html.PartialAsync("LoginPartial")*@
-        @RenderBody()
-        <hr />
-        <footer style=" text-align:center">
-            <i class='fab fa-facebook' style='font-size:36px'></i>
-            <i class='fab fa-google-plus-square' style='font-size:36px'></i>
-            <i class='fab fa-instagram' style='font-size:36px'></i>
-            <i class='fab fa-hackerrank' style='font-size:36px'></i>
-            <i class='fab fa-github' style='font-size:36px'></i>
-            <i class='fab fa-linkedin' style='font-size:36px'></i>
-            <i class='fab fa-telegram' style='font-size:36px'></i>
-            <i class='fab fa-twitch' style='font-size:36px'></i>
-            <i class='fab fa-rocketchat' style='font-size:36px'></i>
-            <p></p>
-            <p><a target="_blank" href="https://github.com/lnupmi11/EventOrganizer">Copyrights &copy; 2019 - EventOrganizer Software&trade;</a></p>
-            <p></p>
-        </footer>
+        @RenderBody()         
     </div>
+    <hr />
+    <footer style=" text-align:center">
+      <i class='fab fa-facebook' style='font-size:36px'></i>
+      <i class='fab fa-google-plus-square' style='font-size:36px'></i>
+      <i class='fab fa-instagram' style='font-size:36px'></i>
+      <i class='fab fa-hackerrank' style='font-size:36px'></i>
+      <i class='fab fa-github' style='font-size:36px'></i>
+      <i class='fab fa-linkedin' style='font-size:36px'></i>
+      <i class='fab fa-telegram' style='font-size:36px'></i>
+      <i class='fab fa-twitch' style='font-size:36px'></i>
+      <i class='fab fa-rocketchat' style='font-size:36px'></i>
+      <p></p>
+      <p>
+        <a target="_blank" href="https://github.com/lnupmi11/EventOrganizer">Copyrights &copy; 2019 - EventOrganizer Software&trade;</a>
+      </p>
+      <p></p>
+    </footer>
 </body>
 </html>
