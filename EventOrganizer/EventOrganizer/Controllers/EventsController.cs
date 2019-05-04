@@ -43,5 +43,13 @@ namespace EventOrganizer.Controllers
 
             return View(elvm);
         }
+
+        public ViewResult Create() => View();
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create(CreateEventModel model)
+        //{
+        //    return View(model);
+        //}
     }
 }
