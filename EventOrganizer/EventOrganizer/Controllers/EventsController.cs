@@ -47,7 +47,7 @@ namespace EventOrganizer.Controllers
         public ViewResult Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateEventModel model)
+        public async Task<IActionResult> Create(CreateEventViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
