@@ -6,7 +6,7 @@ namespace EventOrganizer.DAL.Models
 {
     public class Event
     {
-        public int EventId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
@@ -15,7 +15,7 @@ namespace EventOrganizer.DAL.Models
         public bool IsPreferredEvent { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-        public DateTime EventDateTime { get; set; }
-        public DateTime CreationalDateTime { get; set; }
+        public DateTime ScheduledAt { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

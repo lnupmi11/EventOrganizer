@@ -4,8 +4,8 @@
     <div class="thumbnail">
         <img src="@Model.ImageThumbnailUrl" alt="" />
         <div class="caption">
-            <p class="pull-right">@Model.EventDateTime.ToShortDateString()</p>
-            @*<h3 class="pull-right">@e.EventDateTime.ToShortTimeString()</h3>*@
+            <p class="pull-right">@Model.ScheduledAt.ToShortDateString()</p>
+            @*<h3 class="pull-right">@e.ScheduledAt.ToShortTimeString()</h3>*@
             <h5>
                 <a>@Model.Name</a>
             </h5>

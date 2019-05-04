@@ -21,7 +21,7 @@ namespace EventOrganizer.BLL.Services
         public IEnumerable<Event> GetAll()
         {
             IEnumerable<Event> events = null;
-            events = _eventRepository.Events.OrderBy(p => p.EventId);
+            events = _eventRepository.Events.OrderBy(p => p.Id);
             return events;
         }
 
