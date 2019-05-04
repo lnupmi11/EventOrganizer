@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EventOrganizer.ViewModels
 {
-    public class CreateEventModel
+    public class CreateEventViewModel
     {
         [Required]
         public string Name { get; set; }
