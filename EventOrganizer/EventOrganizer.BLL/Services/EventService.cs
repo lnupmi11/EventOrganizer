@@ -50,6 +50,19 @@ namespace EventOrganizer.BLL.Services
             }
         }
 
+        public void EditItem(Event item)
+        {
+            if(item != null)
+            {
+                if (_eventRepository.Exists(item))
+                {
+                    _eventRepository.Edit(item);
+                }
+            }
+
+
+        }
+
         public void DeleteItem(Event item)
         {
             if (item != null)

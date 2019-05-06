@@ -17,6 +17,8 @@ namespace EventOrganizer.DAL.Interfaces
 
         bool Exists(Event item);
 
+        void Edit(Event item);
+
         void Delete(Event item);
 
     }

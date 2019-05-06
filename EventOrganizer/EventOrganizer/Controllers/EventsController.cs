@@ -78,5 +78,15 @@ namespace EventOrganizer.Controllers
 
         public ViewResult Edit(Event item) => View(item);
 
+        [HttpPost]
+        public async Task<IActionResult> EditEvent(Event model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            _eventService.EditItem(model);
+            return RedirectToAction("List");
+        }
+
+
     }
 }
