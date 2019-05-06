@@ -54,7 +54,7 @@ namespace EventOrganizer.BLL.Services
         {
             if (item != null)
             {
-                if (_eventRepository.Exists(item) == true)
+                if (_eventRepository.Exists(item))
                 {
                     _eventRepository.Delete(item);
                 }
