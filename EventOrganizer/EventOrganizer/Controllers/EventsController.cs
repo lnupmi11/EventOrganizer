@@ -44,6 +44,14 @@ namespace EventOrganizer.Controllers
             return View(elvm);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(Event item)
+        {
+            if (!ModelState.IsValid) RedirectToAction("List");
+            _eventService.DeleteItem(item);
+            return RedirectToAction("List");
+        }
+
         public ViewResult Create() => View();
 
         [HttpPost]
@@ -67,5 +75,8 @@ namespace EventOrganizer.Controllers
             _eventService.CreateItem(event_item);
             return RedirectToAction("List");
         }
+
+        
+
     }
 }
