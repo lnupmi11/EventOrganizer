@@ -16,5 +16,7 @@ namespace EventOrganizer.BLL.Interfaces
         Event GetEventById(int id);
 
         void CreateItem(Event item);
+
+        void DeleteItem(Event item);
     }
 }

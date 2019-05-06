@@ -14,5 +14,10 @@ namespace EventOrganizer.DAL.Interfaces
         Event GetEventById(int EventId);
 
         void Create(Event item);
+
+        bool Exists(Event item);
+
+        void Delete(Event item);
+
     }
 }

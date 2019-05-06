@@ -49,5 +49,16 @@ namespace EventOrganizer.BLL.Services
                 _eventRepository.Create(item);
             }
         }
+
+        public void DeleteItem(Event item)
+        {
+            if (item != null)
+            {
+                if (_eventRepository.Exists(item))
+                {
+                    _eventRepository.Delete(item);
+                }
+            }
+        }
     }
 }

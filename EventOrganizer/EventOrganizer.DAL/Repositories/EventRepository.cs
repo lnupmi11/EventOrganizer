@@ -29,5 +29,24 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext.Events.Add(item);
             _eventOrganizerDbContext.SaveChanges();
         }
+
+        public bool Exists(Event item)
+        {
+            var events = _eventOrganizerDbContext.Events.Where((it) => (it == item)).Count();
+            if (events != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void Delete(Event item)
+        {
+            _eventOrganizerDbContext.Events.Remove(item);
+            _eventOrganizerDbContext.SaveChanges();
+        }
     }
 }
