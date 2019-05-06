@@ -76,7 +76,7 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
-        
+        public ViewResult Edit(Event item) => View(item);
 
     }
 }

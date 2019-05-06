@@ -10,10 +10,13 @@
                 <a>@Model.Name</a>
             </h5>
             <p>@Model.Category.Name</p>
+            @Html.ActionLink("Edit", "Edit", "Events", Model)
+            
             @using (Html.BeginForm("Delete", "Events", Model))
             {
-                <input type ="submit" value="Delete" />
+                <input type="submit" value="Delete" />
             }
+
             @*To do: add short descriptions*@
         </div>
     </div>
