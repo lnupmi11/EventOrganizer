@@ -32,7 +32,7 @@ namespace EventOrganizer.DAL.Repositories
 
         public bool Exists(Event item)
         {
-            var events = _eventOrganizerDbContext.Events.Where((it) => (it == item)).Count();
+            var events = _eventOrganizerDbContext.Events.Where((it) => (it.Id == item.Id)).Count();
             if (events != 0)
             {
                 return true;
@@ -41,6 +41,14 @@ namespace EventOrganizer.DAL.Repositories
             {
                 return false;
             }
+        }
+
+        public void Edit(Event item)
+        {
+            var ev = _eventOrganizerDbContext.Events.Where((it) => (it.Id == item.Id)).First();
+            _eventOrganizerDbContext.Events.Remove(ev);
+            _eventOrganizerDbContext.Events.Add(item);
+            _eventOrganizerDbContext.SaveChanges();
         }
 
         public void Delete(Event item)

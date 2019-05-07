@@ -29,4 +29,10 @@
     <ProjectReference Include="..\EventOrganizer.BLL\EventOrganizer.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Events\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
