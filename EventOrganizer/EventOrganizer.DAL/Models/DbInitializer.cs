@@ -122,19 +122,7 @@ namespace EventOrganizer.DAL.Models
                     }
                 );
             }
-
-            //if (!context.Users.Any())
-            //{
-            //    context.AddRange(
-            //        new User
-            //        {
-            //            UserName = "admin",
-            //            PasswordHash = ("qwerty").GetHashCode().ToString(),
-            //            Email = "admin@gmail.com"
-            //        }
-            //        );
-            //}
-
+            
             context.SaveChanges();
         }
 
