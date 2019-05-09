@@ -2,6 +2,7 @@
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -96,12 +97,19 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List", "Events");
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(string id)
         {
-            _userService.DeleteById(id);
+            User user = _userService.GetById(id);
 
-            return RedirectToAction("Index", "Admin");
+            if (user != null)
+            {
+                _userManager.DeleteAsync(user);
+                return RedirectToAction("Index", "Admin");
+            }
+
+            return NotFound();
         }
     }
 }
