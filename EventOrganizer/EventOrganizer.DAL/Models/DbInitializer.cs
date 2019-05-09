@@ -1,5 +1,6 @@
 ﻿using EventOrganizer.DAL.DbContext;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -122,7 +123,50 @@ namespace EventOrganizer.DAL.Models
                 );
             }
 
+            //if (!context.Users.Any())
+            //{
+            //    context.AddRange(
+            //        new User
+            //        {
+            //            UserName = "admin",
+            //            PasswordHash = ("qwerty").GetHashCode().ToString(),
+            //            Email = "admin@gmail.com"
+            //        }
+            //        );
+            //}
+
             context.SaveChanges();
+        }
+
+        public static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        {
+            if (roleManager.FindByNameAsync("Admin").Result == null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "Admin"
+                };
+                
+            }
+        }
+
+        public static void SeedUsers(UserManager<User> userManager)
+        {
+            if (userManager.FindByEmailAsync("admin@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
+            }
         }
 
         private static Dictionary<string, Category> categories;

@@ -41,6 +41,8 @@ namespace EventOrganizer
             services.AddIdentity<User, IdentityRole>()
                             .AddEntityFrameworkStores<EventOrganizerDbContext>()
                             .AddDefaultTokenProviders();
+            //services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
+            //                .AddEntityFrameworkStores<EventOrganizerDbContext>();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -55,7 +57,7 @@ namespace EventOrganizer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
@@ -81,6 +83,8 @@ namespace EventOrganizer
             //});
 
             DbInitializer.Seed(app);
+            DbInitializer.SeedRoles(roleManager);
+            DbInitializer.SeedUsers(userManager);
         }
     }
 }
