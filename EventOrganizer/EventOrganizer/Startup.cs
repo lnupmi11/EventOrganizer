@@ -49,9 +49,14 @@ namespace EventOrganizer
 
             services.AddTransient<IUserService, UserService>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => EventsCart.GetCart(sp));
+
             services.AddRouteAnalyzer();
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +65,7 @@ namespace EventOrganizer
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
 

@@ -16,6 +16,8 @@ namespace EventOrganizer.DAL.DbContext
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<EventsCartItem> EventsCartItems { get; set; }
+
         public DbSet<User> Users { get; set; }
     }
 }
