@@ -65,6 +65,21 @@ namespace EventOrganizer.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("EventOrganizer.DAL.Models.EventsCartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EventId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventsCartItems");
+                });
+
             modelBuilder.Entity("EventOrganizer.DAL.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -232,6 +247,13 @@ namespace EventOrganizer.Migrations
                         .WithMany("Events")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventOrganizer.DAL.Models.EventsCartItem", b =>
+                {
+                    b.HasOne("EventOrganizer.DAL.Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -43,14 +43,13 @@ namespace EventOrganizer
                             .AddDefaultTokenProviders();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IEventsCartItemsRepository, EventsCartItemsRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IEventsCartItemsService, EventsCartItemsService>();
 
             services.AddTransient<IUserService, UserService>();
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped(sp => EventsCart.GetCart(sp));
 
             services.AddRouteAnalyzer();
 

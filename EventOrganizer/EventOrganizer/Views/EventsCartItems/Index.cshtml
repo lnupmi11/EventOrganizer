@@ -1,35 +1,26 @@
-﻿@model EventsCartViewModel
+﻿@model EventsCartItemsViewModel
 
 <div class="row checkoutForm">
     <h2>Your events cart</h2>
     <h4>Here are the events you liked.</h4>
     <table class="table table-bordered table-striped">
         <thead>
-            <tr>
-                <th>Selected amount</th>
-                <th>Drink</th>
-                <th class="text-right">Price</th>
-                <th class="text-right">Subtotal</th>
-                <th></th>
-            </tr>
         </thead>
         <tbody>
-            @foreach (var line in Model.EventsCart.EventsCartItems)
+            @foreach (var item in Model.EventsCartItems)
             {
                 <tr>
-                    <td class="text-left">@line.Event.Name</td>
-                    <td class="text-right">@line.Event.EventDateTime.ToString("c")</td>
-                    <td class="text-right">
-                    </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="EventsCart" asp-action="RemoveFromEventsCart" asp-route-eventId="@line.Event.EventId"></a></td>
+                    <td class="text-left">@item.Event.Name</td>
+                    <td class="text-right">@item.Event.ScheduledAt.ToString("c")</td>
+                    <td class="text-right"></td>
+                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="EventsCartItems" asp-action="RemoveFromEventsCart" asp-route-event="@item.Event"></a></td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total:</td>
-                <td class="text-right">
-                </td>
+                <td colspan="3" class="text-right"></td>
+                <td class="text-right"></td>
             </tr>
         </tfoot>
     </table>
