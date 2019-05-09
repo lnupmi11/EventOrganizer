@@ -43,15 +43,19 @@ namespace EventOrganizer
                             .AddDefaultTokenProviders();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IEventsCartItemsRepository, EventsCartItemsRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IEventsCartItemsService, EventsCartItemsService>();
 
             services.AddTransient<IUserService, UserService>();
 
             services.AddRouteAnalyzer();
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +64,7 @@ namespace EventOrganizer
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
 
