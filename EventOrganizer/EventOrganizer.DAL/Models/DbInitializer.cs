@@ -144,11 +144,11 @@ namespace EventOrganizer.DAL.Models
                 };
                 roleManager.CreateAsync(role);
             }
-            if (roleManager.FindByNameAsync("Manager").Result == null)
+            if (roleManager.FindByNameAsync("Official").Result == null)
             {
                 IdentityRole role = new IdentityRole
                 {
-                    Name = "Manager"
+                    Name = "Official"
                 };
                 roleManager.CreateAsync(role);
             }
@@ -165,7 +165,7 @@ namespace EventOrganizer.DAL.Models
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
-
+                
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Admin").Wait();
@@ -186,19 +186,19 @@ namespace EventOrganizer.DAL.Models
                     userManager.AddToRoleAsync(user, "User").Wait();
                 }
             }
-            if (userManager.FindByEmailAsync("manager@gmail.com").Result == null)
+            if (userManager.FindByEmailAsync("official@gmail.com").Result == null)
             {
                 User user = new User
                 {
-                    UserName = "manager",
-                    Email = "manager@gmail.com",
+                    UserName = "official",
+                    Email = "official@gmail.com",
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "Manager").Wait();
+                    userManager.AddToRoleAsync(user, "Official").Wait();
                 }
             }
         }

@@ -52,7 +52,7 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
-        [Authorize(Roles = "Manager, Admin")]
+        [Authorize(Roles = "Official, Admin")]
         public ViewResult Create() => View();
 
         [HttpPost]
