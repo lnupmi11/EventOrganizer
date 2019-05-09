@@ -41,8 +41,6 @@ namespace EventOrganizer
             services.AddIdentity<User, IdentityRole>()
                             .AddEntityFrameworkStores<EventOrganizerDbContext>()
                             .AddDefaultTokenProviders();
-            //services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
-            //                .AddEntityFrameworkStores<EventOrganizerDbContext>();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
