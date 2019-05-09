@@ -1,5 +1,6 @@
 ﻿using EventOrganizer.DAL.DbContext;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -121,8 +122,85 @@ namespace EventOrganizer.DAL.Models
                     }
                 );
             }
-
+            
             context.SaveChanges();
+        }
+
+        public static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        {
+            if (roleManager.FindByNameAsync("Admin").Result == null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "Admin"
+                };
+                roleManager.CreateAsync(role);
+            }
+            if (roleManager.FindByNameAsync("User").Result == null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "User"
+                };
+                roleManager.CreateAsync(role);
+            }
+            if (roleManager.FindByNameAsync("Manager").Result == null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "Manager"
+                };
+                roleManager.CreateAsync(role);
+            }
+        }
+
+        public static void SeedUsers(UserManager<User> userManager)
+        {
+            if (userManager.FindByEmailAsync("admin@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("user@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "user",
+                    Email = "user@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "User").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("manager@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "manager",
+                    Email = "manager@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Manager").Wait();
+                }
+            }
         }
 
         private static Dictionary<string, Category> categories;
