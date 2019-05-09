@@ -146,7 +146,23 @@ namespace EventOrganizer.DAL.Models
                 {
                     Name = "Admin"
                 };
-                
+                roleManager.CreateAsync(role);
+            }
+            if (roleManager.FindByNameAsync("User").Result == null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "User"
+                };
+                roleManager.CreateAsync(role);
+            }
+            if (roleManager.FindByNameAsync("Manager").Result == null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "Manager"
+                };
+                roleManager.CreateAsync(role);
             }
         }
 
@@ -165,6 +181,36 @@ namespace EventOrganizer.DAL.Models
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("user@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "user",
+                    Email = "user@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "User").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("manager@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "manager",
+                    Email = "manager@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Manager").Wait();
                 }
             }
         }
