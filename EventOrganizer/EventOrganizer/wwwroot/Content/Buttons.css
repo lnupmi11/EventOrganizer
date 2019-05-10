@@ -1,0 +1,21 @@
+﻿
+input[type=submit].edit {
+    background-color: dodgerblue;
+    border: none;
+    color: white;
+    opacity: 0.8;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type=submit].delete {
+    background-color: tomato;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
