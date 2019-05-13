@@ -9,5 +9,6 @@ namespace EventOrganizer.BLL.Interfaces
     {
         string GetCategoryName(string categoryName);
 
+        IEnumerable<Category> GetAll();
     }
 }
