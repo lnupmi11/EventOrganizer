@@ -23,7 +23,7 @@ namespace EventOrganizer.ViewModels
         public bool IsPreferredEvent { get; set; }
 
         [Required]
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
 
         public DateTime ScheduledAt { get; set; }
     }

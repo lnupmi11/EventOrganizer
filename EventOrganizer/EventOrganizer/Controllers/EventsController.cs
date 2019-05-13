@@ -73,7 +73,7 @@ namespace EventOrganizer.Controllers
                 ImageUrl = model.ImageUrl,
                 ImageThumbnailUrl = model.ImageThumbnailUrl,
                 IsPreferredEvent = model.IsPreferredEvent,
-                Category = model.Category,
+                CategoryId = model.CategoryId,
                 ScheduledAt = model.ScheduledAt,
                 CreatedAt = DateTime.Now
             };
