@@ -8,6 +8,7 @@ using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EventOrganizer.Controllers
 {
@@ -53,7 +54,11 @@ namespace EventOrganizer.Controllers
         }
 
         [Authorize(Roles = "Official, Admin")]
-        public ViewResult Create() => View();
+        public ViewResult Create()
+        {
+            ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateEventViewModel model)
@@ -77,7 +82,11 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
-        public ViewResult Edit(Event item) => View(item);
+        public ViewResult Edit(Event item)
+        {
+            ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");
+            return View(item);
+        }
 
         [HttpPost]
         public async Task<IActionResult> EditEvent(Event model)

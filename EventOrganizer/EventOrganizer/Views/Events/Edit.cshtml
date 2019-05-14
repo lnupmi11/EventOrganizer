@@ -55,12 +55,14 @@
           </div>
 
           <div class="form-group">
-            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-              <input asp-for="CategoryId" class="form-control" />
-              <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-          </div>
+		    <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+			  <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+				<option selected="selected" value="">Please select</option>
+			  </select>
+			  <span asp-validation-for="CategoryId" class="text-danger"></span>
+			</div>
+		  </div>
 
           <div class="form-group">
             <label asp-for="ScheduledAt" class="col-md-2 control-label"></label>
