@@ -39,7 +39,8 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
-                            <ul class="nav navbar-nav navbar-right" style="margin-left:600px;">
+                            <ul class="nav navbar-nav navbar-right" style="margin-left:500px;">
+                                <li><a href="#">@UserManager.GetUserName(User)</a></li>
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                             </ul>
                         </form>
