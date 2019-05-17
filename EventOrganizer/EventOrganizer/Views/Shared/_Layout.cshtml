@@ -9,6 +9,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/Buttons.css" rel="stylesheet" />
     <link href="~/Content/Checkbox.css" rel="stylesheet" />
+    <link href="~/Content/Image.css" rel="stylesheet" />
 
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous' />
 
@@ -42,9 +43,9 @@
                     {
                         <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
                           
-                            <ul class="nav navbar-nav navbar-right" style="margin-left:500px;">
+                            <ul class="nav navbar-nav navbar-right" style="margin-left:280px;">
+                                <img src="~/Images/img_avatar.png" alt="Avatar" class="avatar">
                                 <li><a href="#">@UserManager.GetUserName(User)</a></li>
-
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                             </ul>
                         </form>
