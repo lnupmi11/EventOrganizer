@@ -36,6 +36,9 @@ namespace EventOrganizer.BLL.Services
             return _categoryName;
         }
 
-
+        public IEnumerable<Category> GetAll()
+        {
+            return _categoryRepository.Categories;
+        }
     }
 }
