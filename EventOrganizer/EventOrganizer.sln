@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOrganizer.DAL", "Event
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOrganizer.BLL", "EventOrganizer.BLL\EventOrganizer.BLL.csproj", "{284C9513-7289-4B44-A7EF-ADADC0BF0BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOrganizer.Tests", "EventOrganizer.Tests\EventOrganizer.Tests.csproj", "{66948B23-743F-4764-A101-C49E61638297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOrganizer.Tests", "EventOrganizer.Tests\EventOrganizer.Tests.csproj", "{66948B23-743F-4764-A101-C49E61638297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -35,19 +35,23 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     @await Component.InvokeAsync("CategoryMenu")
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-                    <li><a asp-controller="EventsCartItems" asp-action="Index" style="cursor: not-allowed;">Liked</a></li>
+                    <li><a asp-controller="EventsCartItems" asp-action="Index" style="cursor: not-allowed;">Registered</a></li>
+                    <li><a asp-controller="Events" asp-action="Create">Create event</a></li>
+                    <li><a asp-controller="Roles" asp-action="Index">Roles</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
+                          
                             <ul class="nav navbar-nav navbar-right" style="margin-left:500px;">
                                 <li><a href="#">@UserManager.GetUserName(User)</a></li>
+
                                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                             </ul>
                         </form>
                     }
                     else
                     {
-                        <ul class="nav navbar-nav navbar-right" style="position: absolute;top: 8px;right: 16px; margin-right:11%;">
+                        <ul class="nav navbar-nav navbar-right" style="position: absolute;top: 8px;right: 16px; margin-right:12%;">
                             <li><a id="registerLink" asp-controller="Account" asp-action="Register"> Register </a></li>
                             <li><a id="loginLink" asp-controller="Account" asp-action="Login"> Log in </a></li>
                         </ul>

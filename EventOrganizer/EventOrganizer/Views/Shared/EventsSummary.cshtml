@@ -12,15 +12,15 @@
             <p>@Model.Category.Name</p>
             <div class="row">
                 <div class="col-lg-6">
-                    @using (Html.BeginForm("Delete", "Events", Model))
+                    @using (Html.BeginForm("Edit", "Events", Model))
                     {
-                        <input type="submit" value="Delete" class="delete"/>
+                        <input type="submit" value="Edit" class="edit" />
                     }
                 </div>
                 <div class="col-lg-6" style="text-align: right">
-                    @using (Html.BeginForm("Edit", "Events", Model))
+                    @using (Html.BeginForm("Delete", "Events", Model))
                     {
-                        <input type="submit" value="Edit" class="edit"/>
+                        <input type="submit" value="Delete" class="delete" />
                     }
                 </div>
             </div>
