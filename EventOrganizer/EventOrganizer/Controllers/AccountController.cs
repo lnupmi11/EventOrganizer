@@ -83,6 +83,17 @@ namespace EventOrganizer.Controllers
                 if (result.Succeeded)
                 {
                     _userManager.AddToRoleAsync(user, "User").Wait();
+
+                    var result2 = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
+
+                    if (result2.Succeeded)
+                    {
+                        if (string.IsNullOrEmpty(loginViewModel.ReturnUrl))
+                        {
+                            return RedirectToAction("List", "Events");
+                        }
+                        return Redirect(loginViewModel.ReturnUrl);
+                    }
                     return RedirectToAction("List", "Events");
                 }
 
