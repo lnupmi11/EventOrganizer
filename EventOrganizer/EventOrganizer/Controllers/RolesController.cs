@@ -1,5 +1,6 @@
 ﻿using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,11 +22,14 @@ namespace EventOrganizer.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index() => View(_roleManager.Roles.ToList());
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Create() => View();
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(string name)
         {
             if(!string.IsNullOrEmpty(name))
@@ -48,6 +52,7 @@ namespace EventOrganizer.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -61,6 +66,7 @@ namespace EventOrganizer.Controllers
 
         public IActionResult UserList() => View(_userManager.Users.ToList());
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string userId)
         {
             User user = await _userManager.FindByIdAsync(userId);
@@ -82,6 +88,7 @@ namespace EventOrganizer.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
             User user = await _userManager.FindByIdAsync(userId);

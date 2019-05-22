@@ -82,6 +82,7 @@ namespace EventOrganizer.Controllers
 
                 if (result.Succeeded)
                 {
+                    _userManager.AddToRoleAsync(user, "User").Wait();
                     return RedirectToAction("List", "Events");
                 }
 

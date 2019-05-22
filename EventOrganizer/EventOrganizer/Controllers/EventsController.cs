@@ -46,6 +46,7 @@ namespace EventOrganizer.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Official, Admin")]
         public async Task<IActionResult> Delete(Event item)
         {
             if (!ModelState.IsValid) RedirectToAction("List");
@@ -53,7 +54,7 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
-        [Authorize(Roles = "Official, Admin")]
+        [Authorize(Roles = "Official")]
         public ViewResult Create()
         {
             ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");
@@ -61,6 +62,7 @@ namespace EventOrganizer.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Official")]
         public async Task<IActionResult> Create(CreateEventViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -82,6 +84,7 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
+        [Authorize(Roles = "Official")]
         public ViewResult Edit(Event item)
         {
             ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");
@@ -89,6 +92,7 @@ namespace EventOrganizer.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Official")]
         public async Task<IActionResult> EditEvent(Event model)
         {
             if (!ModelState.IsValid) return View(model);
