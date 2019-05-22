@@ -29,19 +29,23 @@
             <div style="background-color:azure; height:200px; border:solid;">
                 <h2>Event 3</h2>
             </div>
-            <div class="col-lg-6">
-                <p>if official</p>
-                <a asp-controller="Events" asp-action="Create">
-
-                    <input type="submit" value="Create event" class="edit" />
-                </a>
-            </div>
-            <div class="col-lg-6" style="text-align: right">
-                <p>if admin</p>
-                <a asp-controller="Roles" asp-action="Index">
-
-                    <input type="submit" value="Roles" class="edit" />
-                </a>
+            <div class="row">
+                @if (User.IsInRole("Official"))
+                {
+                    <div class="col-lg-6" style="text-align: left">
+                        <a asp-controller="Events" asp-action="Create">
+                            <input type="submit" value="Create event" class="edit" />
+                        </a>
+                    </div>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="col-lg-6" style="text-align: left">
+                        <a asp-controller="Roles" asp-action="Index">
+                            <input type="submit" value="Roles" class="edit" />
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
