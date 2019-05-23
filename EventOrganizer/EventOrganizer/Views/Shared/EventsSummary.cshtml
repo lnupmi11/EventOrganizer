@@ -11,6 +11,8 @@
                 <a>@Model.Name</a>
             </h5>
             <p>@Model.Category.Name</p>
+            <p>On this event you:</p>
+            <p>@Model.ShortDescription  description...</p>
             @if (User.IsInRole("Official"))
             {
                 <div class="row">
@@ -31,6 +33,12 @@
             else if (User.IsInRole("Admin"))
             {
                 <div class="row">
+                    <div class="col-lg-6">
+                        @using (Html.BeginForm("Edit", "Events", Model))
+                        {
+                            <input type="submit" value="Edit" class="edit" />
+                        }
+                    </div>
                     <div class="col-lg-6" style="text-align: right">
                         @using (Html.BeginForm("Delete", "Events", Model))
                         {
@@ -39,9 +47,6 @@
                     </div>
                 </div>
             }
-
-
-            @*To do: add short descriptions*@
         </div>
     </div>
 </div>

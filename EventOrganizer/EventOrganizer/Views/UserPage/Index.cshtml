@@ -18,19 +18,8 @@
         <div class="col-sm-8">
             <p>Some example text..</p>
             <p><b>Some anouther example text..</b></p>
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 1</h2>
-            </div>
-            <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 2</h2>
-            </div>
-            <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 3</h2>
-            </div>
             <div class="row">
-                @if (User.IsInRole("Official"))
+                @if (User.IsInRole("Official") || User.IsInRole("Admin"))
                 {
                     <div class="col-lg-6" style="text-align: left">
                         <a asp-controller="Events" asp-action="Create">
@@ -46,6 +35,17 @@
                         </a>
                     </div>
                 }
+            </div>
+            <div style="background-color:azure; height:200px; border:solid;">
+                <h2>Event 1</h2>
+            </div>
+            <br />
+            <div style="background-color:azure; height:200px; border:solid;">
+                <h2>Event 2</h2>
+            </div>
+            <br />
+            <div style="background-color:azure; height:200px; border:solid;">
+                <h2>Event 3</h2>
             </div>
         </div>
     </div>
