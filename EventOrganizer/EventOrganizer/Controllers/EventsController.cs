@@ -101,6 +101,10 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
+        public ViewResult Index(Event item)
+        {
+            return View(item);
+        }
 
     }
 }
