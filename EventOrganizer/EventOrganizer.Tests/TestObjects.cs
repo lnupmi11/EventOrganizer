@@ -63,5 +63,34 @@ namespace EventOrganizer.Tests
             ScheduledAt = new DateTime(2019, 5, 10, 18, 00, 00),
             CreatedAt = new DateTime(2019, 3, 17, 17, 29, 00)
         };
+
+        public static readonly Category Category1 = new Category
+        {
+            Name = "Bussiness",
+            Description = "Bussiness conferences, meetings and..."
+        };
+
+        public static readonly Category Category2 = new Category
+        {
+            Name = "Education",
+            Description = "Educational seminars, lectures and..."
+        };
+        public static readonly Category Category3 = new Category
+        {
+            Name = "Marketing",
+            Description = "Marketing trade shows, product launches and..."
+        };
+
+        public static readonly Category Category4 = new Category
+        {
+            Name = "Entertainment",
+            Description = "Theme parties, weddings, birthdays and..."
+        };
+
+        public static readonly Category Category5 = new Category
+        {
+            Name = "Culture",
+            Description = "Opening ceremonies, award ceremonies and..."
+        };
     }
 }
