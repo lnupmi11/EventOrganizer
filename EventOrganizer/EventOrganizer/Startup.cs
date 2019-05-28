@@ -43,11 +43,11 @@ namespace EventOrganizer
                             .AddDefaultTokenProviders();
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<IEventsCartItemsRepository, EventsCartItemsRepository>();
+            services.AddTransient<IEventCartItemsRepository, EventCartItemsRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<IEventsCartItemsService, EventsCartItemsService>();
+            services.AddTransient<IEventCartItemsService, EventCartItemsService>();
 
             services.AddTransient<IUserService, UserService>();
 

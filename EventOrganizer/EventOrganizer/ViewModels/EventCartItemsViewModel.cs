@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace EventOrganizer.ViewModels
 {
-    public class EventsCartItemsViewModel
+    public class EventCartItemsViewModel
     {
-        public IEnumerable<EventsCartItem> EventsCartItems { get; set; }
+        public IEnumerable<EventCartItem> EventsCartItems { get; set; }
     }
 }

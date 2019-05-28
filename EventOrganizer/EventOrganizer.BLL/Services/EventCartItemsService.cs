@@ -5,11 +5,11 @@ using EventOrganizer.DAL.Models;
 
 namespace EventOrganizer.BLL.Services
 {
-    public class EventsCartItemsService : IEventsCartItemsService
+    public class EventCartItemsService : IEventCartItemsService
     {
-        private readonly IEventsCartItemsRepository _eventsCartItemsRepository;
+        private readonly IEventCartItemsRepository _eventsCartItemsRepository;
 
-        public EventsCartItemsService(IEventsCartItemsRepository eventsCartItemsRepository)
+        public EventCartItemsService(IEventCartItemsRepository eventsCartItemsRepository)
         {
             _eventsCartItemsRepository = eventsCartItemsRepository;
         }
@@ -32,7 +32,7 @@ namespace EventOrganizer.BLL.Services
             }
         }
 
-        public IEnumerable<EventsCartItem> GetEventsCartItems()
+        public IEnumerable<EventCartItem> GetEventsCartItems()
         {
             return _eventsCartItemsRepository.GetAllItems();
         }

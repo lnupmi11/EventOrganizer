@@ -1,6 +1,6 @@
 ﻿namespace EventOrganizer.DAL.Models
 {
-    public class EventsCartItem
+    public class EventCartItem
     {
         public int Id { get; set; }
         public Event Event { get; set; }

@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190418165502_CartItem.cs" />
-    <Compile Remove="Migrations\20190418165502_CartItem.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

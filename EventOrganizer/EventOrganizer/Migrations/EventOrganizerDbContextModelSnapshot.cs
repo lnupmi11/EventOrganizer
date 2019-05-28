@@ -65,7 +65,7 @@ namespace EventOrganizer.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("EventOrganizer.DAL.Models.EventsCartItem", b =>
+            modelBuilder.Entity("EventOrganizer.DAL.Models.EventCartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +77,7 @@ namespace EventOrganizer.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("EventsCartItems");
+                    b.ToTable("EventCartItems");
                 });
 
             modelBuilder.Entity("EventOrganizer.DAL.Models.User", b =>

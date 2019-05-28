@@ -7,16 +7,16 @@ using System.Linq;
 
 namespace EventOrganizer.DAL.Repositories
 {
-    public class EventsCartItemsRepository : IEventsCartItemsRepository
+    public class EventCartItemsRepository : IEventCartItemsRepository
     {
         private readonly EventOrganizerDbContext _eventOrganizerDbContext;
 
-        public EventsCartItemsRepository(EventOrganizerDbContext eventOrganizerDbContext)
+        public EventCartItemsRepository(EventOrganizerDbContext eventOrganizerDbContext)
         {
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public IEnumerable<EventsCartItem> EventsCartItems => _eventOrganizerDbContext.EventsCartItems;
+        public IEnumerable<EventCartItem> EventsCartItems => _eventOrganizerDbContext.EventCartItems;
 
         //public static EventsCart GetCart(IServiceProvider services)
         //{
@@ -32,12 +32,12 @@ namespace EventOrganizer.DAL.Repositories
 
         public void AddItem(Event @event)
         {
-            var eventsCartItem = _eventOrganizerDbContext.EventsCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);
+            var eventsCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);
 
             if (eventsCartItem == null)
             {
-                eventsCartItem = new EventsCartItem { Event = @event };
-                _eventOrganizerDbContext.EventsCartItems.Add(eventsCartItem);
+                eventsCartItem = new EventCartItem { Event = @event };
+                _eventOrganizerDbContext.EventCartItems.Add(eventsCartItem);
             }
 
             _eventOrganizerDbContext.SaveChanges();
@@ -45,11 +45,11 @@ namespace EventOrganizer.DAL.Repositories
 
         public void RemoveItem(Event @event)
         {
-            var eventsCartItem = _eventOrganizerDbContext.EventsCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);
+            var eventsCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);
 
             if (eventsCartItem != null)
             {
-                _eventOrganizerDbContext.EventsCartItems.Remove(eventsCartItem);
+                _eventOrganizerDbContext.EventCartItems.Remove(eventsCartItem);
             }
 
             _eventOrganizerDbContext.SaveChanges();
@@ -57,18 +57,18 @@ namespace EventOrganizer.DAL.Repositories
 
         public bool ItemExists(Event @event)
         {
-            return _eventOrganizerDbContext.EventsCartItems.SingleOrDefault(s => s.Event.Id == @event.Id) != null;
+            return _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id) != null;
         }
 
-        public IEnumerable<EventsCartItem> GetAllItems()
+        public IEnumerable<EventCartItem> GetAllItems()
         {
-            return _eventOrganizerDbContext.EventsCartItems.Include(s => s.Event).ToList();
+            return _eventOrganizerDbContext.EventCartItems.Include(s => s.Event).ToList();
         }
 
         public void RemoveAllItems()
         {
-            var cartItems = _eventOrganizerDbContext.EventsCartItems;
-            _eventOrganizerDbContext.EventsCartItems.RemoveRange(cartItems);
+            var cartItems = _eventOrganizerDbContext.EventCartItems;
+            _eventOrganizerDbContext.EventCartItems.RemoveRange(cartItems);
 
             _eventOrganizerDbContext.SaveChanges();
         }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace EventOrganizer.DAL.Interfaces
 {
-    public interface IEventsCartItemsRepository
+    public interface IEventCartItemsRepository
     {
-        IEnumerable<EventsCartItem> EventsCartItems { get; }
+        IEnumerable<EventCartItem> EventsCartItems { get; }
 
         void AddItem(Event @event);
 
         void RemoveItem(Event @event);
 
-        IEnumerable<EventsCartItem> GetAllItems();
+        IEnumerable<EventCartItem> GetAllItems();
 
         bool ItemExists(Event @event);
 
