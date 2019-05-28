@@ -51,7 +51,7 @@ namespace EventOrganizer.Tests.RepositoryTests
             var repository = new UserRepository(GetMockContext().Object);
             var expected = TestUsers.Last();
             var actual = repository.GetByUserName(expected.UserName);
-            Assert.Equal(expected, actual);
+            Assert.Equal(expected.UserName, actual.UserName);
         }
 
         [Fact]

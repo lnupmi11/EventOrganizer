@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using EventOrganizer.BLL.Interfaces;
+using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
+using EventOrganizer.DAL.Repositories;
 
 namespace EventOrganizer.BLL.Services
 {
     public class EventsCartItemsService : IEventsCartItemsService
     {
-        private readonly IEventsCartItemsRepository _eventsCartItemsRepository;
+        private readonly EventsCartItemsRepository _eventsCartItemsRepository;
 
-        public EventsCartItemsService(IEventsCartItemsRepository eventsCartItemsRepository)
+        public EventsCartItemsService(EventOrganizerDbContext context)
         {
-            _eventsCartItemsRepository = eventsCartItemsRepository;
+            _eventsCartItemsRepository = new EventsCartItemsRepository(context);
         }
 
         public void AddToCart(Event @event)
