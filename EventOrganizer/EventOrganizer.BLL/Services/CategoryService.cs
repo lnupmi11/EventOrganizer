@@ -1,4 +1,5 @@
 ﻿using EventOrganizer.BLL.Interfaces;
+using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.DAL.Repositories;
@@ -11,11 +12,11 @@ namespace EventOrganizer.BLL.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly CategoryRepository _categoryRepository;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(EventOrganizerDbContext context)
         {
-            _categoryRepository = categoryRepository;
+            _categoryRepository = new CategoryRepository(context);
         }
 
         public string GetCategoryName(string categoryName)

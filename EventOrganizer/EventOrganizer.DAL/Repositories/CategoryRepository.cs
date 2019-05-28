@@ -14,6 +14,6 @@ namespace EventOrganizer.DAL.Repositories
         {
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
-        public IEnumerable<Category> Categories => _eventOrganizerDbContext.Categories;
+        public virtual IEnumerable<Category> Categories => _eventOrganizerDbContext.Categories;
     }
 }
