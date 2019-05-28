@@ -5,16 +5,16 @@ namespace EventOrganizer.DAL.Interfaces
 {
     public interface IEventCartItemsRepository
     {
-        IEnumerable<EventCartItem> EventsCartItems { get; }
+        IEnumerable<EventCartItem> EventCartItems { get; }
 
-        void AddItem(Event @event);
+        void AddItem(int eventId, string userId);
 
-        void RemoveItem(Event @event);
+        void RemoveItem(int eventId, string userId);
 
-        IEnumerable<EventCartItem> GetAllItems();
+        bool ItemExists(int eventId, string userId);
 
-        bool ItemExists(Event @event);
+        IEnumerable<EventCartItem> GetAllItems(string userId);
 
-        void RemoveAllItems();
+        void RemoveAllItems(string userId);
     }
 }

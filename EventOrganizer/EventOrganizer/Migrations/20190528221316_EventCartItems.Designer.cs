@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventOrganizer.Migrations
 {
     [DbContext(typeof(EventOrganizerDbContext))]
-    [Migration("20190528061540_EventCartItems")]
+    [Migration("20190528221316_EventCartItems")]
     partial class EventCartItems
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,11 +73,11 @@ namespace EventOrganizer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EventId");
+                    b.Property<int>("EventId");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventId");
 
                     b.ToTable("EventCartItems");
                 });
@@ -249,13 +249,6 @@ namespace EventOrganizer.Migrations
                         .WithMany("Events")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("EventOrganizer.DAL.Models.EventCartItem", b =>
-                {
-                    b.HasOne("EventOrganizer.DAL.Models.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -7,39 +7,39 @@ namespace EventOrganizer.BLL.Services
 {
     public class EventCartItemsService : IEventCartItemsService
     {
-        private readonly IEventCartItemsRepository _eventsCartItemsRepository;
+        private readonly IEventCartItemsRepository _eventCartItemsRepository;
 
-        public EventCartItemsService(IEventCartItemsRepository eventsCartItemsRepository)
+        public EventCartItemsService(IEventCartItemsRepository eventCartItemsRepository)
         {
-            _eventsCartItemsRepository = eventsCartItemsRepository;
+            _eventCartItemsRepository = eventCartItemsRepository;
         }
 
-        public void AddToCart(Event @event)
+        public void AddToCart(int eventId, string userId)
         {
-            bool exists = _eventsCartItemsRepository.ItemExists(@event);
+            bool exists = _eventCartItemsRepository.ItemExists(eventId, userId);
             if (!exists)
             {
-                _eventsCartItemsRepository.AddItem(@event);
+                _eventCartItemsRepository.AddItem(eventId, userId);
             }
         }
 
-        public void RemoveFromCart(Event @event)
+        public void RemoveFromCart(int eventId, string userId)
         {
-            bool exists = _eventsCartItemsRepository.ItemExists(@event);
+            bool exists = _eventCartItemsRepository.ItemExists(eventId, userId);
             if (exists)
             {
-                _eventsCartItemsRepository.RemoveItem(@event);
+                _eventCartItemsRepository.RemoveItem(eventId, userId);
             }
         }
 
-        public IEnumerable<EventCartItem> GetEventsCartItems()
+        public IEnumerable<EventCartItem> GetEventCartItems(string userId)
         {
-            return _eventsCartItemsRepository.GetAllItems();
+            return _eventCartItemsRepository.GetAllItems(userId);
         }
 
-        public void ClearCart()
+        public void ClearCart(string userId)
         {
-            _eventsCartItemsRepository.RemoveAllItems();
+            _eventCartItemsRepository.RemoveAllItems(userId);
         }
     }
 }

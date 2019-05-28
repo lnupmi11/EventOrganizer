@@ -1,7 +1,6 @@
 ﻿using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,46 +15,51 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public IEnumerable<EventCartItem> EventsCartItems => _eventOrganizerDbContext.EventCartItems;
+        public IEnumerable<EventCartItem> EventCartItems => _eventOrganizerDbContext.EventCartItems;
 
-        public void AddItem(Event @event)
+        public void AddItem(int eventId, string userId)
         {
-            var eventsCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);
+            var eventCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault
+                (s => s.EventId == eventId && s.UserId ==  userId);
 
-            if (eventsCartItem == null)
+            if (eventCartItem == null)
             {
-                eventsCartItem = new EventCartItem { Event = @event };
-                _eventOrganizerDbContext.EventCartItems.Add(eventsCartItem);
+                eventCartItem = new EventCartItem { EventId = eventId, UserId = userId };
+                _eventOrganizerDbContext.EventCartItems.Add(eventCartItem);
             }
 
             _eventOrganizerDbContext.SaveChanges();
         }
 
-        public void RemoveItem(Event @event)
+        public void RemoveItem(int eventId, string userId)
         {
-            var eventsCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);
+            var eventCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault
+                (s => s.EventId == eventId && s.UserId == userId);
 
-            if (eventsCartItem != null)
+            if (eventCartItem != null)
             {
-                _eventOrganizerDbContext.EventCartItems.Remove(eventsCartItem);
+                _eventOrganizerDbContext.EventCartItems.Remove(eventCartItem);
             }
 
             _eventOrganizerDbContext.SaveChanges();
         }
 
-        public bool ItemExists(Event @event)
+        public bool ItemExists(int eventId, string userId)
         {
-            return _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id) != null;
+            var eventCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault
+                (s => s.EventId == eventId && s.UserId == userId);
+            return eventCartItem != null;
         }
 
-        public IEnumerable<EventCartItem> GetAllItems()
+        public IEnumerable<EventCartItem> GetAllItems(string userId)
         {
-            return _eventOrganizerDbContext.EventCartItems.Include(s => s.Event).ToList();
+            var cartItems = _eventOrganizerDbContext.EventCartItems.Where(s => s.UserId == userId).ToList();
+            return cartItems;
         }
 
-        public void RemoveAllItems()
+        public void RemoveAllItems(string userId)
         {
-            var cartItems = _eventOrganizerDbContext.EventCartItems;
+            var cartItems = _eventOrganizerDbContext.EventCartItems.Where(s => s.UserId == userId).ToList();
             _eventOrganizerDbContext.EventCartItems.RemoveRange(cartItems);
 
             _eventOrganizerDbContext.SaveChanges();

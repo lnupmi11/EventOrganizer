@@ -7,12 +7,12 @@ namespace EventOrganizer.BLL.Interfaces
 {
     public interface IEventCartItemsService
     {
-        void AddToCart(Event @event);
+        void AddToCart(int eventId, string userId);
 
-        void RemoveFromCart(Event @event);
+        void RemoveFromCart(int eventId, string userId);
 
-        IEnumerable<EventCartItem> GetEventsCartItems();
+        IEnumerable<EventCartItem> GetEventCartItems(string userId);
 
-        void ClearCart();
+        void ClearCart(string userId);
     }
 }

@@ -23,19 +23,12 @@
             @foreach (var item in Model.EventCartItems)
             {
                 <div style="background-color:azure; height:200px; border:solid;">
-                    <p class="text-left">@item.Event.Name</p>
-                    <p class="text-right">@item.Event.ScheduledAt.ToString("c")</p>
-                    <p class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="UserPage" asp-action="RemoveFromEventsCart" asp-route-event="@item.Event"></a></p>
+                    <p class="text-left">@item.Name</p>
+                    <p class="text-right">@item.ScheduledAt.ToString("c")</p>
+                    <p class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="EventCartItems" asp-action="RemoveFromEventCart" asp-route-eventId="@item.Id"></a></p>
                 </div>
             }
             <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 2</h2>
-            </div>
-            <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 3</h2>
-            </div>
             <div class="row">
                 @if (User.IsInRole("Official"))
                 {

@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190528061540_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528061540_EventCartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528202428_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528202428_EventCartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528203045_CartItems.cs" />
+    <Compile Remove="Migrations\20190528203045_CartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528203607_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528203607_EventCartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528221019_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528221019_EventCartItems.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

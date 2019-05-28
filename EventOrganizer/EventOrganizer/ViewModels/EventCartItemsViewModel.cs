@@ -5,6 +5,6 @@ namespace EventOrganizer.ViewModels
 {
     public class EventCartItemsViewModel
     {
-        public IEnumerable<EventCartItem> EventCartItems { get; set; }
+        public IEnumerable<Event> EventCartItems { get; set; }
     }
 }

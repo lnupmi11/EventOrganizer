@@ -13,23 +13,13 @@ namespace EventOrganizer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EventId = table.Column<int>(nullable: true)
+                    EventId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventCartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EventCartItems_Events_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Events",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EventCartItems_EventId",
-                table: "EventCartItems",
-                column: "EventId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
