@@ -1,7 +1,6 @@
 ﻿using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.DAL.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,21 +12,18 @@ namespace EventOrganizer.Tests.RepositoryTests
 {
     public class EventRepositoryTests
     {
-        private static IEnumerable<Event> GetTestData()
+        private static readonly IEnumerable<Event> TestEvents = new[]
         {
-            return new[]
-            {
-                TestObjects.Event1,
-                TestObjects.Event2,
-                TestObjects.Event3
-            };
-        }
+            TestObjects.Event1,
+            TestObjects.Event2,
+            TestObjects.Event3
+        };
 
         private static Mock<EventOrganizerDbContext> GetMockContext()
         {
             var mockContext = new Mock<EventOrganizerDbContext>();
             mockContext.Setup(item => item.Events).Returns(
-                MockProvider.GetMockSet(GetTestData()).Object
+                MockProvider.GetMockSet(TestEvents).Object
             );
             return mockContext;
         }
@@ -35,12 +31,11 @@ namespace EventOrganizer.Tests.RepositoryTests
         [Fact]
         public void GetEventByIdTest()
         {
-            //var mockContext = GetMockContext();
-            //var repository = new EventRepository(mockContext.Object);
-            //var expected = mockContext.Object.Events.First();
-            //var actual = repository.GetEventById(expected.Id);
-            //Assert.NotNull(actual);
-            Assert.NotNull("asd");
+            var mockContext = GetMockContext();
+            var repository = new EventRepository(mockContext.Object);
+            var expected = mockContext.Object.Events.First();
+            var actual = repository.GetEventById(expected.Id);
+            Assert.NotNull(actual);
         }
     }
 }
