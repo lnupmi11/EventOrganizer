@@ -37,7 +37,7 @@
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li><a asp-controller="EventsCartItems" asp-action="Index" style="cursor: not-allowed;">Registered</a></li>
+                        <li><a asp-controller="EventCartItems" asp-action="Index">Registered</a></li>
                     }
                 </ul>
                     @if (SignInManager.IsSignedIn(User))

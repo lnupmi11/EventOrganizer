@@ -10,5 +10,9 @@ namespace EventOrganizer.Controllers
 {
     public class UserPageController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

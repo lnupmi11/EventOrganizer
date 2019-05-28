@@ -20,7 +20,7 @@ namespace EventOrganizer.Controllers
             _eventCartItemsService = eventCartItemsRepository;
         }
 
-        public ViewResult Index()
+        public IActionResult Index()
         {
             string userId = _userManager.GetUserId(User);
             var items = _eventCartItemsService.GetEventCartItems(userId);

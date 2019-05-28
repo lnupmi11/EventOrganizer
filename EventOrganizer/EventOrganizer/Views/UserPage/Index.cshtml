@@ -1,6 +1,4 @@
-﻿@model EventCartItemsViewModel
-
-<div class="container-fluid">
+﻿<div class="container-fluid">
     <h1>Your profile</h1>
 
     <div class="row">
@@ -20,14 +18,6 @@
         <div class="col-sm-8">
             <p>Some example text..</p>
             <p><b>Some anouther example text..</b></p>
-            @foreach (var item in Model.EventCartItems)
-            {
-                <div style="background-color:azure; height:200px; border:solid;">
-                    <p class="text-left">@item.Name</p>
-                    <p class="text-right">@item.ScheduledAt.ToString("c")</p>
-                    <p class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="EventCartItems" asp-action="RemoveFromEventCart" asp-route-eventId="@item.Id"></a></p>
-                </div>
-            }
             <br />
             <div class="row">
                 @if (User.IsInRole("Official"))
