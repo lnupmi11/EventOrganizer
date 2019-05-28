@@ -17,14 +17,6 @@ namespace EventOrganizer.Tests
             var result = contactController.Index();
             Assert.NotNull(result);
         }
-
-        [Fact]
-        public void IndexTestModelNameTrue()
-        {
-            ContactController contactController = new ContactController();
-
-            var result = contactController.Index();
-            Assert.True(string.IsNullOrEmpty(result.ViewName) || result.ViewName == "Index");
-        }
+        
     }
 }
