@@ -9,18 +9,21 @@ namespace EventOrganizer.Tests
     {
         public static readonly User User1 = new User
         {
+            Id = "1",
             Email = "email1@gmail.com",
             UserName = "username#1"
         };
 
         public static readonly User User2 = new User
         {
+            Id = "2",
             Email = "email2@gmail.com",
             UserName = "username#2"
         };
 
         public static readonly User User3 = new User
         {
+            Id = "3",
             Email = "email3@gmail.com",
             UserName = "username#3"
         };
