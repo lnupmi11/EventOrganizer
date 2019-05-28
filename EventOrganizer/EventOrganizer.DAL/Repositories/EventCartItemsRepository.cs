@@ -18,18 +18,6 @@ namespace EventOrganizer.DAL.Repositories
 
         public IEnumerable<EventCartItem> EventsCartItems => _eventOrganizerDbContext.EventCartItems;
 
-        //public static EventsCart GetCart(IServiceProvider services)
-        //{
-        //    ISession session = services.GetRequiredService<IHttpContextAccessor>()?
-        //        .HttpContext.Session;
-
-        //    var context = services.GetService<EventOrganizerDbContext>();
-        //    string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-        //    session.SetString("CartId", cartId);
-
-        //    return new EventsCart(context) { EventsCartId = cartId };
-        //}
-
         public void AddItem(Event @event)
         {
             var eventsCartItem = _eventOrganizerDbContext.EventCartItems.SingleOrDefault(s => s.Event.Id == @event.Id);

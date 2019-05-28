@@ -26,7 +26,7 @@ namespace EventOrganizer.Controllers
 
             var eCIVM = new EventCartItemsViewModel
             {
-                EventsCartItems = items
+                EventCartItems = items
             };
 
             return View(eCIVM);
