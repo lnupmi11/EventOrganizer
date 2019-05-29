@@ -14,6 +14,16 @@ namespace EventOrganizer.DAL.DbContext
         public EventOrganizerDbContext(DbContextOptions<EventOrganizerDbContext> options)
             : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<User>()
+                .HasMany(e => e.Events)
+                .WithOne(u => u.User)
+                .OnDelete(DeleteBehavior.SetNull);
+        }
+
         public virtual DbSet<Event> Events { get; set; }
 
         public virtual DbSet<Category> Categories { get; set; }

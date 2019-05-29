@@ -15,6 +15,8 @@ namespace EventOrganizer.DAL.Models
         public bool IsPreferredEvent { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
         public DateTime ScheduledAt { get; set; }
         public DateTime CreatedAt { get; set; }
     }
