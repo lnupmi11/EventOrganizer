@@ -2,9 +2,13 @@
 	border: 1px solid grey;
 	border-radius: 5px;
 	text-align: left;
-	font-weight: 600;
+	margin-top: 5px;
 	padding: 20px;
 	background-size: 50%;
 	background-position: right;
 	background-repeat: no-repeat;
+}
+
+.text-bold {
+	font-weight: 600;
 }

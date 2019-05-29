@@ -41,7 +41,7 @@
               foreach (Event e in @ViewBag.UserEvents)
               {
                 <div class="user-event" style="background-image: url(@e.ImageUrl)">
-                  <p>@e.Name</p>
+                  <p class="text-bold">@e.Name</p>
                   <p>@e.ShortDescription</p>
                   <p>@e.Category.Name</p>
                   <p>@e.ScheduledAt</p>
