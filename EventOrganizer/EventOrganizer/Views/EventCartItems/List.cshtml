@@ -1,0 +1,8 @@
+﻿<h2>Liked events</h2>
+
+@{
+    foreach (Event e in Model.EventCartItems)
+    {
+        @Html.Partial("EventCartItem", e);
+    }
+}

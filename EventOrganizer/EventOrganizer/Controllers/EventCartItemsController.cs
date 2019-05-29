@@ -20,7 +20,7 @@ namespace EventOrganizer.Controllers
             _eventCartItemsService = eventCartItemsRepository;
         }
 
-        public IActionResult Index()
+        public ViewResult List()
         {
             string userId = _userManager.GetUserId(User);
             var items = _eventCartItemsService.GetEventCartItems(userId);
@@ -37,18 +37,22 @@ namespace EventOrganizer.Controllers
             return View(eCIVM);
         }
 
-        public RedirectToActionResult AddToEventCart(int eventId)
+        [HttpPost]
+        public RedirectToActionResult AddToEventCart(Event @event)
         {
+            int eventId = @event.Id;
             string userId = _userManager.GetUserId(User);
             _eventCartItemsService.AddToCart(eventId, userId);
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
-        public RedirectToActionResult RemoveFromEventCart(int eventId)
+        [HttpPost]
+        public RedirectToActionResult RemoveFromEventCart(Event @event)
         {
+            int eventId = @event.Id;
             string userId = _userManager.GetUserId(User);
             _eventCartItemsService.RemoveFromCart(eventId, userId);
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
     }
 }
