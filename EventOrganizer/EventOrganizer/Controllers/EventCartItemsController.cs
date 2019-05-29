@@ -54,5 +54,13 @@ namespace EventOrganizer.Controllers
             _eventCartItemsService.RemoveFromCart(eventId, userId);
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public RedirectToActionResult ClearEventCart()
+        {
+            string userId = _userManager.GetUserId(User);
+            _eventCartItemsService.ClearCart(userId);
+            return RedirectToAction("List");
+        }
     }
 }

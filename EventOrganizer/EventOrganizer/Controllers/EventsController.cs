@@ -100,7 +100,5 @@ namespace EventOrganizer.Controllers
             _eventService.EditItem(model);
             return RedirectToAction("List");
         }
-
-
     }
 }

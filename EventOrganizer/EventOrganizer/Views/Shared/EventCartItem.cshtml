@@ -2,14 +2,14 @@
 
 <div class="row">
     <br />
-    <div style="background-color:azure; height:200px; border:solid;">
-        <p class="text-left">@Model.Name</p>
-        <p class="text-left">@Model.ScheduledAt.ToString()</p>
+    <div style="background-color:azure; height:112px; border:solid;">
+        <h4 class="text-left">@Model.Name</h4>
+        <h6 class="text-left">@Model.ScheduledAt.ToString()</h6>
         <div class="row">
             <div class="col-lg-6" style="text-align: left">
                 @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
                 {
-                    <input type="submit" value="Remove" class="edit" />
+                    <input type="submit" value="Remove" class="delete" />
                 }
             </div>
         </div>
