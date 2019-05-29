@@ -20,6 +20,12 @@
                             <input type="submit" value="Like" class="edit" />
                         }
                     </div>
+                    <div class="col-lg-6" style="text-align: right">
+                        @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
+                        {
+                            <input type="submit" value="Unlike" class="delete" />
+                        }
+                    </div>
                 </div>
             }
             @if (User.IsInRole("Official"))
@@ -31,6 +37,14 @@
                             <input type="submit" value="Like" class="edit" />
                         }
                     </div>
+                    <div class="col-lg-6" style="text-align: right">
+                        @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
+                        {
+                            <input type="submit" value="Unlike" class="delete" />
+                        }
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-6">
                         @using (Html.BeginForm("Edit", "Events", Model))
                         {
@@ -55,6 +69,14 @@
                         }
                     </div>
                     <div class="col-lg-6" style="text-align: right">
+                        @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
+                        {
+                            <input type="submit" value="Unlike" class="delete" />
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" style="text-align: left">
                         @using (Html.BeginForm("Delete", "Events", Model))
                         {
                             <input type="submit" value="Delete" class="delete" />
