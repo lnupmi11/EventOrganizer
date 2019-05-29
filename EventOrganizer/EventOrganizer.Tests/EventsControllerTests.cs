@@ -18,7 +18,6 @@ namespace EventOrganizer.Tests
         {
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
             Mock<IEventService> eventService = new Mock<IEventService>();
-
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
 
             var result = eventsController.List("All");
