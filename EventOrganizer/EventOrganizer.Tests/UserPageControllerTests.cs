@@ -7,16 +7,15 @@ using Xunit;
 
 namespace EventOrganizer.Tests
 {
-    public class ContactControllerTests
+    public class UserPageControllerTests
     {
         [Fact]
         public void IndexTestNotNull()
         {
-            ContactController contactController = new ContactController();
+            UserPageController contactController = new UserPageController();
 
             var result = contactController.Index();
             Assert.NotNull(result);
         }
-        
     }
 }
