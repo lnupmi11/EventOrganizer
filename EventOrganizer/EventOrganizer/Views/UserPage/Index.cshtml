@@ -16,19 +16,6 @@
             <br />
         </div>
         <div class="col-sm-8">
-            <p>Some example text..</p>
-            <p><b>Some anouther example text..</b></p>
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 1</h2>
-            </div>
-            <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 2</h2>
-            </div>
-            <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-                <h2>Event 3</h2>
-            </div>
             <div class="row">
                 @if (User.IsInRole("Official"))
                 {
@@ -47,6 +34,20 @@
                     </div>
                 }
             </div>
+            <p style="margin-top: 30px;">
+              <b>List of my events:</b>
+            </p>
+            @{
+              foreach (Event e in @ViewBag.UserEvents)
+              {
+                <div class="user-event" style="background-image: url(@e.ImageUrl)">
+                  <p>@e.Name</p>
+                  <p>@e.ShortDescription</p>
+                  <p>@e.Category.Name</p>
+                  <p>@e.ScheduledAt</p>
+                </div>
+              }
+            }
         </div>
     </div>
 </div>
