@@ -63,7 +63,6 @@ namespace EventOrganizer.Tests
             ScheduledAt = new DateTime(2019, 5, 10, 18, 00, 00),
             CreatedAt = new DateTime(2019, 3, 17, 17, 29, 00)
         };
-
         public static readonly Category Category1 = new Category
         {
             Name = "Bussiness",
