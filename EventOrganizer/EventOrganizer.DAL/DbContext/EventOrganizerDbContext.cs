@@ -28,7 +28,7 @@ namespace EventOrganizer.DAL.DbContext
 
         public virtual DbSet<Category> Categories { get; set; }
 
-        public virtual DbSet<EventsCartItem> EventsCartItems { get; set; }
+        public virtual DbSet<EventCartItem> EventCartItems { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
     }
