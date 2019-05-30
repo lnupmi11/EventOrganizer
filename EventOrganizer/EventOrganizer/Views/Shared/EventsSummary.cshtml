@@ -48,16 +48,14 @@
                 {
                     <div class="row">
                         <div class="col-lg-6">
-                            @using (Html.BeginForm("Edit", "Events", Model))
-                            {
+                            <a id="registerLink" asp-controller="Events" asp-action="Edit" asp-route-id="@Model.Id">
                                 <input type="submit" value="Edit" class="edit" />
-                            }
+                            </a>
                         </div>
                         <div class="col-lg-6" style="text-align: right">
-                            @using (Html.BeginForm("Delete", "Events", Model))
-                            {
+                            <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">    
                                 <input type="submit" value="Delete" class="delete" />
-                            }
+                            </a>
                         </div>
                     </div>
                 }
@@ -79,11 +77,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6" style="text-align: left">
-                        @using (Html.BeginForm("Delete", "Events", Model))
-                        {
+                    <div class="col-lg-6" style="text-align: right">
+                        <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">
                             <input type="submit" value="Delete" class="delete" />
-                        }
+                        </a>
                     </div>
                 </div>
             }
