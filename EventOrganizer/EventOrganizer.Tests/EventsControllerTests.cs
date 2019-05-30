@@ -3,6 +3,7 @@ using EventOrganizer.Controllers;
 using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
@@ -12,13 +13,25 @@ namespace EventOrganizer.Tests
 {
     public class EventsControllerTests
     {
-        
+        private static readonly IEnumerable<User> TestUsers = new[]
+        {
+            TestObjects.User1,
+            TestObjects.User2,
+            TestObjects.User3
+        };
+        private Mock<UserManager<User>> GetUserManagerMock()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            return userManager;
+        }
         [Fact]
         public void ListTestIsNotNull()
         {
-            Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
-            Mock<IEventService> eventService = new Mock<IEventService>();
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            var categoryService = new Mock<ICategoryService>();
+            var eventService = new Mock<IEventService>();
+            var userManager = GetUserManagerMock();
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
 
             var result = eventsController.List("All");
             Assert.NotNull(result);
@@ -29,8 +42,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             var result = await eventsController.Create(new ViewModels.CreateEventViewModel {});
 
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
@@ -41,8 +55,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             var result = eventsController.Edit(TestObjects.Event1);
 
             categoryService.Setup(item => item.GetAll()).Returns(new List<Category>());
@@ -54,8 +69,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             var result = await eventsController.EditEvent(TestObjects.Event1);
 
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
@@ -66,8 +82,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             categoryService.Setup(item => item.GetAll()).Returns(new List<Category>());
 
             var result = eventsController.Create();
@@ -79,8 +96,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             var result = await eventsController.Delete(TestObjects.Event1);
 
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
@@ -91,8 +109,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             categoryService.Setup(item => item.GetCategoryName(TestObjects.Category1.Name)).Returns(
                 TestObjects.Category1.Name
             );
@@ -117,8 +136,9 @@ namespace EventOrganizer.Tests
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
 
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
             categoryService.Setup(item => item.GetCategoryName("invalid_category")).Returns(
                 "All"
             );

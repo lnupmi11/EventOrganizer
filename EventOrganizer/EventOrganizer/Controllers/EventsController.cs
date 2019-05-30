@@ -50,11 +50,19 @@ namespace EventOrganizer.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Official, Admin")]
-        public async Task<IActionResult> Delete(Event item)
+        public async Task<IActionResult> Delete(int itemId)
         {
             if (!ModelState.IsValid) RedirectToAction("List");
-            _eventService.DeleteItem(item);
-            return RedirectToAction("List");
+            var item = _eventService.GetEventById(itemId);
+            if (User.IsInRole("Admin") || _userManager.GetUserId(User) == item.UserId)
+            {
+                _eventService.DeleteItem(item);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return Forbid();
+            }
         }
 
         [Authorize(Roles = "Official")]
@@ -89,9 +97,13 @@ namespace EventOrganizer.Controllers
         }
 
         [Authorize(Roles = "Official")]
-        public ViewResult Edit(Event item)
+        public ViewResult Edit(int itemId)
         {
-            ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");
+            var item = _eventService.GetEventById(itemId);
+            if (_userManager.GetUserId(User) == item.UserId)
+            {
+                ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");
+            }
             return View(item);
         }
 
@@ -99,9 +111,12 @@ namespace EventOrganizer.Controllers
         [Authorize(Roles = "Official")]
         public async Task<IActionResult> EditEvent(Event model)
         {
+            var oldModel = _eventService.GetEventById(model.Id);
             if (!ModelState.IsValid) return View(model);
-
-            _eventService.EditItem(model);
+            if (_userManager.GetUserId(User) == oldModel.UserId)
+            {
+                _eventService.EditItem(model);
+            }
             return RedirectToAction("List");
         }
     }
