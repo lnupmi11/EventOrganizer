@@ -5,13 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190528061540_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528061540_EventCartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528202428_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528202428_EventCartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528203045_CartItems.cs" />
+    <Compile Remove="Migrations\20190528203045_CartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528203607_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528203607_EventCartItems.Designer.cs" />
+    <Compile Remove="Migrations\20190528221019_EventCartItems.cs" />
+    <Compile Remove="Migrations\20190528221019_EventCartItems.Designer.cs" />
     <Compile Remove="wwwroot\NewFolder\**" />
     <Content Remove="wwwroot\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
     <None Remove="wwwroot\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Migrations\20190418165502_CartItem.cs" />
     <Compile Remove="Migrations\20190418165502_CartItem.Designer.cs" />
   </ItemGroup>
