@@ -8,8 +8,9 @@
             <p class="pull-right">@Model.ScheduledAt.ToShortDateString()</p>
             @*<h3 class="pull-right">@e.ScheduledAt.ToShortTimeString()</h3>*@
             <h5>
-                <a asp-controller="Events" asp-action="Index">@Model.Name</a>
+                <a asp-controller="Events" asp-action="Show" asp-route-id="@Model.Id">@Model.Name</a>
             </h5>
+            <p>@Model.Id</p>
             <p>@Model.Category.Name</p>
             <p>On this event you:</p>
             <p>@Model.ShortDescription  description...</p>

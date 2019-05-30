@@ -101,8 +101,9 @@ namespace EventOrganizer.Controllers
             return RedirectToAction("List");
         }
 
-        public ViewResult Index(Event item)
+        public ViewResult Show(int id)
         {
+            Event item = _eventService.GetEventById(id);
             return View(item);
         }
 
