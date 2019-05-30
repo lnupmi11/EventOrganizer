@@ -58,7 +58,7 @@ namespace EventOrganizer.Tests
             var userManager = GetUserManagerMock();
 
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
-            var result = eventsController.Edit(TestObjects.Event1.Id);
+            var result = eventsController.Edit(TestObjects.Event1);
 
             categoryService.Setup(item => item.GetAll()).Returns(new List<Category>());
             Assert.NotNull(result.ViewData["Categories"]);
@@ -99,7 +99,7 @@ namespace EventOrganizer.Tests
             var userManager = GetUserManagerMock();
 
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
-            var result = await eventsController.Delete(TestObjects.Event1.Id);
+            var result = await eventsController.Delete(TestObjects.Event1);
 
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
         }
