@@ -1,6 +1,9 @@
 ﻿@model Event
 
 <div class="container-fluid">
+    <div class="image-container" style="background-image: url(@Model.ImageUrl);">
+        <div class="text">@Model.Name</div>
+    </div>
     <h1>Event page</h1>
 
     <div class="row">
@@ -23,13 +26,13 @@
             <p><b>Some anouther example text..</b></p>
 
             <div style="background-color:azure; height:200px; border:solid;">
-                
+
             </div>
             <br />
             <div style="background-color:azure; height:200px; border:solid;">
-                
+
             </div>
-            
+
         </div>
     </div>
 </div>
