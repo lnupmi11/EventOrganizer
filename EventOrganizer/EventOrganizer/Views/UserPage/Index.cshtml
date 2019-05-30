@@ -1,6 +1,6 @@
 ﻿<div class="container-fluid">
     <h1>Your profile</h1>
-
+    
     <div class="row">
         <div class="col-sm-4" style="background-color:lavender; height:550px;">
             <br />
@@ -16,9 +16,6 @@
             <br />
         </div>
         <div class="col-sm-8">
-            <p>Some example text..</p>
-            <p><b>Some anouther example text..</b></p>
-            <br />
             <div class="row">
                 @if (User.IsInRole("Official"))
                 {
@@ -37,6 +34,20 @@
                     </div>
                 }
             </div>
+            <p style="margin-top: 30px;">
+              <b>List of my events:</b>
+            </p>
+            @{
+              foreach (Event e in @ViewBag.UserEvents)
+              {
+                <div class="user-event" style="background-image: url(@e.ImageUrl)">
+                  <p class="text-bold">@e.Name</p>
+                  <p>@e.ShortDescription</p>
+                  <p>@e.Category.Name</p>
+                  <p>@e.ScheduledAt</p>
+                </div>
+              }
+            }
         </div>
     </div>
 </div>

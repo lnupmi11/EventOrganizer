@@ -7,6 +7,6 @@ namespace EventOrganizer.DAL.Models
 {
     public class User : IdentityUser
     {
-
+        public ICollection<Event> Events { get; set; }
     }
 }

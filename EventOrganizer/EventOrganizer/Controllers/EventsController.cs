@@ -7,6 +7,7 @@ using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -16,11 +17,13 @@ namespace EventOrganizer.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IEventService _eventService;
+        private readonly UserManager<User> _userManager;
 
-        public EventsController(ICategoryService categoryService, IEventService eventService)
+        public EventsController(ICategoryService categoryService, IEventService eventService, UserManager<User> userManager)
         {
             _categoryService = categoryService;
             _eventService = eventService;
+            _userManager = userManager;
         }
 
         public ViewResult List(string category)
@@ -76,6 +79,7 @@ namespace EventOrganizer.Controllers
                 ImageThumbnailUrl = model.ImageThumbnailUrl,
                 IsPreferredEvent = model.IsPreferredEvent,
                 CategoryId = model.CategoryId,
+                UserId = _userManager.GetUserId(User),
                 ScheduledAt = model.ScheduledAt,
                 CreatedAt = DateTime.Now
             };

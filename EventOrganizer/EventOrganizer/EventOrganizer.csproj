@@ -15,6 +15,12 @@
     <Compile Remove="Migrations\20190528203607_EventCartItems.Designer.cs" />
     <Compile Remove="Migrations\20190528221019_EventCartItems.cs" />
     <Compile Remove="Migrations\20190528221019_EventCartItems.Designer.cs" />
+    <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="wwwroot\NewFolder\**" />
+    <Compile Remove="Migrations\20190418165502_CartItem.cs" />
+    <Compile Remove="Migrations\20190418165502_CartItem.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +44,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="NuGet.VisualStudio" Version="4.9.4" />
+    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
   </ItemGroup>
 
   <ItemGroup>

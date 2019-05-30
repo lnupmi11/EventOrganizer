@@ -1,45 +1,111 @@
 ﻿using EventOrganizer.Controllers;
-using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Moq;
-using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace EventOrganizer.Tests
 {
     public class AdminControllerTests
     {
-        //UserManager<User> userManager = new UserManager<User>
-        //    (
-        //    new Mock<IUserStore<User>>().Object,
-        //    new Mock<IOptions<IdentityOptions>>().Object,
-        //    new Mock<IPasswordHasher<User>>().Object,
-        //    new IUserValidator<User>[0],
-        //    new IPasswordValidator<User>[0],
-        //    new Mock<ILookupNormalizer>().Object,
-        //    new Mock<IdentityErrorDescriber>().Object,
-        //    new Mock<IServiceProvider>().Object,
-        //    new Mock<ILogger<UserManager<User>>>().Object
-        //    );
-        //
-        //[Fact]
-        //public void CreateTestNotNull()
-        //{
-        //    Mock<UserManager<User>> userManager = new Mock<UserManager<User>>();
-        //    AdminController adminController = new AdminController(userManager.Object);
+        [Fact]
+        public void IndexTest()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            AdminController adminController = new AdminController(userManager.Object);
+            var listOfUsers = new List<User>() { TestObjects.User1, TestObjects.User2, TestObjects.User3 };
 
-        //    CreateModel createModel = new CreateModel();
-        //    var actionResultTask = adminController.Create(createModel);
-        //    actionResultTask.Wait();
+            userManager.Setup(item => item.Users).Returns(
+                listOfUsers.AsQueryable()
+            );
 
-        //    var viewResult = actionResultTask.Result as ViewResult;
-        //    Assert.NotNull(viewResult);
-        //}
+
+            var result = adminController.Index();
+            var expected = new List<User>() {
+                TestObjects.User1, TestObjects.User2, TestObjects.User3
+            };
+
+            Assert.NotNull(result);
+            Assert.Equal(result.Model.ToString(), expected.ToString());
+        }
+
+        [Fact]
+        public void CreateTest()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            AdminController adminController = new AdminController(userManager.Object);
+            var listOfUsers = new List<User>() { TestObjects.User1, TestObjects.User2, TestObjects.User3 };
+
+            userManager.Setup(item => item.Users).Returns(
+                listOfUsers.AsQueryable()
+            );
+
+            var result = adminController.Index();
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async void CreateInvalidPasswordTest()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            AdminController adminController = new AdminController(userManager.Object);
+            var usr = new User()
+            {
+                UserName = "Nelya",
+                Email = "nelya@gmail.com"
+            };
+
+            IdentityError ErrorMessage = new IdentityError { Description = "invalid password" };
+            userManager.Setup(item => item.CreateAsync(It.IsAny<User>(), "badpassword"))
+                .ReturnsAsync(IdentityResult.Failed(ErrorMessage));
+
+            adminController.ModelState.Clear();
+            var result = await adminController.Create(new UserViewModel()
+            {
+                Name = usr.UserName,
+                Email = usr.Email,
+                Password = "badpassword"
+            });
+            Assert.NotNull(result);
+            Assert.Single(adminController.ModelState[""].Errors);
+            Assert.Equal(adminController.ModelState[""].Errors[0].ErrorMessage.ToString(), ErrorMessage.Description.ToString() );
+
+        }
+        [Fact]
+        public async void CreateCorrectUserTest()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            AdminController adminController = new AdminController(userManager.Object);
+            var usr = new User()
+            {
+                UserName = "Nelya",
+                Email = "nelya@gmail.com"
+            };
+
+            userManager.Setup(item => item.CreateAsync(It.IsAny<User>(), "Aa1&aaaaaaaa"))
+                .ReturnsAsync(IdentityResult.Success);
+
+            var result = await adminController.Create(new UserViewModel()
+            {
+                Name = usr.UserName,
+                Email = usr.Email,
+                Password = "Aa1&aaaaaaaa"
+            });
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<RedirectToActionResult>(result);
+
+        }
+
+
     }
 }

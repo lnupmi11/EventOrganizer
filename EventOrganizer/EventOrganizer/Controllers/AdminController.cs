@@ -24,29 +24,28 @@ namespace EventOrganizer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            
+            User user = new User
             {
-                User user = new User
-                {
-                    UserName = model.Name,
-                    Email = model.Email
-                };
+                UserName = model.Name,
+                Email = model.Email
+            };
 
-                IdentityResult result = await userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    foreach (IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
+            IdentityResult result = await userManager.CreateAsync(user, model.Password);
+            
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
             }
-            return View(model);
+            else
+            {
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
         }
     }
 }
