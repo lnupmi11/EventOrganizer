@@ -44,20 +44,23 @@
                         }
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        @using (Html.BeginForm("Edit", "Events", Model))
-                        {
-                            <input type="submit" value="Edit" class="edit" />
-                        }
+                @if (UserManager.GetUserId(User) == Model.UserId)
+                {
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @using (Html.BeginForm("Edit", "Events", Model))
+                            {
+                                <input type="submit" value="Edit" class="edit" />
+                            }
+                        </div>
+                        <div class="col-lg-6" style="text-align: right">
+                            @using (Html.BeginForm("Delete", "Events", Model))
+                            {
+                                <input type="submit" value="Delete" class="delete" />
+                            }
+                        </div>
                     </div>
-                    <div class="col-lg-6" style="text-align: right">
-                        @using (Html.BeginForm("Delete", "Events", Model))
-                        {
-                            <input type="submit" value="Delete" class="delete" />
-                        }
-                    </div>
-                </div>
+                }
             }
             else if (User.IsInRole("Admin"))
             {
