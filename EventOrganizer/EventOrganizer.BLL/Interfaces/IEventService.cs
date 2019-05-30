@@ -9,6 +9,8 @@ namespace EventOrganizer.BLL.Interfaces
     {
         IEnumerable<Event> GetAll();
 
+        IEnumerable<Event> GetEventsByUserId(string userId);
+
         IEnumerable<Event> GetEvents(string category);
 
         IEnumerable<Event> GetPreferredEvents();

@@ -14,6 +14,23 @@
             <p>@Model.Category.Name</p>
             <p>On this event you:</p>
             <p>@Model.ShortDescription  description...</p>
+            @if (User.IsInRole("User") || User.IsInRole("Official") || User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div class="col-lg-6" style="text-align: left">
+                        @using (Html.BeginForm("AddToEventCart", "EventCartItems", Model))
+                        {
+                            <input type="submit" value="Like" class="edit" />
+                        }
+                    </div>
+                    <div class="col-lg-6" style="text-align: right">
+                        @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
+                        {
+                            <input type="submit" value="Unlike" class="delete" />
+                        }
+                    </div>
+                </div>
+            }
             @if (User.IsInRole("Official"))
             {
                 <div class="row">

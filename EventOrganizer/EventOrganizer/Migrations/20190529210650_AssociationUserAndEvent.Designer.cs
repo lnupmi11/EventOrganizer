@@ -4,14 +4,16 @@ using EventOrganizer.DAL.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventOrganizer.Migrations
 {
     [DbContext(typeof(EventOrganizerDbContext))]
-    partial class EventOrganizerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190529210650_AssociationUserAndEvent")]
+    partial class AssociationUserAndEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,19 +71,19 @@ namespace EventOrganizer.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("EventOrganizer.DAL.Models.EventCartItem", b =>
+            modelBuilder.Entity("EventOrganizer.DAL.Models.EventsCartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EventId");
-
-                    b.Property<string>("UserId");
+                    b.Property<int?>("EventId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("EventCartItems");
+                    b.HasIndex("EventId");
+
+                    b.ToTable("EventsCartItems");
                 });
 
             modelBuilder.Entity("EventOrganizer.DAL.Models.User", b =>
@@ -256,6 +258,13 @@ namespace EventOrganizer.Migrations
                         .WithMany("Events")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("EventOrganizer.DAL.Models.EventsCartItem", b =>
+                {
+                    b.HasOne("EventOrganizer.DAL.Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

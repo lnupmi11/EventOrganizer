@@ -18,28 +18,28 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public IEnumerable<User> All()
+        public virtual IEnumerable<User> All()
         {
             return _eventOrganizerDbContext.Users;
         }
 
-        public User Get(string id)
+        public virtual User Get(string id)
         {
             return All().FirstOrDefault(u => u.Id == id);
         }
 
-        public User GetByUserName(string username)
+        public virtual User GetByUserName(string username)
         {
             return All().FirstOrDefault(u => u.UserName == username);
         }
 
-        public void Create(User item)
+        public virtual void Create(User item)
         {
             _eventOrganizerDbContext.Users.Add(item);
             _eventOrganizerDbContext.SaveChanges();
         }
 
-        public void Update(User item)
+        public virtual void Update(User item)
         {
             if (item != null)
             {
@@ -48,7 +48,7 @@ namespace EventOrganizer.DAL.Repositories
             }
         }
 
-        public void Delete(string id)
+        public virtual void Delete(string id)
         {
             var user = _eventOrganizerDbContext.Users.Find(id);
             if (user != null)

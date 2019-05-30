@@ -1,4 +1,5 @@
 ﻿using EventOrganizer.BLL.Interfaces;
+using EventOrganizer.DAL.DbContext;
 using EventOrganizer.DAL.Interfaces;
 using EventOrganizer.DAL.Models;
 using EventOrganizer.DAL.Repositories;
@@ -11,11 +12,11 @@ namespace EventOrganizer.BLL.Services
 {
     public class EventService : IEventService
     {
-        private readonly IEventRepository _eventRepository;
+        private readonly EventRepository _eventRepository;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(EventOrganizerDbContext context)
         {
-            _eventRepository = eventRepository;
+            _eventRepository = new EventRepository(context);
         }
 
         public IEnumerable<Event> GetAll()
@@ -29,6 +30,14 @@ namespace EventOrganizer.BLL.Services
         {
             IEnumerable<Event> events = null;
             events = _eventRepository.Events.Where(p => p.Category.Name.Equals(category)).OrderBy(p => p.Name);
+            return events;
+        }
+
+        // TODO: test this method
+        public IEnumerable<Event> GetEventsByUserId(string userId)
+        {
+            IEnumerable<Event> events = null;
+            events = _eventRepository.Events.Where(e => e.UserId == userId).OrderBy(p => p.CreatedAt);
             return events;
         }
 
@@ -59,8 +68,6 @@ namespace EventOrganizer.BLL.Services
                     _eventRepository.Edit(item);
                 }
             }
-
-
         }
 
         public void DeleteItem(Event item)

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/Content/Buttons.css" rel="stylesheet" />
     <link href="~/Content/Checkbox.css" rel="stylesheet" />
     <link href="~/Content/Image.css" rel="stylesheet" />
@@ -37,7 +38,7 @@
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li><a asp-controller="EventsCartItems" asp-action="Index" style="cursor: not-allowed;">Registered</a></li>
+                        <li><a asp-controller="EventCartItems" asp-action="List">Liked</a></li>
                     }
                 </ul>
                     @if (SignInManager.IsSignedIn(User))
