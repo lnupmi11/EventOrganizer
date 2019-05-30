@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
+using System.Security.Claims;
 using Xunit;
 
 namespace EventOrganizer.Tests
@@ -97,10 +98,15 @@ namespace EventOrganizer.Tests
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
             var userManager = GetUserManagerMock();
-
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
+            userManager.Setup(item => item.GetUserAsync(It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(TestObjects.User1);
+            userManager.Setup(item => item.IsInRoleAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .ReturnsAsync(true);
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+            
             var result = await eventsController.Delete(TestObjects.Event1.Id);
-
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
         }
 
