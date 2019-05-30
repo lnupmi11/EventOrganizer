@@ -33,6 +33,14 @@ namespace EventOrganizer.BLL.Services
             return events;
         }
 
+        // TODO: test this method
+        public IEnumerable<Event> GetEventsByUserId(string userId)
+        {
+            IEnumerable<Event> events = null;
+            events = _eventRepository.Events.Where(e => e.UserId == userId).OrderBy(p => p.CreatedAt);
+            return events;
+        }
+
         public IEnumerable<Event> GetPreferredEvents()
         {
             return _eventRepository.PreferredEvents;
