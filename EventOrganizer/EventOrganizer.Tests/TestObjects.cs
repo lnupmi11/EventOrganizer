@@ -38,7 +38,8 @@ namespace EventOrganizer.Tests
             IsPreferredEvent = true,
             ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Conference.jpg",
             ScheduledAt = new DateTime(2019, 5, 18, 18, 00, 00),
-            CreatedAt = new DateTime(2019, 3, 17, 17, 35, 00)
+            CreatedAt = new DateTime(2019, 3, 17, 17, 35, 00),
+            UserId = "1"
         };
 
         public static readonly Event Event2 = new Event
@@ -51,7 +52,8 @@ namespace EventOrganizer.Tests
             IsPreferredEvent = true,
             ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Seminar.jpg",
             ScheduledAt = new DateTime(2019, 5, 20, 18, 30, 00),
-            CreatedAt = new DateTime(2019, 3, 17, 17, 31, 00)
+            CreatedAt = new DateTime(2019, 3, 17, 17, 31, 00),
+            UserId = "2"
         };
 
         public static readonly Event Event3 = new Event
@@ -64,7 +66,8 @@ namespace EventOrganizer.Tests
             IsPreferredEvent = true,
             ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Expo.jpg",
             ScheduledAt = new DateTime(2019, 5, 10, 18, 00, 00),
-            CreatedAt = new DateTime(2019, 3, 17, 17, 29, 00)
+            CreatedAt = new DateTime(2019, 3, 17, 17, 29, 00),
+            UserId = "3"
         };
 
         public static readonly Category Category1 = new Category
