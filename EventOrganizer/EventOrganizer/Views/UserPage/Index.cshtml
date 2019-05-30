@@ -19,7 +19,7 @@
             <p>Some example text..</p>
             <p><b>Some anouther example text..</b></p>
             <div class="row">
-                @if (User.IsInRole("Official") || User.IsInRole("Admin"))
+                @if (User.IsInRole("Official"))
                 {
                     <div class="col-lg-6" style="text-align: left">
                         <a asp-controller="Events" asp-action="Create">
