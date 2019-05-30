@@ -8,10 +8,12 @@
             <p class="pull-right">@Model.ScheduledAt.ToShortDateString()</p>
             @*<h3 class="pull-right">@e.ScheduledAt.ToShortTimeString()</h3>*@
             <h5>
-                <a>@Model.Name</a>
+                <a asp-controller="Events" asp-action="Show" asp-route-id="@Model.Id">@Model.Name</a>
             </h5>
             <p>@Model.Category.Name</p>
-            @if (User.IsInRole("User"))
+            <p>On this event you:</p>
+            <p>@Model.ShortDescription  description...</p>
+            @if (User.IsInRole("User") || User.IsInRole("Official") || User.IsInRole("Admin"))
             {
                 <div class="row">
                     <div class="col-lg-6" style="text-align: left">
@@ -28,22 +30,8 @@
                     </div>
                 </div>
             }
-            @if (User.IsInRole("Official"))
+            @if (User.IsInRole("Official") || User.IsInRole("Admin"))
             {
-                <div class="row">
-                    <div class="col-lg-6" style="text-align: left">
-                        @using (Html.BeginForm("AddToEventCart", "EventCartItems", Model))
-                        {
-                            <input type="submit" value="Like" class="edit" />
-                        }
-                    </div>
-                    <div class="col-lg-6" style="text-align: right">
-                        @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
-                        {
-                            <input type="submit" value="Unlike" class="delete" />
-                        }
-                    </div>
-                </div>
                 @if (UserManager.GetUserId(User) == Model.UserId)
                 {
                     <div class="row">
@@ -53,40 +41,13 @@
                             </a>
                         </div>
                         <div class="col-lg-6" style="text-align: right">
-                            <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">    
+                            <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">
                                 <input type="submit" value="Delete" class="delete" />
                             </a>
                         </div>
                     </div>
                 }
             }
-            else if (User.IsInRole("Admin"))
-            {
-                <div class="row">
-                    <div class="col-lg-6" style="text-align: left">
-                        @using (Html.BeginForm("AddToEventCart", "EventCartItems", Model))
-                        {
-                            <input type="submit" value="Like" class="edit" />
-                        }
-                    </div>
-                    <div class="col-lg-6" style="text-align: right">
-                        @using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
-                        {
-                            <input type="submit" value="Unlike" class="delete" />
-                        }
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6" style="text-align: right">
-                        <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">
-                            <input type="submit" value="Delete" class="delete" />
-                        </a>
-                    </div>
-                </div>
-            }
-
-
-            @*To do: add short descriptions*@
         </div>
     </div>
 </div>

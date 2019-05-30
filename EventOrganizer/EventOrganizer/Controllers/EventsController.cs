@@ -119,5 +119,11 @@ namespace EventOrganizer.Controllers
             }
             return RedirectToAction("List");
         }
+
+        public ViewResult Show(int id)
+        {
+            Event item = _eventService.GetEventById(id);
+            return View(item);
+        }
     }
 }

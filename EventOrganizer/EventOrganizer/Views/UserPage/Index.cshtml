@@ -16,8 +16,10 @@
             <br />
         </div>
         <div class="col-sm-8">
+            <p>Some example text..</p>
+            <p><b>Some anouther example text..</b></p>
             <div class="row">
-                @if (User.IsInRole("Official"))
+                @if (User.IsInRole("Official") || User.IsInRole("Admin"))
                 {
                     <div class="col-lg-6" style="text-align: left">
                         <a asp-controller="Events" asp-action="Create">
@@ -34,6 +36,7 @@
                     </div>
                 }
             </div>
+
             <p style="margin-top: 30px;">
               <b>List of my events:</b>
             </p>
