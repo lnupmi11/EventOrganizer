@@ -34,6 +34,7 @@
 
 .event-image {
 	background-repeat: no-repeat;
+	min-height: 100px;
 	width: 30%;
 	background-size: cover;
 	border-radius: 5px;
