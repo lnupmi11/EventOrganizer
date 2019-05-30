@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sm-4" style="background-color:lavender; height:550px;">
             <br />
-            <img src="~/Images/img_avatar.png" class="sticky" alt="avatar_img" style="width:100%;">
+            <img src="~/Images/img_avatar.png" class="sticky" alt="avatar_img" style="width:100%;" />
             <h2>@UserManager.GetUserName(User)</h2>
             <p>Some info about you..</p>
             <p><b>Some anouther info about you..</b></p>
@@ -16,8 +16,6 @@
             <br />
         </div>
         <div class="col-sm-8">
-            <p>Some example text..</p>
-            <p><b>Some anouther example text..</b></p>
             <div class="row">
                 @if (User.IsInRole("Official"))
                 {
@@ -37,18 +35,35 @@
                 }
             </div>
 
-            <p style="margin-top: 30px;">
+            <p style="margin-top: 15px;">
               <b>List of my events:</b>
             </p>
             @{
               foreach (Event e in @ViewBag.UserEvents)
-              {
-                <div class="user-event" style="background-image: url(@e.ImageUrl)">
-                  <p class="text-bold">@e.Name</p>
-                  <p>@e.ShortDescription</p>
-                  <p>@e.Category.Name</p>
-                  <p>@e.ScheduledAt</p>
-                </div>
+              {          
+                  <div class="event-container">
+                    <div class="event-image" style="background-image: url(@e.ImageUrl)"></div>
+                    <div class="event-info">
+                      <div class="event-info-container">
+                        <span class="text-title">
+                          <a asp-controller="Events" asp-action="Show" asp-route-id="@e.Id" class="text-title">
+                            @e.Name
+                          </a>
+                        </span>
+                        <span class="text-description">@e.ShortDescription</span>
+                        <span>@e.Category.Name</span>
+                        <span>Starts at: @e.ScheduledAt</span>
+                      </div>
+                    </div>
+                    <div class="event-actions">
+                      <span><a class="btn btn-primary" asp-controller="Events" asp-action="Edit" asp-route-itemId="@e.Id">Edit</a></span>
+                      <span class="mt-10">
+                        <form asp-controller="Events" asp-action="Delete" asp-route-itemId="@e.Id" method="post">
+				                  <button type="submit" class="btn btn-danger">Delete</button>
+			                  </form>
+                      </span>
+                    </div>
+                  </div>
               }
             }
         </div>

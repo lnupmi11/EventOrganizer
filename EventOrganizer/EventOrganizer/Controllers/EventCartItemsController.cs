@@ -53,8 +53,7 @@ namespace EventOrganizer.Controllers
             int eventId = @event.Id;
             string userId = _userManager.GetUserId(User);
             _eventCartItemsService.RemoveFromCart(eventId, userId);
-            return RedirectToAction("Index", "Home");
-            //return RedirectToAction("List");
+            return RedirectToAction("List");
         }
 
         [HttpPost]
