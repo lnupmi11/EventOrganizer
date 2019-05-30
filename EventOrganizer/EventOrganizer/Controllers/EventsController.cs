@@ -54,7 +54,8 @@ namespace EventOrganizer.Controllers
         {
             if (!ModelState.IsValid) RedirectToAction("List");
             var item = _eventService.GetEventById(itemId);
-            if (User.IsInRole("Admin") || _userManager.GetUserId(User) == item.UserId)
+            var usr = await _userManager.GetUserAsync(User);
+            if (await _userManager.IsInRoleAsync(usr, "Admin") || usr.Id == item.UserId)
             {
                 _eventService.DeleteItem(item);
                 return RedirectToAction("List");
@@ -111,8 +112,8 @@ namespace EventOrganizer.Controllers
         [Authorize(Roles = "Official")]
         public async Task<IActionResult> EditEvent(Event model)
         {
-            var oldModel = _eventService.GetEventById(model.Id);
             if (!ModelState.IsValid) return View(model);
+            var oldModel = _eventService.GetEventById(model.Id);
             if (_userManager.GetUserId(User) == oldModel.UserId)
             {
                 _eventService.EditItem(model);
