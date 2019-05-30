@@ -43,7 +43,8 @@ namespace EventOrganizer.Controllers
             int eventId = @event.Id;
             string userId = _userManager.GetUserId(User);
             _eventCartItemsService.AddToCart(eventId, userId);
-            return RedirectToAction("List");
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("List");
         }
 
         [HttpPost]
@@ -52,7 +53,8 @@ namespace EventOrganizer.Controllers
             int eventId = @event.Id;
             string userId = _userManager.GetUserId(User);
             _eventCartItemsService.RemoveFromCart(eventId, userId);
-            return RedirectToAction("List");
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("List");
         }
 
         [HttpPost]
