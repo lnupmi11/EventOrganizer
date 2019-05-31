@@ -125,6 +125,34 @@ namespace EventOrganizer.Tests
         }
 
         [Fact]
+        public async void LoginFailedToLoginTest()
+        {
+            var umMock = GetUserManagerMock();
+            var simMock = GetSignInManagerMock();
+            var usMock = GetUserServiceMock();
+
+            var accountController = new AccountController(umMock.Object, simMock.Object, usMock.Object);
+            
+            simMock.Setup(item => item.PasswordSignInAsync(It.IsAny<User>(), It.IsAny<string>(), false, false))
+                .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Failed);
+            simMock.Setup(item => item.SignOutAsync())
+                .Returns(Task.FromResult("Success"));
+            var usr = TestUsers.FirstOrDefault(u => u.UserName == "username#1");
+            usMock.Setup(item => item.GetByUserName("username#1"))
+                .Returns(usr);
+
+            var result = await accountController.Login(new LoginViewModel() { UserName = "username#1" });
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var errorlist = Assert.Single(accountController.ModelState[""].Errors);
+            var actualMsg = errorlist.ErrorMessage;
+
+            var expectedMsg = "Username/Password not found";
+
+            Assert.Equal(actualMsg, expectedMsg);
+
+        }
+
+        [Fact]
         public void RegisterTestNotNull()
         {
             var umMock = GetUserManagerMock();
@@ -293,6 +321,24 @@ namespace EventOrganizer.Tests
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
+        }
+
+        [Fact]
+        public async void InvalidModelStateTest()
+        {
+            var umMock = GetUserManagerMock();
+            var simMock = GetSignInManagerMock();
+            var usMock = GetUserServiceMock();
+
+            var accountController = new AccountController(umMock.Object, simMock.Object, usMock.Object);
+            accountController.ModelState.AddModelError("invalid", "Invalid model state");
+            var result = await accountController.Login(new LoginViewModel());
+            Assert.NotNull(result);
+            Assert.False(accountController.ModelState.IsValid);
+            
+
+
+
         }
     }
 }

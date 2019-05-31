@@ -5,6 +5,7 @@ using EventOrganizer.DAL.Models;
 using EventOrganizer.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Moq;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -14,12 +15,6 @@ namespace EventOrganizer.Tests
 {
     public class EventsControllerTests
     {
-        private static readonly IEnumerable<User> TestUsers = new[]
-        {
-            TestObjects.User1,
-            TestObjects.User2,
-            TestObjects.User3
-        };
         private Mock<UserManager<User>> GetUserManagerMock()
         {
             var userStore = new Mock<IUserStore<User>>();
@@ -52,18 +47,42 @@ namespace EventOrganizer.Tests
         }
 
         [Fact]
-        public void EditTest()
+        public void EditUserIsAuthorTest()
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
             var userManager = GetUserManagerMock();
 
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+            userManager.Setup(item => item.GetUserId(null))
+                .Returns(TestObjects.User1.Id);
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
             var result = eventsController.Edit(TestObjects.Event1.Id);
-
             categoryService.Setup(item => item.GetAll()).Returns(new List<Category>());
             Assert.NotNull(result.ViewData["Categories"]);
+            var expected = new SelectList(new List<Category>().ToString(), "Id", "Name").ToString();
+            var actual = result.ViewData["Categories"].ToString();
+            Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void EditUserIsNotAuthorTest()
+        {
+            Mock<IEventService> eventService = new Mock<IEventService>();
+            Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
+
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
+            userManager.Setup(item => item.GetUserId(null))
+                .Returns(TestObjects.User2.Id);
+            var result = eventsController.Edit(TestObjects.Event1.Id);
+            categoryService.Setup(item => item.GetAll()).Returns(new List<Category>());
+            Assert.Null(result.ViewData["Categories"]);
+        }
+
 
         [Fact]
         public async void EditEventTest()
@@ -73,6 +92,10 @@ namespace EventOrganizer.Tests
             var userManager = GetUserManagerMock();
 
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
+            userManager.Setup(item => item.GetUserId(null))
+                .Returns(TestObjects.User1.Id);
             var result = await eventsController.EditEvent(TestObjects.Event1);
 
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
@@ -93,7 +116,7 @@ namespace EventOrganizer.Tests
         }
 
         [Fact]
-        public async void DeleteTest()
+        public async void DeleteUserIsAdminTest()
         {
             Mock<IEventService> eventService = new Mock<IEventService>();
             Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
@@ -109,6 +132,43 @@ namespace EventOrganizer.Tests
             var result = await eventsController.Delete(TestObjects.Event1.Id);
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
         }
+
+        [Fact]
+        public async void DeleteUserIsOfficialTest()
+        {
+            Mock<IEventService> eventService = new Mock<IEventService>();
+            Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
+            userManager.Setup(item => item.GetUserAsync(It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(TestObjects.User1);
+            userManager.Setup(item => item.IsInRoleAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .ReturnsAsync(false);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+
+            var result = await eventsController.Delete(TestObjects.Event1.Id);
+            Assert.IsAssignableFrom<RedirectToActionResult>(result);
+        }
+
+        [Fact]
+        public async void DeleteUserHaveNoAccessTest()
+        {
+            Mock<IEventService> eventService = new Mock<IEventService>();
+            Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
+            userManager.Setup(item => item.GetUserAsync(It.IsAny<ClaimsPrincipal>()))
+                .ReturnsAsync(TestObjects.User2);
+            userManager.Setup(item => item.IsInRoleAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .ReturnsAsync(false);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+
+            var result = await eventsController.Delete(TestObjects.Event1.Id);
+            Assert.IsType<ForbidResult>(result);
+        }
+
 
         [Fact]
         public void ListTest()
@@ -162,6 +222,52 @@ namespace EventOrganizer.Tests
                 CurrentCategory = "All"
             };
             Assert.Equal(expected.ToString(), result.Model.ToString());
+        }
+
+        [Fact]
+        public void ShowTest()
+        {
+            Mock<IEventService> eventService = new Mock<IEventService>();
+            Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
+
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+
+            eventService.Setup(item => item.GetEventById(It.IsAny<int>()))
+                .Returns(TestObjects.Event1);
+
+            var result = eventsController.Show(TestObjects.Event1.Id);
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async void InvalidStatesTestAsync()
+        {
+            Mock<IEventService> eventService = new Mock<IEventService>();
+            Mock<ICategoryService> categoryService = new Mock<ICategoryService>();
+            var userManager = GetUserManagerMock();
+
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+            Event ev = null;
+
+            eventsController.ModelState.AddModelError("invalid", "Invalid model state");
+            var result = await eventsController.EditEvent(ev);
+            Assert.NotNull(result);
+            Assert.False(eventsController.ModelState.IsValid);
+
+            result = await eventsController.Create(new CreateEventViewModel());
+            Assert.NotNull(result);
+            Assert.False(eventsController.ModelState.IsValid);
+
+            result = await eventsController.Create(new CreateEventViewModel());
+            Assert.NotNull(result);
+            Assert.False(eventsController.ModelState.IsValid);
+
+            result = await eventsController.Delete(TestObjects.Event1.Id);
+            Assert.NotNull(result);
+            Assert.False(eventsController.ModelState.IsValid);
+            Assert.IsAssignableFrom<RedirectToActionResult>(result);
         }
 
     }

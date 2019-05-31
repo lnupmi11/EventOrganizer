@@ -32,11 +32,39 @@ namespace EventOrganizer.Tests.ServiceTests
         public void GetAllTest()
         {
             var list = TestEvents;
-            var service = new EventService(GetMockContext().Object);
-
+            var eventRepository = GetMockContext();
+            var service = new EventService(eventRepository.Object);
+            
             var actual = service.GetAll();
 
-            Assert.Equal(list.Count(), actual.Count());
+            Assert.Equal(list.ToList<Event>().ToString(), actual.ToList<Event>().ToString());
+
+        }
+
+        [Fact]
+        public void GetEventsTest()
+        {
+            var list = TestEvents.Where(p => p.Category.Name.Equals("Bussiness")).OrderBy(p => p.Name);
+            var eventRepository = GetMockContext();
+            var service = new EventService(eventRepository.Object);
+
+            var actual = service.GetEvents("Bussiness");
+
+            Assert.Equal(list.ToList<Event>().ToString(), actual.ToList<Event>().ToString());
+
+        }
+
+        [Fact]
+        public void GetEventsByUserIdTest()
+        {
+            var list = TestEvents.Where(e => e.UserId == "1").OrderBy(p => p.CreatedAt);
+            var eventRepository = GetMockContext();
+            var service = new EventService(eventRepository.Object);
+
+            var actual = service.GetEventsByUserId("1");
+
+            Assert.Equal(list.ToList<Event>().ToString(), actual.ToList<Event>().ToString());
+
         }
 
         [Fact]

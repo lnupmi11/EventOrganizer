@@ -27,6 +27,12 @@ namespace EventOrganizer.Tests
             new IdentityRole("Admin"),
             new IdentityRole("Official")
         };
+        private static readonly List<string> RolesList = new List<string>()
+        {
+            "User",
+            "Admin",
+            "Official"
+        };
 
 
         private Mock<UserManager<User>> GetUserManagerMock()
@@ -152,5 +158,109 @@ namespace EventOrganizer.Tests
             Assert.IsAssignableFrom<RedirectToActionResult>(result);
         }
 
+        [Fact]
+        public void CreateViewTest()
+        {
+            var umMock = GetUserManagerMock();
+            var rmMock = GetRoleManagerMock();
+
+            var rolesController = new RolesController(rmMock.Object, umMock.Object);
+
+            var result = rolesController.Create();
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<ViewResult>(result);
+        }
+
+        [Fact]
+        public void UserListViewTest()
+        {
+            var umMock = GetUserManagerMock();
+            var rmMock = GetRoleManagerMock();
+
+            var rolesController = new RolesController(rmMock.Object, umMock.Object);
+            umMock.Setup(item => item.Users)
+                .Returns(TestUsers.AsQueryable());
+            var result = rolesController.UserList();
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var expected = TestUsers.ToList<User>().ToString();
+            var actual = rolesController.ViewData.Model.ToString();
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public async void EditNullUserTest()
+        {
+            var umMock = GetUserManagerMock();
+            var rmMock = GetRoleManagerMock();
+
+            var rolesController = new RolesController(rmMock.Object, umMock.Object);
+            User usr = null;
+            umMock.Setup(item => item.FindByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(usr);
+
+            var result = await rolesController.Edit("invaliId");
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void EditTest()
+        {
+            var umMock = GetUserManagerMock();
+            var rmMock = GetRoleManagerMock();
+
+            var rolesController = new RolesController(rmMock.Object, umMock.Object);
+            umMock.Setup(item => item.FindByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(TestObjects.User1);
+            umMock.Setup(item => item.GetRolesAsync(It.IsAny<User>()))
+                .ReturnsAsync(RolesList);
+            rmMock.Setup(item => item.Roles)
+                .Returns(TestRoles.AsQueryable());
+            ChangeRoleViewModel mdl = new ChangeRoleViewModel();
+
+            var result = await rolesController.Edit("1");
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<ViewResult>(result);
+            var expected = mdl.ToString();
+            var actual = rolesController.ViewData.Model.ToString();
+            Assert.Equal(expected, actual);
+
+        }
+       
+        [Fact]
+        public async void EditPostNullUserTest()
+        {
+            var umMock = GetUserManagerMock();
+            var rmMock = GetRoleManagerMock();
+
+            var rolesController = new RolesController(rmMock.Object, umMock.Object);
+            User usr = null;
+            umMock.Setup(item => item.FindByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(usr);
+            
+            var result = await rolesController.Edit("invaliId", RolesList);
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async void EditPostTest()
+        {
+            var umMock = GetUserManagerMock();
+            var rmMock = GetRoleManagerMock();
+
+            var rolesController = new RolesController(rmMock.Object, umMock.Object);
+            umMock.Setup(item => item.FindByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(TestObjects.User1);
+            umMock.Setup(item => item.GetRolesAsync(It.IsAny<User>()))
+                .ReturnsAsync(RolesList);
+            rmMock.Setup(item => item.Roles)
+                .Returns(TestRoles.AsQueryable());
+            
+            var result = await rolesController.Edit("invaliId", RolesList);
+            Assert.IsAssignableFrom<RedirectToActionResult>(result);
+        }
     }
 }

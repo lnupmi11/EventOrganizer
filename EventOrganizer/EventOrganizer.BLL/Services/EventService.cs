@@ -33,7 +33,6 @@ namespace EventOrganizer.BLL.Services
             return events;
         }
 
-        // TODO: test this method
         public IEnumerable<Event> GetEventsByUserId(string userId)
         {
             IEnumerable<Event> events = null;
