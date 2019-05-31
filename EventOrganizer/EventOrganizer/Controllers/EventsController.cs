@@ -50,10 +50,10 @@ namespace EventOrganizer.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Official, Admin")]
-        public async Task<IActionResult> Delete(int itemId)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!ModelState.IsValid) return RedirectToAction("List");
-            var item = _eventService.GetEventById(itemId);
+            var item = _eventService.GetEventById(id);
             var usr = await _userManager.GetUserAsync(User);
             if (await _userManager.IsInRoleAsync(usr, "Admin") || usr.Id == item.UserId)
             {
@@ -98,9 +98,9 @@ namespace EventOrganizer.Controllers
         }
 
         [Authorize(Roles = "Official")]
-        public ViewResult Edit(int itemId)
+        public ViewResult Edit(int id)
         {
-            var item = _eventService.GetEventById(itemId);
+            var item = _eventService.GetEventById(id);
             if (_userManager.GetUserId(User) == item.UserId)
             {
                 ViewBag.Categories = new SelectList(_categoryService.GetAll(), "Id", "Name");

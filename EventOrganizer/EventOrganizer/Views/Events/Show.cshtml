@@ -29,9 +29,9 @@
                             </a>
                         </div>
                         <div class="col-lg-6">
-                            <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">
-                                <input type="submit" value="Delete" class="delete" style="background-color:tomato;font-size: 25px;width:100%;margin:15px;"/>
-                            </a>
+                            <form asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                                <input id="registerLink" type="submit" value="Delete" class="delete" style="background-color:tomato;font-size: 25px;width:100%;margin:15px;" />
+                            </form>
                         </div>
                     </div>
                 }
