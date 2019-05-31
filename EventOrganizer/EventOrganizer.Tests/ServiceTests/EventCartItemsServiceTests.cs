@@ -13,14 +13,6 @@ namespace EventOrganizer.Tests.ServiceTests
 {
     public class EventCartItemsServiceTests
     {
-        private static readonly IEnumerable<Category> TestCategories = new[]
-        {
-            TestObjects.Category1,
-            TestObjects.Category2,
-            TestObjects.Category3,
-            TestObjects.Category4,
-            TestObjects.Category5
-        };
 
         private static Mock<IEventCartItemsRepository> GetMockContext()
         {

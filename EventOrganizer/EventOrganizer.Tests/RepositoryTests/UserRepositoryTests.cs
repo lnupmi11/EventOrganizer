@@ -83,5 +83,15 @@ namespace EventOrganizer.Tests.RepositoryTests
             repository.Delete(item.Id);
             Assert.Null(mockContext.Object.Users.Find(item.Id));
         }
+
+        [Fact]
+        public void DeleteNullUserTest()
+        {
+            var mockContext = GetMockContext();
+            var repository = new UserRepository(mockContext.Object);
+            repository.Delete("1");
+            Assert.Null(mockContext.Object.Users.Find("1"));
+        }
+
     }
 }

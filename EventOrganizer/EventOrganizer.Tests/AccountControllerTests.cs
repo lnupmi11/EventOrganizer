@@ -116,7 +116,7 @@ namespace EventOrganizer.Tests
                 .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
             simMock.Setup(item => item.SignOutAsync())
                 .Returns(Task.FromResult("Success"));
-            var usr = TestUsers.FirstOrDefault(u => u.UserName == "username#1");
+            var usr = TestObjects.User1;
             usMock.Setup(item => item.GetByUserName("username#1"))
                 .Returns(usr);
 
@@ -137,7 +137,7 @@ namespace EventOrganizer.Tests
                 .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Failed);
             simMock.Setup(item => item.SignOutAsync())
                 .Returns(Task.FromResult("Success"));
-            var usr = TestUsers.FirstOrDefault(u => u.UserName == "username#1");
+            var usr = TestObjects.User1;
             usMock.Setup(item => item.GetByUserName("username#1"))
                 .Returns(usr);
 
@@ -191,7 +191,7 @@ namespace EventOrganizer.Tests
 
             var accountController = new AccountController(umMock.Object, simMock.Object, usMock.Object);
 
-            var usr = TestUsers.FirstOrDefault(u => u.UserName == "username#1");
+            var usr = TestObjects.User1;
             usMock.Setup(item => item.GetById(It.IsAny<string>()))
                 .Returns(usr);
             var result = accountController.Delete("1");
