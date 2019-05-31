@@ -11,7 +11,7 @@ namespace EventOrganizer.DAL.Models
 {
     public class DbInitializer
     {
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        public static void Seed(IApplicationBuilder applicationBuilder, UserManager<User> userManager)
         {
             EventOrganizerDbContext context = applicationBuilder.ApplicationServices.GetRequiredService<EventOrganizerDbContext>();
 
@@ -34,7 +34,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Conference.jpg",
                         ScheduledAt = new DateTime(2019, 5, 18, 18, 00, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 35, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 35, 00),
+                        UserId = userManager.FindByNameAsync("cool").Result.Id
                     },
                     new Event
                     {
@@ -46,7 +47,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Seminar.jpg",
                         ScheduledAt = new DateTime(2019, 5, 20, 18, 30, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 31, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 31, 00),
+                        UserId = userManager.FindByNameAsync("cool").Result.Id
                     },
                     new Event
                     {
@@ -58,7 +60,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Expo.jpg",
                         ScheduledAt = new DateTime(2019, 5, 10, 18, 00, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 29, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 29, 00),
+                        UserId = userManager.FindByNameAsync("cool").Result.Id
                     },
                     new Event
                     {
@@ -70,7 +73,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Product-Launch.jpg",
                         ScheduledAt = new DateTime(2019, 5, 25, 12, 30, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 27, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 27, 00),
+                        UserId = userManager.FindByNameAsync("cool").Result.Id
                     },
                     new Event
                     {
@@ -82,7 +86,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Board-Meetings.jpg",
                         ScheduledAt = new DateTime(2019, 5, 15, 18, 00, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 30, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 30, 00),
+                        UserId = userManager.FindByNameAsync("official").Result.Id
                     },
                     new Event
                     {
@@ -94,7 +99,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Year-End-Functions.jpg",
                         ScheduledAt = new DateTime(2019, 5, 22, 22, 00, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 34, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 34, 00),
+                        UserId = userManager.FindByNameAsync("official").Result.Id
                     },
                     new Event
                     {
@@ -106,7 +112,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Executive-Retreat.jpg",
                         ScheduledAt = new DateTime(2019, 5, 20, 15, 00, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 35, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 35, 00),
+                        UserId = userManager.FindByNameAsync("official").Result.Id
                     },
                     new Event
                     {
@@ -118,7 +125,8 @@ namespace EventOrganizer.DAL.Models
                         IsPreferredEvent = true,
                         ImageThumbnailUrl = "https://thealeitgroup.com/wp/wp-content/uploads/2018/05/Corporate-Dinner.jpg",
                         ScheduledAt = new DateTime(2019, 5, 27, 21, 00, 00),
-                        CreatedAt = new DateTime(2019, 3, 17, 17, 37, 00)
+                        CreatedAt = new DateTime(2019, 3, 17, 17, 37, 00),
+                        UserId = userManager.FindByNameAsync("official").Result.Id
                     }
                 );
             }
@@ -134,7 +142,7 @@ namespace EventOrganizer.DAL.Models
                 {
                     Name = "Admin"
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
             if (roleManager.FindByNameAsync("User").Result == null)
             {
@@ -142,7 +150,7 @@ namespace EventOrganizer.DAL.Models
                 {
                     Name = "User"
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
             if (roleManager.FindByNameAsync("Official").Result == null)
             {
@@ -150,7 +158,7 @@ namespace EventOrganizer.DAL.Models
                 {
                     Name = "Official"
                 };
-                roleManager.CreateAsync(role);
+                roleManager.CreateAsync(role).Wait();
             }
         }
 
@@ -192,6 +200,21 @@ namespace EventOrganizer.DAL.Models
                 {
                     UserName = "official",
                     Email = "official@gmail.com",
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Official").Wait();
+                }
+            }
+            if (userManager.FindByEmailAsync("cool@gmail.com").Result == null)
+            {
+                User user = new User
+                {
+                    UserName = "cool",
+                    Email = "cool@gmail.com",
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "Aa123456&").Result;

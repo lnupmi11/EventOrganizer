@@ -85,9 +85,9 @@ namespace EventOrganizer
             //    routes.MapRouteAnalyzer("/routes");
             //});
 
-            DbInitializer.Seed(app);
             DbInitializer.SeedRoles(roleManager);
             DbInitializer.SeedUsers(userManager);
+            DbInitializer.Seed(app, userManager);
         }
     }
 }
