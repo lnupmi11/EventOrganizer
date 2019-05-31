@@ -36,11 +36,12 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     @await Component.InvokeAsync("CategoryMenu")
-                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-controller="EventCartItems" asp-action="List">Liked</a></li>
                     }
+                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
+
                 </ul>
                     @if (SignInManager.IsSignedIn(User))
                     {
