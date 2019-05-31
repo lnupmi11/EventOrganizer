@@ -37,6 +37,18 @@ namespace EventOrganizer.Tests.ServiceTests
             var actual = service.GetAll();
             Assert.Equal(TestCategories.Count(), actual.Count());
         }
+
+        [Fact]
+        public void GetCategoryNameAllTest()
+        {
+            var service = new CategoryService(GetMockContext().Object);
+
+            var expectedName = "All";
+
+            var actualName = service.GetCategoryName("All");
+            Assert.Equal(expectedName, actualName);
+        }
+        
     }
 
 }

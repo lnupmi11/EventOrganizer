@@ -106,6 +106,31 @@ namespace EventOrganizer.Tests
 
         }
 
+        [Fact]
+        public void CreateViewTest()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            AdminController adminController = new AdminController(userManager.Object);
+
+            var result = adminController.Create();
+            Assert.IsAssignableFrom<ViewResult>(result);
+        }
+
+        [Fact]
+        public async void InvalidModelStateTest()
+        {
+            var userStore = new Mock<IUserStore<User>>();
+            var userManager = new Mock<UserManager<User>>(userStore.Object, null, null, null, null, null, null, null, null);
+            AdminController adminController = new AdminController(userManager.Object);
+            adminController.ModelState.AddModelError("invalid", "Invalid model state");
+
+            var result = await adminController.Create(new UserViewModel());
+
+            Assert.NotNull(result);
+            Assert.False(adminController.ModelState.IsValid);
+            Assert.IsAssignableFrom<ViewResult>(result);
+        }
 
     }
 }

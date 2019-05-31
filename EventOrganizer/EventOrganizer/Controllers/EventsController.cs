@@ -52,7 +52,7 @@ namespace EventOrganizer.Controllers
         [Authorize(Roles = "Official, Admin")]
         public async Task<IActionResult> Delete(int itemId)
         {
-            if (!ModelState.IsValid) RedirectToAction("List");
+            if (!ModelState.IsValid) return RedirectToAction("List");
             var item = _eventService.GetEventById(itemId);
             var usr = await _userManager.GetUserAsync(User);
             if (await _userManager.IsInRoleAsync(usr, "Admin") || usr.Id == item.UserId)

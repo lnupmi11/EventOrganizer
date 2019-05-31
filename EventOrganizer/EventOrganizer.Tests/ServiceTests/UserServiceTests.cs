@@ -98,5 +98,17 @@ namespace EventOrganizer.Tests.ServiceTests
 
             Assert.Null(service.GetById(item.Id));
         }
+
+        [Fact]
+        public void GetByUserNameTest()
+        {
+            var expected = TestUsers.First();
+            var service = new UserService(GetMockContext().Object);
+
+            var actual = service.GetByUserName(expected.UserName);
+
+            Assert.NotNull(actual);
+            Assert.Equal(expected.ToString(), actual.ToString());
+        }
     }
 }
