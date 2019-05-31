@@ -19,3 +19,30 @@ input[type=submit].delete {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.like {
+    background-color: hotpink;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.like:hover {
+    background-color:deeppink;
+}
+
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: RoyalBlue;
+}

@@ -4,34 +4,49 @@
     <div class="image-container" style="background-image: url(@Model.ImageUrl);">
         <div class="text">@Model.Name</div>
     </div>
-    <h1>Event page</h1>
 
     <div class="row">
-        <div class="col-sm-6" style="background-color:lavender; height:500px;">
-            <br />
-            <img src="@Model.ImageUrl" class="sticky" alt="avatar_img" style="width:100%;">
-            <h2>@Model.Name</h2>
-            <p>@Model.ShortDescription</p>
-            <p><b>Some info about event..</b></p>
-            <div class="col-lg-6" style="padding-bottom:100px;">
-                <a>
-                    <input type="submit" value="Register" class="edit" />
-                </a>
-            </div>
-            <br />
+        <div class="col-sm-4">
+            @if (User.IsInRole("User") || User.IsInRole("Official") || User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div style="text-align: center">
+                        @using (Html.BeginForm("AddToEventCart", "EventCartItems", Model))
+                        {
+                            <input type="submit" value="Like" class="delete" style="background-color:deeppink;font-size: 25px;width:100%;margin:15px;" />
+                        }
+                    </div>
+                </div>
+            }
+            @if (User.IsInRole("Official") || User.IsInRole("Admin"))
+            {
+                @if (UserManager.GetUserId(User) == Model.UserId)
+                {
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a id="registerLink" asp-controller="Events" asp-action="Edit" asp-route-id="@Model.Id">
+                                <input type="submit" value="Edit" class="edit" style="background-color:dodgerblue;font-size: 25px;width:100%;margin:15px;"/>
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id">
+                                <input type="submit" value="Delete" class="delete" style="background-color:tomato;font-size: 25px;width:100%;margin:15px;"/>
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
         </div>
-        <div class="col-sm-6" style="background-color:lavenderblush; height:500px;">
-            <h2>@Model.Name</h2>
-            <p>Some example text..</p>
-            <p><b>Some anouther example text..</b></p>
+        <div class="col-sm-8">
+            <h1 style="text-align:center"><b>@Model.Name</b></h1>
 
-            <div style="background-color:azure; height:200px; border:solid;">
-
-            </div>
             <br />
-            <div style="background-color:azure; height:200px; border:solid;">
-
-            </div>
+            @*<h2>Category: @Model.Category.Name</h2>*@
+            <h2><b>Starts: @Model.ScheduledAt.ToLongDateString() in @Model.ScheduledAt.ToShortTimeString()</b></h2>
+            <h2>On this event you: @Model.LongDescription description</h2>
+            <br />
+            @*<h2><b>Created by: @Model.User.UserName</b></h2>*@
+            <h2>@Model.ShortDescription</h2>
 
         </div>
     </div>
