@@ -1,4 +1,4 @@
-﻿<h2>Events you liked</h2>
+﻿<h2 style="text-align:center"><b>Events you liked</b></h2>
 
 @{
     foreach (Event e in Model.EventCartItems)
@@ -14,12 +14,12 @@
         <div class="col-lg-6" style="text-align: left">
             @using (Html.BeginForm("ClearEventCart", "EventCartItems"))
             {
-                <input type="submit" value="Remove all events" class="delete" />
+                <input type="submit" value="Dislike all events" class="delete" />
             }
         </div>
     </div>
 }
 else
 {
-    <h4>For now you don't like any events</h4>
+    <h3 style="text-align:center">For now you don't like any events</h3>
 }

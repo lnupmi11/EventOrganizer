@@ -1,5 +1,5 @@
 ﻿<div class="container-fluid">
-    <h1>Your profile</h1>
+    <h1>Profile</h1>
     
     <div class="row">
         <div class="col-sm-4" style="background-color:lavender; height:550px;">
@@ -27,45 +27,52 @@
                 }
                 @if (User.IsInRole("Admin"))
                 {
-                    <div class="col-lg-6" style="text-align: left">
+                    <div style="text-align: center">
+                        <h3><b>Admin panel</b></h3>
                         <a asp-controller="Roles" asp-action="Index">
-                            <input type="submit" value="Roles" class="edit" />
+                            <input type="submit" value="Roles" class="edit" style="width:100px;"/>
+                        </a>
+                        <a asp-controller="Roles" asp-action="UserList">
+                            <input type="submit" value="Users" class="edit" style="width:100px;"/>
                         </a>
                     </div>
                 }
             </div>
+            <div class="row">
+                @if (User.IsInRole("Official"))
+                {
+                    <p style="margin-top: 15px;">
+                        <b>List of my events:</b>
+                    </p>
+                    @foreach (Event e in @ViewBag.UserEvents)
+                    {
+                        <div class="event-container">
+                            <div class="event-image" style="background-image: url(@e.ImageUrl)"></div>
+                            <div class="event-info">
+                                <div class="event-info-container">
+                                    <span class="text-title">
+                                        <a asp-controller="Events" asp-action="Show" asp-route-id="@e.Id" class="text-title">
+                                            @e.Name
+                                        </a>
+                                    </span>
+                                    <span class="text-description">@e.ShortDescription</span>
+                                    <span>@e.Category.Name</span>
+                                    <span>Starts at: @e.ScheduledAt</span>
+                                </div>
+                            </div>
+                            <div class="event-actions">
+                                <span><a class="btn btn-primary" asp-controller="Events" asp-action="Edit" asp-route-id="@e.Id">Edit</a></span>
+                                <span class="mt-10">
+                                    <form asp-controller="Events" asp-action="Delete" asp-route-id="@e.Id" method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </span>
+                            </div>
+                        </div>
+                    }
+                }
 
-            <p style="margin-top: 15px;">
-              <b>List of my events:</b>
-            </p>
-            @{
-              foreach (Event e in @ViewBag.UserEvents)
-              {          
-                  <div class="event-container">
-                    <div class="event-image" style="background-image: url(@e.ImageUrl)"></div>
-                    <div class="event-info">
-                      <div class="event-info-container">
-                        <span class="text-title">
-                          <a asp-controller="Events" asp-action="Show" asp-route-id="@e.Id" class="text-title">
-                            @e.Name
-                          </a>
-                        </span>
-                        <span class="text-description">@e.ShortDescription</span>
-                        <span>@e.Category.Name</span>
-                        <span>Starts at: @e.ScheduledAt</span>
-                      </div>
-                    </div>
-                    <div class="event-actions">
-                      <span><a class="btn btn-primary" asp-controller="Events" asp-action="Edit" asp-route-id="@e.Id">Edit</a></span>
-                      <span class="mt-10">
-                        <form asp-controller="Events" asp-action="Delete" asp-route-id="@e.Id" method="post">
-				                  <button type="submit" class="btn btn-danger">Delete</button>
-			                  </form>
-                      </span>
-                    </div>
-                  </div>
-              }
-            }
+            </div>
         </div>
     </div>
 </div>

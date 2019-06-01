@@ -52,7 +52,7 @@ namespace EventOrganizer.Controllers
                 {
                     if (string.IsNullOrEmpty(loginViewModel.ReturnUrl))
                     {
-                        return RedirectToAction("List", "Events");
+                        return RedirectToAction("Index", "Home");
                     }
                     return Redirect(loginViewModel.ReturnUrl);
                 }
@@ -90,11 +90,11 @@ namespace EventOrganizer.Controllers
                     {
                         if (string.IsNullOrEmpty(loginViewModel.ReturnUrl))
                         {
-                            return RedirectToAction("List", "Events");
+                            return RedirectToAction("Index", "Home");
                         }
                         return Redirect(loginViewModel.ReturnUrl);
                     }
-                    return RedirectToAction("List", "Events");
+                    return RedirectToAction("Index", "Home");
                 }
 
             }
@@ -106,7 +106,7 @@ namespace EventOrganizer.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("List", "Events");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost, ActionName("Delete")]
