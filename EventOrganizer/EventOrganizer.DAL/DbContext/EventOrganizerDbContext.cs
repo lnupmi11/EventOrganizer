@@ -25,11 +25,11 @@ namespace EventOrganizer.DAL.DbContext
             builder.Entity<User>()
                 .HasMany(c => c.Comments)
                 .WithOne(u => u.User)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Event>()
                .HasMany(c => c.Comments)
                .WithOne(e => e.Event)
-               .OnDelete(DeleteBehavior.SetNull);
+               .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual DbSet<Event> Events { get; set; }
