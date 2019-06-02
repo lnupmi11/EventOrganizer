@@ -22,6 +22,14 @@ namespace EventOrganizer.DAL.DbContext
                 .HasMany(e => e.Events)
                 .WithOne(u => u.User)
                 .OnDelete(DeleteBehavior.SetNull);
+            builder.Entity<User>()
+                .HasMany(c => c.Comments)
+                .WithOne(u => u.User)
+                .OnDelete(DeleteBehavior.SetNull);
+            builder.Entity<Event>()
+               .HasMany(c => c.Comments)
+               .WithOne(e => e.Event)
+               .OnDelete(DeleteBehavior.SetNull);
         }
 
         public virtual DbSet<Event> Events { get; set; }
@@ -31,5 +39,7 @@ namespace EventOrganizer.DAL.DbContext
         public virtual DbSet<EventCartItem> EventCartItems { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
+
+        public virtual DbSet<Comment> Comments { get; set; }
     }
 }
