@@ -26,7 +26,7 @@ namespace EventOrganizer.Controllers
             _userManager = userManager;
         }
 
-        public ViewResult List(string category)
+        public ViewResult List(string category, int pageNumber = 0)
         {
             IEnumerable<Event> events = null;
             string currentCategory = null;
@@ -42,8 +42,15 @@ namespace EventOrganizer.Controllers
 
             EventsListViewModel elvm = new EventsListViewModel();
 
-            elvm.Events = events;
+            int eventsPerPage = 6;
+            elvm.Events = events.OrderBy((it) => it.Id).Skip(pageNumber * eventsPerPage).Take(eventsPerPage);
             elvm.CurrentCategory = currentCategory;
+            elvm.PageInfo = new PageInfo
+            {
+                CurrentPageNumber = pageNumber,
+                EventsPerPage = eventsPerPage,
+                TotalNumberOfEvents = events.Count()
+            };
 
             return View(elvm);
         }

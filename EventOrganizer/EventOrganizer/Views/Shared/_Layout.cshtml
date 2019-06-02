@@ -38,7 +38,8 @@
                     @await Component.InvokeAsync("CategoryMenu")
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li><a asp-controller="EventCartItems" asp-action="List">Liked</a></li>
+                        <li><a asp-controller="EventCartItems" 
+                               >Liked</a></li>
                     }
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
 
