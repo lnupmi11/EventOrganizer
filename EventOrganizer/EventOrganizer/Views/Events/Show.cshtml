@@ -1,20 +1,20 @@
-﻿@model Event
+﻿@model ShowEventViewModel
 
 <div class="container-fluid">
-    <div class="image-container" style="background-image: url(@Model.ImageUrl);">
-        <div class="text">@Model.Name</div>
+    <div class="image-container" style="background-image: url(@Model.Event.ImageUrl);">
+        <div class="text">@Model.Event.Name</div>
     </div>
 
     <div class="row">
         <div class="col-sm-8">
-            <h1 style="text-align:center"><b>@Model.Name</b></h1>
+            <h1 style="text-align:center"><b>@Model.Event.Name</b></h1>
 
             <br />
-            <h2><b>Starts: @Model.ScheduledAt.ToLongDateString() in @Model.ScheduledAt.ToShortTimeString()</b></h2>
-            <h2>@Model.ShortDescription</h2>
+            <h2><b>Starts: @Model.Event.ScheduledAt.ToLongDateString() in @Model.Event.ScheduledAt.ToShortTimeString()</b></h2>
+            <h2>@Model.Event.ShortDescription</h2>
             <h2>Visit for free!</h2>
             <br />
-            <h2>On this event you: @Model.LongDescription description</h2>
+            <h2>On this event you: @Model.Event.LongDescription description</h2>
         </div>
         <div class="col-sm-4">
             @if (User.IsInRole("User") || User.IsInRole("Official") || User.IsInRole("Admin"))
@@ -30,16 +30,16 @@
             }
             @if (User.IsInRole("Official") || User.IsInRole("Admin"))
             {
-                @if (UserManager.GetUserId(User) == Model.UserId)
+                @if (UserManager.GetUserId(User) == Model.Event.UserId)
                 {
                     <div class="row">
                         <div class="col-lg-6">
-                            <a id="registerLink" asp-controller="Events" asp-action="Edit" asp-route-id="@Model.Id">
+                            <a id="registerLink" asp-controller="Events" asp-action="Edit" asp-route-id="@Model.Event.Id">
                                 <input type="submit" value="Edit" class="edit" style="background-color:dodgerblue;font-size: 25px;width:90%;margin:15px;" />
                             </a>
                         </div>
                         <div class="col-lg-6">
-                            <form asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                            <form asp-controller="Events" asp-action="Delete" asp-route-id="@Model.Event.Id" method="post">
                                 <input id="registerLink" type="submit" value="Delete" class="delete" style="background-color:tomato;font-size: 25px;width:90%;margin:15px;" />
                             </form>
                         </div>
@@ -47,5 +47,21 @@
                 }
             }
         </div>
+    </div>
+
+    <div class="row">
+        @foreach(Comment comment in Model.Event.Comments)
+        {
+            <div class="row">
+                <p>@comment.Content - <b>@UserManager.FindByIdAsync(comment.UserId).Result.UserName</b> said</p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <form asp-controller="Events" asp-action="AddComment" asp-route-id="@Model.Event.Id" method="post">
+            <textarea asp-for="Comment" id="message" placeholder="Write your message here..." required="" style="width:100%"></textarea>    
+            <button type="submit" class="btn btn-danger">Send Comment</button>
+        </form>
+
     </div>
 </div>

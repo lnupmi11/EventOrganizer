@@ -1,4 +1,5 @@
 ﻿using EventOrganizer.DAL.DbContext;
+using EventOrganizer.DAL.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -224,6 +225,28 @@ namespace EventOrganizer.DAL.Models
                     userManager.AddToRoleAsync(user, "Official").Wait();
                 }
             }
+        }
+
+        public static void SeedComments(ICommentRepository repo, UserManager<User> userManager)
+        {
+            if (repo.Comments.Count()  == 0)
+            {
+                var comments = new List<Comment>()
+                {
+                    new Comment() { Content = "Обов'язково відвідаю!", EventId = 1, UserId = userManager.FindByNameAsync("user").Result.Id },
+                    new Comment() { Content = "Обов'язково відвідаю! Зуб даю!", EventId = 1, UserId = userManager.FindByNameAsync("cool").Result.Id },
+                    new Comment() { Content = "Обов'язково відвідаю! Даю зуб Зеленського!", EventId = 1, UserId = userManager.FindByNameAsync("admin").Result.Id }
+                };
+                foreach(var it in comments)
+                {
+                    repo.Create(it);
+                }
+            }
+        }
+
+        private static object List<T>()
+        {
+            throw new NotImplementedException();
         }
 
         private static Dictionary<string, Category> categories;

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace EventOrganizer.ViewModels
 {
-    public class EventsListViewModel
+    public class ShowEventViewModel
     {
-        public IEnumerable<Event> Events { get; set; }
+        public Event Event { get; set; }
 
-        public string CurrentCategory { get; set; }
+        public string Comment { get; set; }
 
     }
 }

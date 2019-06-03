@@ -9,7 +9,7 @@ namespace EventOrganizer.DAL.DbContext
 {
     public class EventOrganizerDbContext : IdentityDbContext<User>
     {
-        public EventOrganizerDbContext() { }
+        public EventOrganizerDbContext() {}
 
         public EventOrganizerDbContext(DbContextOptions<EventOrganizerDbContext> options)
             : base(options) { }

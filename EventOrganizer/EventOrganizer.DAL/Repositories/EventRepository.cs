@@ -18,11 +18,11 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public virtual IEnumerable<Event> Events => _eventOrganizerDbContext.Events.Include(c => c.Category);
+        public virtual IEnumerable<Event> Events => _eventOrganizerDbContext.Events.Include(c => c.Category).Include(c => c.Comments);
 
-        public virtual IEnumerable<Event> PreferredEvents => _eventOrganizerDbContext.Events.Where(p => p.IsPreferredEvent).Include(c => c.Category);
+        public virtual IEnumerable<Event> PreferredEvents => Events.Where(p => p.IsPreferredEvent);
 
-        public virtual Event GetEventById(int eventId) => _eventOrganizerDbContext.Events.FirstOrDefault(p => p.Id == eventId);
+        public virtual Event GetEventById(int eventId) => Events.FirstOrDefault(p => p.Id == eventId);
 
         public virtual void Create(Event item)
         {

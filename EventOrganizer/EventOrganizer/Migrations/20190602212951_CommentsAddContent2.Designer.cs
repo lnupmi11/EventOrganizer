@@ -4,14 +4,16 @@ using EventOrganizer.DAL.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EventOrganizer.Migrations
 {
     [DbContext(typeof(EventOrganizerDbContext))]
-    partial class EventOrganizerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190602212951_CommentsAddContent2")]
+    partial class CommentsAddContent2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
