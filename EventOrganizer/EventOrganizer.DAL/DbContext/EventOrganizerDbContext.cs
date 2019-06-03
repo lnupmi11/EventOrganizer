@@ -37,7 +37,7 @@ namespace EventOrganizer.DAL.DbContext
             builder.Entity<User>()
                .HasMany(l => l.Likes)
                .WithOne(u => u.User)
-               .OnDelete(DeleteBehavior.Cascade);
+               .OnDelete(DeleteBehavior.SetNull);
         }
 
         public virtual DbSet<Event> Events { get; set; }
