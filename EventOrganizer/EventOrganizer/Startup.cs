@@ -73,7 +73,7 @@ namespace EventOrganizer
                 routes.MapRoute(
                     name: "categoryfilter",
                     template: "Events/{action}/{category?}",
-                    defaults: new { Controller = "Events", action = "List" });
+                    defaults: new { Controller = "Events", action = "List"});
 
                 routes.MapRoute(
                     name: "default",
