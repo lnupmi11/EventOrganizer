@@ -42,8 +42,12 @@ namespace EventOrganizer.DAL.Repositories
         }
         public virtual void Unlike(Like like)
         {
-            _eventOrganizerDbContext.Likes.Remove(like);
-            _eventOrganizerDbContext.SaveChanges();
+            if (like != null)
+            {
+                var l = _eventOrganizerDbContext.Likes.FirstOrDefault(it => it.EventId == like.EventId && it.UserId == like.UserId);
+                _eventOrganizerDbContext.Likes.Remove(l);
+                _eventOrganizerDbContext.SaveChanges();
+            }
         }
     }
 }
