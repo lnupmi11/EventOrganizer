@@ -233,9 +233,9 @@ namespace EventOrganizer.DAL.Models
             {
                 var comments = new List<Comment>()
                 {
-                    new Comment() { Content = "Обов'язково відвідаю!", EventId = 1, UserId = userManager.FindByNameAsync("user").Result.Id },
-                    new Comment() { Content = "Обов'язково відвідаю! Зуб даю!", EventId = 1, UserId = userManager.FindByNameAsync("cool").Result.Id },
-                    new Comment() { Content = "Обов'язково відвідаю! Даю зуб Зеленського!", EventId = 1, UserId = userManager.FindByNameAsync("admin").Result.Id }
+                    new Comment() { Content = "Cool event", EventId = 1, UserId = userManager.FindByNameAsync("user").Result.Id },
+                    new Comment() { Content = "Be sure to visit!", EventId = 1, UserId = userManager.FindByNameAsync("cool").Result.Id },
+                    new Comment() { Content = "Best event Ive ever seen", EventId = 1, UserId = userManager.FindByNameAsync("admin").Result.Id }
                 };
                 foreach(var it in comments)
                 {
