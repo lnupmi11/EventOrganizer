@@ -11,5 +11,7 @@ namespace EventOrganizer.ViewModels
 
         public string Comment { get; set; }
 
+        public bool Liked { get; set; }
+
     }
 }

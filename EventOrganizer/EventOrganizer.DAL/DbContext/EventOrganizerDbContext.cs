@@ -30,6 +30,14 @@ namespace EventOrganizer.DAL.DbContext
                .HasMany(c => c.Comments)
                .WithOne(e => e.Event)
                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Event>()
+              .HasMany(l => l.Likes)
+              .WithOne(e => e.Event)
+              .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<User>()
+               .HasMany(l => l.Likes)
+               .WithOne(u => u.User)
+               .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual DbSet<Event> Events { get; set; }
@@ -41,5 +49,7 @@ namespace EventOrganizer.DAL.DbContext
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Comment> Comments { get; set; }
+
+        public virtual DbSet<Like> Likes { get; set; } 
     }
 }

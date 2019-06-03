@@ -18,7 +18,7 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext = eventOrganizerDbContext;
         }
 
-        public virtual IEnumerable<Event> Events => _eventOrganizerDbContext.Events.Include(c => c.Category).Include(c => c.Comments);
+        public virtual IEnumerable<Event> Events => _eventOrganizerDbContext.Events.Include(c => c.Category).Include(c => c.Comments).Include(l=>l.Likes);
 
         public virtual IEnumerable<Event> PreferredEvents => Events.Where(p => p.IsPreferredEvent);
 
@@ -56,5 +56,6 @@ namespace EventOrganizer.DAL.Repositories
             _eventOrganizerDbContext.Events.Remove(item);
             _eventOrganizerDbContext.SaveChanges();
         }
+
     }
 }

@@ -49,6 +49,8 @@ namespace EventOrganizer
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IEventCartItemsService, EventCartItemsService>();
             services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ILikeService, LikeService>();
+            services.AddTransient<ILikeRepository, LikeRepository>();
 
 
             services.AddTransient<IUserService, UserService>();

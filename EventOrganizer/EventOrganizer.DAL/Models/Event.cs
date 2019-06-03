@@ -20,5 +20,6 @@ namespace EventOrganizer.DAL.Models
         public DateTime ScheduledAt { get; set; }
         public DateTime CreatedAt { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Like> Likes { get; set; }
     }
 }

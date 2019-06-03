@@ -8,20 +8,35 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 style="text-align:center"><b>@Model.Event.Name</b></h1>
-
             <br />
             <h2><b>Starts: @Model.Event.ScheduledAt.ToLongDateString() in @Model.Event.ScheduledAt.ToShortTimeString()</b></h2>
             <h2>@Model.Event.ShortDescription</h2>
             <h2>Visit for free!</h2>
             <br />
             <h2>On this event you: @Model.Event.LongDescription description</h2>
+            <h2>Was Liked @Model.Event.Likes.Count() time(s)</h2>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                if (Model.Liked == false)
+                {
+                    <form asp-controller="Events" asp-action="LikeEvent" asp-route-id="@Model.Event.Id" method="post">
+                        <input type="submit" value="SuperLike" class="delete" style="background-color:greenyellow;font-size: 25px;width:90%;margin:15px;" />
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Events" asp-action="DislikeEvent" asp-route-id="@Model.Event.Id" method="post">
+                        <input type="submit" value="Dislike" class="delete" style="background-color:orangered;font-size: 25px;width:90%;margin:15px;" />
+                    </form>
+                }
+            }
         </div>
         <div class="col-sm-4">
             @if (User.IsInRole("User") || User.IsInRole("Official") || User.IsInRole("Admin"))
             {
                 <div class="row">
                     <div style="text-align: center">
-                        @using (Html.BeginForm("AddToEventCart", "EventCartItems", Model))
+                        @using (Html.BeginForm("AddToEventCart", "EventCartItems", Model.Event))
                         {
                             <input type="submit" value="Like" class="delete" style="background-color:deeppink;font-size: 25px;width:90%;margin:15px;" />
                         }

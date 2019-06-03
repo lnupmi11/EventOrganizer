@@ -9,5 +9,6 @@ namespace EventOrganizer.DAL.Models
     {
         public ICollection<Event> Events { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Like> Likes { get; set; }
     }
 }

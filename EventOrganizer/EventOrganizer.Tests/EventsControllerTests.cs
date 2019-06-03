@@ -27,7 +27,7 @@ namespace EventOrganizer.Tests
             var categoryService = new Mock<ICategoryService>();
             var eventService = new Mock<IEventService>();
             var userManager = GetUserManagerMock();
-            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
+            EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object, );
 
             var result = eventsController.List("All");
             Assert.NotNull(result);

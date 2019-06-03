@@ -20,12 +20,15 @@ namespace EventOrganizer.Controllers
         private readonly IEventService _eventService;
         private readonly UserManager<User> _userManager;
         private readonly ICommentRepository _commentRepository;
-        public EventsController(ICategoryService categoryService, IEventService eventService, UserManager<User> userManager, ICommentRepository commentRepository)
+        private readonly ILikeService _likeService;
+        public EventsController(ICategoryService categoryService, IEventService eventService, 
+            UserManager<User> userManager, ICommentRepository commentRepository, ILikeService likeService)
         {
             _categoryService = categoryService;
             _eventService = eventService;
             _userManager = userManager;
             _commentRepository = commentRepository;
+            _likeService = likeService;
         }
 
         public ViewResult List(string category)
@@ -127,7 +130,8 @@ namespace EventOrganizer.Controllers
         {
             var model = new ShowEventViewModel()
             {
-                Event = _eventService.GetEventById(id)
+                Event = _eventService.GetEventById(id),
+                Liked = _likeService.IsLiked(id, _userManager.GetUserId(User))
             };
             return View(model);
         }
@@ -141,5 +145,28 @@ namespace EventOrganizer.Controllers
                 new { controller = "Events", action = "Show", id }
             ));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LikeEvent(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            _likeService.Like(id, userId);
+            return RedirectToAction("Show", new RouteValueDictionary
+            (
+                new { controller = "Events", action = "Show", id }
+            ));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DislikeEvent(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            _likeService.Unlike(id, userId);
+            return RedirectToAction("Show", new RouteValueDictionary
+            (
+                new { controller = "Events", action = "Show", id }
+            ));
+        }
+
     }
 }
