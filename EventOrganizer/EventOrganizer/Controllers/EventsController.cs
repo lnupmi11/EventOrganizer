@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 
 namespace EventOrganizer.Controllers
 {
@@ -18,12 +19,16 @@ namespace EventOrganizer.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IEventService _eventService;
         private readonly UserManager<User> _userManager;
-
-        public EventsController(ICategoryService categoryService, IEventService eventService, UserManager<User> userManager)
+        private readonly ICommentRepository _commentRepository;
+        private readonly ILikeService _likeService;
+        public EventsController(ICategoryService categoryService, IEventService eventService, 
+            UserManager<User> userManager, ICommentRepository commentRepository, ILikeService likeService)
         {
             _categoryService = categoryService;
             _eventService = eventService;
             _userManager = userManager;
+            _commentRepository = commentRepository;
+            _likeService = likeService;
         }
 
         public ViewResult List(string category, int pageNumber = 0)
@@ -130,8 +135,45 @@ namespace EventOrganizer.Controllers
 
         public ViewResult Show(int id)
         {
-            Event item = _eventService.GetEventById(id);
-            return View(item);
+            var model = new ShowEventViewModel()
+            {
+                Event = _eventService.GetEventById(id),
+                Liked = _likeService.IsLiked(id, _userManager.GetUserId(User))
+            };
+            return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddComment(int id, ShowEventViewModel model)
+        {
+            _commentRepository.Create(new Comment() { Content = model.Comment, EventId = id, UserId = _userManager.GetUserId(User) });
+            return RedirectToAction("Show", new RouteValueDictionary
+            (
+                new { controller = "Events", action = "Show", id }
+            ));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LikeEvent(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            _likeService.Like(id, userId);
+            return RedirectToAction("Show", new RouteValueDictionary
+            (
+                new { controller = "Events", action = "Show", id }
+            ));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DislikeEvent(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            _likeService.Unlike(id, userId);
+            return RedirectToAction("Show", new RouteValueDictionary
+            (
+                new { controller = "Events", action = "Show", id }
+            ));
+        }
+
     }
 }

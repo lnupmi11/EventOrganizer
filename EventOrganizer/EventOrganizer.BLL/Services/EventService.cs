@@ -22,27 +22,27 @@ namespace EventOrganizer.BLL.Services
         public IEnumerable<Event> GetAll()
         {
             IEnumerable<Event> events = null;
-            events = _eventRepository.Events.OrderBy(p => p.Id);
+            events = _eventRepository.Events.OrderByDescending(p => p.Likes.Count).ThenBy(p => p.Id);
             return events;
         }
 
         public IEnumerable<Event> GetEvents(string category)
         {
             IEnumerable<Event> events = null;
-            events = _eventRepository.Events.Where(p => p.Category.Name.Equals(category)).OrderBy(p => p.Name);
+            events = _eventRepository.Events.Where(p => p.Category.Name.Equals(category)).OrderByDescending(p=>p.Likes.Count).ThenBy(p => p.Id);
             return events;
         }
 
         public IEnumerable<Event> GetEventsByUserId(string userId)
         {
             IEnumerable<Event> events = null;
-            events = _eventRepository.Events.Where(e => e.UserId == userId).OrderBy(p => p.CreatedAt);
+            events = _eventRepository.Events.Where(e => e.UserId == userId).OrderByDescending(p => p.Likes.Count).ThenByDescending(p => p.CreatedAt);
             return events;
         }
 
         public IEnumerable<Event> GetPreferredEvents()
         {
-            return _eventRepository.PreferredEvents;
+            return _eventRepository.PreferredEvents.OrderByDescending(p => p.Likes.Count).Take(6);
         }
 
         public Event GetEventById(int eventId)

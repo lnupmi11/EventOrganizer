@@ -1,4 +1,4 @@
-﻿@using EventOrganizer.Helpers
+
 <h2>@Model.CurrentCategory</h2>
 
 <div class="row">
@@ -9,6 +9,7 @@
     }
 }
 </div>
+
 <div class="btn-group">
     @Html.Raw(PagingHelper.PageLinks(Model.PageInfo, (Func<int, string>)((x) => Url.Action("List", "Events", new { Category = Model.CurrentCategory, pageNumber = x })) ))    
 </div>

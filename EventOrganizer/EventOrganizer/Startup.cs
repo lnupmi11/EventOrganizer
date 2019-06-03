@@ -48,6 +48,10 @@ namespace EventOrganizer
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IEventCartItemsService, EventCartItemsService>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<ILikeService, LikeService>();
+            services.AddTransient<ILikeRepository, LikeRepository>();
+
 
             services.AddTransient<IUserService, UserService>();
 
@@ -59,7 +63,7 @@ namespace EventOrganizer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ICommentRepository repo)
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
@@ -88,6 +92,7 @@ namespace EventOrganizer
             DbInitializer.SeedRoles(roleManager);
             DbInitializer.SeedUsers(userManager);
             DbInitializer.Seed(app, userManager);
+            DbInitializer.SeedComments(repo, userManager);
         }
     }
 }
