@@ -38,11 +38,9 @@
                     @await Component.InvokeAsync("CategoryMenu")
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li><a asp-controller="EventCartItems" 
-                               >Liked</a></li>
+                        <li><a asp-controller="EventCartItems" asp-action="List">Liked</a></li>
                     }
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-
                 </ul>
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -51,7 +49,6 @@
                             <li><img src="~/Images/img_avatar.png" alt="Avatar" class="avatar"></li>
                             <li>
                                 <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
-                                    
                                 </form>
                             </li>
                         </ul>
