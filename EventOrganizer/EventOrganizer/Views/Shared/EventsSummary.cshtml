@@ -1,16 +1,38 @@
-﻿@model Event 
+﻿@model Event
+
 
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
         <img src="@Model.ImageThumbnailUrl" alt="" />
         <div class="caption">
-            <p class="pull-right">@Model.EventDateTime.ToShortDateString()</p>
-            @*<h3 class="pull-right">@e.EventDateTime.ToShortTimeString()</h3>*@
+            <p class="pull-right">@Model.ScheduledAt.ToShortDateString()</p>
+            @*<h3 class="pull-right">@e.ScheduledAt.ToShortTimeString()</h3>*@
             <h5>
-                <a>@Model.Name</a>
+                <b>
+                    <a asp-controller="Events" asp-action="Show" asp-route-id="@Model.Id">@Model.Name</a>
+                </b>
             </h5>
             <p>@Model.Category.Name</p>
-            @*To do: add short descriptions*@
+            <p>On this event you:</p>
+            <p>@Model.ShortDescription  description...</p>
+            @*@if (User.IsInRole("Official") || User.IsInRole("Admin"))
+            {
+                @if (UserManager.GetUserId(User) == Model.UserId)
+                {
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a id="registerLink" asp-controller="Events" asp-action="Edit" asp-route-itemId="@Model.Id">
+                                <input type="submit" value="Edit" class="edit" />
+                            </a>
+                        </div>
+                        <div class="col-lg-6" style="text-align: right">
+                            <a id="registerLink" asp-controller="Events" asp-action="Delete" asp-route-itemId="@Model.Id">
+                                <input type="submit" value="Delete" class="delete" />
+                            </a>
+                        </div>
+                    </div>
+                }
+            }*@
         </div>
     </div>
 </div>

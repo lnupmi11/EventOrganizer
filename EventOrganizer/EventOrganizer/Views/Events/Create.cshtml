@@ -1,0 +1,81 @@
+﻿@model CreateEventViewModel
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h2>Create Event</h2>
+    <form asp-controller="Events" asp-action="Create" method="post" class="form-horizontal" role="form">
+      
+      <div class="form-group">
+        <label asp-for="Name" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+          <input asp-for="Name" class="form-control" />
+          <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="ShortDescription" class="col-md-2 control-label">Short Description</label>
+        <div class="col-md-10">
+          <input asp-for="ShortDescription" class="form-control" />
+          <span asp-validation-for="ShortDescription" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="LongDescription" class="col-md-2 control-label">Description</label>
+        <div class="col-md-10">
+          <input asp-for="LongDescription" class="form-control" />
+          <span asp-validation-for="LongDescription" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="ImageUrl" class="col-md-2 control-label">Image Url</label>
+        <div class="col-md-10">
+          <input asp-for="ImageUrl" class="form-control" />
+          <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="ImageThumbnailUrl" class="col-md-2 control-label">Thumbnail Url</label>
+        <div class="col-md-10">
+          <input asp-for="ImageThumbnailUrl" class="form-control" />
+          <span asp-validation-for="ImageThumbnailUrl" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="IsPreferredEvent" class="col-md-2 control-label">Preferred?</label>
+        <div class="col-md-10">
+          <input type="checkbox" asp-for="IsPreferredEvent" class="form-control" />
+          <span asp-validation-for="IsPreferredEvent" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+          <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+            <option selected="selected" value="">Please select</option>
+          </select>
+          <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label asp-for="ScheduledAt" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+          <input type="datetime-local" asp-for="ScheduledAt" class="form-control" />
+          <span asp-validation-for="ScheduledAt" class="text-danger"></span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <input type="submit" class="btn btn-success " value="Create" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -4,11 +4,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/Content/Buttons.css" rel="stylesheet" />
+    <link href="~/Content/Checkbox.css" rel="stylesheet" />
+    <link href="~/Content/Image.css" rel="stylesheet" />
+    <link href="~/Content/Cutout.css" rel="stylesheet" />
 
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous' />
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -16,21 +21,70 @@
     <title>EventOrganizer</title>
 </head>
 <body>
-    <div class="container body-content" style="padding:50px;">
-        @RenderBody()
-        <hr />
-        <footer>
-            <i class='fab fa-facebook' style='font-size:36px'></i>
-            <i class='fab fa-google-plus-square' style='font-size:36px'></i>
-            <i class='fab fa-instagram' style='font-size:36px'></i>
-            <i class='fab fa-hackerrank' style='font-size:36px'></i>
-            <i class='fab fa-github' style='font-size:36px'></i>
-            <i class='fab fa-linkedin' style='font-size:36px'></i>
-            <i class='fab fa-telegram' style='font-size:36px'></i>
-            <i class='fab fa-twitch' style='font-size:36px'></i>
-            <i class='fab fa-rocketchat' style='font-size:36px'></i>
-            <p><a target="_blank" href="https://github.com/etrupja">&copy; 2019</a></p>
-        </footer>
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-dark" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">EventOrganizer</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @await Component.InvokeAsync("CategoryMenu")
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-controller="EventCartItems" asp-action="List">Liked</a></li>
+                    }
+                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
+                    <li><a asp-controller="Categories" asp-action="Create">Create category</a></li>
+                </ul>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="nav navbar-nav navbar-right" style="margin-left:430px;">
+                            <li><a id="registerLink" asp-controller="UserPage" asp-action="Index">@UserManager.GetUserName(User)</a></li>
+                            <li><img src="~/Images/img_avatar.png" alt="Avatar" class="avatar"></li>
+                            <li>
+                                <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
+                                </form>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right" style="position: absolute;top: 8px;right: 16px; margin-right:12%;">
+                            <li><a id="registerLink" asp-controller="Account" asp-action="Register"> Register </a></li>
+                            <li><a id="loginLink" asp-controller="Account" asp-action="Login"> Log in </a></li>
+                        </ul>
+                    }
+                
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content" style="margin-top: 80px">
+        @*@await Html.PartialAsync("LoginPartial")*@
+        @RenderBody()         
     </div>
+    <hr />
+    <footer style=" text-align:center">
+      <i class='fab fa-facebook' style='font-size:36px'></i>
+      <i class='fab fa-google-plus-square' style='font-size:36px'></i>
+      <i class='fab fa-instagram' style='font-size:36px'></i>
+      <i class='fab fa-hackerrank' style='font-size:36px'></i>
+      <i class='fab fa-github' style='font-size:36px'></i>
+      <i class='fab fa-linkedin' style='font-size:36px'></i>
+      <i class='fab fa-telegram' style='font-size:36px'></i>
+      <i class='fab fa-twitch' style='font-size:36px'></i>
+      <i class='fab fa-rocketchat' style='font-size:36px'></i>
+      <p></p>
+      <p>
+        <a target="_blank" href="https://github.com/lnupmi11/EventOrganizer">Copyrights &copy; 2019 - EventOrganizer Software&trade;</a>
+      </p>
+      <p></p>
+    </footer>
 </body>
 </html>

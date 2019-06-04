@@ -1,0 +1,58 @@
+﻿.mt-10 {
+	margin-top: 10px;
+}
+
+.text-title {
+	font-weight: 600;
+	font-size: 20px;
+	color: inherit;
+}
+
+.text-title:hover, .text-title:active, .text-title:link  {
+	overlay: none;
+	text-decoration: none;
+	opacity: .8;
+	color: inherit;
+}
+
+.text-description {
+	color: #474b50;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.event-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	border: 1px solid grey;
+	border-radius: 5px;
+	margin-top: 5px;
+	padding: 10px;
+	background-color: #f6f6ff;
+}
+
+.event-image {
+	background-repeat: no-repeat;
+	min-height: 100px;
+	width: 30%;
+	background-size: cover;
+	border-radius: 5px;
+}
+
+.event-info {
+	padding: 0 15px;
+	width: 60%;
+}
+
+.event-info-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.event-actions {
+	width: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}

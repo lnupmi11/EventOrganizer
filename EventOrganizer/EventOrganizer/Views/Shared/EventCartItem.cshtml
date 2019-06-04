@@ -1,0 +1,23 @@
+﻿@model Event
+
+<div class="event-container">
+	<div class="event-image" style="background-image: url(@Model.ImageThumbnailUrl)"></div>
+	<div class="event-info">
+		<div class="event-info-container">
+			<span class="text-title">
+				<a asp-controller="Events" asp-action="Show" asp-route-id="@Model.Id" class="text-title">
+					@Model.Name
+				</a>
+			</span>
+		<span class="text-description">@Model.ShortDescription</span>
+		<span>Starts at: @Model.ScheduledAt</span>
+		</div>
+	</div>
+	<div class="event-actions">
+		@using (Html.BeginForm("RemoveFromEventCart", "EventCartItems", Model))
+        {
+            <input class="btn btn-danger" type="submit" value="Dislike" class="delete" />
+        }
+	</div>
+</div>
+

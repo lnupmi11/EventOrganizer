@@ -1,0 +1,25 @@
+﻿<h2 style="text-align:center"><b>Events you liked</b></h2>
+
+@{
+    foreach (Event e in Model.EventCartItems)
+    {
+        @Html.Partial("EventCartItem", e);
+    }
+}
+
+@if (Model.EventCartItems.Count != 0)
+{
+    <br />
+    <div class="row">
+        <div class="col-lg-6" style="text-align: left">
+            @using (Html.BeginForm("ClearEventCart", "EventCartItems"))
+            {
+                <input type="submit" value="Dislike all events" class="delete" />
+            }
+        </div>
+    </div>
+}
+else
+{
+    <h3 style="text-align:center">For now you don't like any events</h3>
+}

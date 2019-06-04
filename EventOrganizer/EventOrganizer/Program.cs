@@ -14,8 +14,10 @@ namespace EventOrganizer
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).UseDefaultServiceProvider(options =>
+            options.ValidateScopes = false).Build().Run();
         }
+        //.UseDefaultServiceProvider(options => options.ValidateScopes = false) 
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)

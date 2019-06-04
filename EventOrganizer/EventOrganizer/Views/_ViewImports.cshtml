@@ -1,2 +1,10 @@
 ﻿@using EventOrganizer.ViewModels
-@using EventOrganizer.Data.Models
+@using EventOrganizer.DAL.Models
+﻿@using EventOrganizer.Helpers
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@addTagHelper EventOrganizer.TagHelpers.*, EventOrganizer
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
