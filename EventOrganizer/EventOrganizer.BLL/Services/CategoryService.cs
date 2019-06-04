@@ -41,5 +41,13 @@ namespace EventOrganizer.BLL.Services
         {
             return _categoryRepository.Categories;
         }
+
+        public void CreateItem(Category item)
+        {
+            if (item != null)
+            {
+                _categoryRepository.Create(item);
+            }
+        }
     }
 }

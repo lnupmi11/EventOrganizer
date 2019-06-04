@@ -29,7 +29,7 @@ namespace EventOrganizer.Tests
             var userManager = GetUserManagerMock();
             EventsController eventsController = new EventsController(categoryService.Object, eventService.Object, userManager.Object);
 
-            var result = eventsController.List("All");
+            var result = eventsController.List("All", 0);
             Assert.NotNull(result);
         }
 
@@ -188,7 +188,7 @@ namespace EventOrganizer.Tests
                 new List<Event>() { TestObjects.Event1 }
             );
 
-            var result = eventsController.List(TestObjects.Category1.Name);
+            var result = eventsController.List(TestObjects.Category1.Name, 0);
             var expected = new EventsListViewModel()
             {
                 Events = new List<Event>() { TestObjects.Event1 },
@@ -215,7 +215,7 @@ namespace EventOrganizer.Tests
                 new List<Event>() {}
             );
 
-            var result = eventsController.List("invalid_category");
+            var result = eventsController.List("invalid_category", 0);
             var expected = new EventsListViewModel()
             {
                 Events = new List<Event>() { TestObjects.Event1, TestObjects.Event2, TestObjects.Event3 },

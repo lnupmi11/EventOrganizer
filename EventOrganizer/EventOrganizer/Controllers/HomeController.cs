@@ -23,7 +23,7 @@ namespace EventOrganizer.Controllers
         {
             var homeViewModel = new HomeViewModel
             {
-                PreferredEvents = _eventService.GetPreferredEvents()
+                PreferredEvents = _eventService.GetPreferredEvents().Take(6)
             };
             return View(homeViewModel);
         }

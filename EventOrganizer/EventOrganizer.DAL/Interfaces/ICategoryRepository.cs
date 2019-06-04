@@ -8,5 +8,7 @@ namespace EventOrganizer.DAL.Interfaces
     public interface ICategoryRepository
     {
         IEnumerable<Category> Categories { get; }
+
+        void Create(Category item);
     }
 }

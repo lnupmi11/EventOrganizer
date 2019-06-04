@@ -41,16 +41,15 @@
                         <li><a asp-controller="EventCartItems" asp-action="List">Liked</a></li>
                     }
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-
+                    <li><a asp-controller="Categories" asp-action="Create">Create category</a></li>
                 </ul>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <ul class="nav navbar-nav navbar-right" style="margin-left:530px;">
+                        <ul class="nav navbar-nav navbar-right" style="margin-left:430px;">
                             <li><a id="registerLink" asp-controller="UserPage" asp-action="Index">@UserManager.GetUserName(User)</a></li>
                             <li><img src="~/Images/img_avatar.png" alt="Avatar" class="avatar"></li>
                             <li>
                                 <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
-                                    
                                 </form>
                             </li>
                         </ul>
