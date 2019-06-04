@@ -30,10 +30,13 @@
                     <div style="text-align: center">
                         <h3><b>Admin panel</b></h3>
                         <a asp-controller="Roles" asp-action="Index">
-                            <input type="submit" value="Roles" class="edit" style="width:100px;"/>
+                            <input type="submit" value="Roles" class="edit" style="width:100px;" />
                         </a>
                         <a asp-controller="Roles" asp-action="UserList">
-                            <input type="submit" value="Users" class="edit" style="width:100px;"/>
+                            <input type="submit" value="Users" class="edit" style="width:100px;" />
+                        </a>
+                        <a asp-controller="Categories" asp-action="Create">
+                            <input type="submit" value="Create category" class="edit" style="width:100px;" />
                         </a>
                     </div>
                 }

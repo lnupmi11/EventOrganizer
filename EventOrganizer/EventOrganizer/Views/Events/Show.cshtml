@@ -63,19 +63,29 @@
             }
         </div>
     </div>
-
+    
     <div class="row">
         @foreach(Comment comment in Model.Event.Comments)
         {
-            <div class="row">
-                <p>@comment.Content - <b>@UserManager.FindByIdAsync(comment.UserId).Result.UserName</b> said</p>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4><b>@UserManager.FindByIdAsync(comment.UserId).Result.UserName :</b></h4>
             </div>
+            <div class="col-sm-8">
+                <h4><p>@comment.Content</p></h4>
+            </div>
+        </div>
         }
     </div>
-    <div class="row">
+    <div class="row" style="text-align:center;">
         <form asp-controller="Events" asp-action="AddComment" asp-route-id="@Model.Event.Id" method="post">
-            <textarea asp-for="Comment" id="message" placeholder="Write your message here..." required="" style="width:100%"></textarea>    
-            <button type="submit" class="btn btn-danger">Send Comment</button>
+            <div class="row">
+                <textarea asp-for="Comment" id="message" placeholder="Write your message here..." required="" style="width:60%"></textarea>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn">Send Comment</button>
+            </div>
+            
         </form>
 
     </div>
